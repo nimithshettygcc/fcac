@@ -155,10 +155,12 @@
 
 /* Right section - Stacked offers (takes up right column) */
 .offer-list-stacked {
+  display: block;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  flex: 1;
+  justify-content: space-between;
+  padding-left: 1%;
+  width: 38%;
 }
 
 .offer-list-stacked-item {
@@ -277,6 +279,15 @@
   .offer-list-container {
     flex-direction: column;
     gap: 16px;
+  }
+
+  .offer-list-left {
+    width: 100%;
+  }
+
+  .offer-list-stacked {
+    width: 100%;
+    padding-left: 0;
   }
 
   .offer-list-large {
