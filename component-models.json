@@ -262,5 +262,34 @@
         "label": "Link"
       }
     ]
-  }
+  },
+  {
+    "id": "offer-list",
+    "fields": [
+      {
+        "component": "container",
+        "name": "offers",
+        "label": "Offers (3)",
+        "min": 3,
+        "max": 3,
+        "model": {
+          "id": "offer-item",
+          "fields": [
+            {
+              "component": "image",
+              "name": "image",
+              "label": "Image",
+              "value": ""
+            },
+            {
+              "component": "text",
+              "name": "href",
+              "label": "Link (full URL or internal path)",
+              "value": "#"
+            }
+          ]
+        }
+      }
+    ]
+  }  
 ]
