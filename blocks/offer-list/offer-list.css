@@ -13,7 +13,8 @@
 
 /* Left section - Cyber Monday Sale offer (takes up left column) */
 .offer-list-left {
-  flex: 1;
+  display: block;
+  width: 67%;
 }
 
 .offer-list-left-link {
