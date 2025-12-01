@@ -1,6 +1,6 @@
 .offer-list-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  width: 100%;
   gap: 24px;
   max-width: 1200px;
   margin: 0 auto;
@@ -11,6 +11,7 @@
   flex-direction: column;
 }
 
+/* Left section - Banner (takes up left column) */
 .offer-list-banner {
   background-color: #000;
   border: 4px solid #e31e24;
@@ -18,6 +19,7 @@
   justify-content: center;
   align-items: center;
   min-height: 300px;
+  flex: 1;
 }
 
 .offer-list-banner-text {
@@ -30,6 +32,7 @@
   display: block;
   text-decoration: none;
   color: inherit;
+  width: 100%;
 }
 
 .offer-list-banner-text picture,
@@ -52,11 +55,13 @@
   margin-bottom: 0;
 }
 
+/* Middle section - Large offer (if used, otherwise this would be in left) */
 .offer-list-large {
   background-color: #000;
   padding: 32px 24px;
   justify-content: space-between;
   min-height: 300px;
+  flex: 1;
 }
 
 .offer-list-discount {
@@ -128,10 +133,12 @@
   opacity: 0.8;
 }
 
+/* Right section - Stacked offers (takes up right column) */
 .offer-list-stacked {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  flex: 1;
 }
 
 .offer-list-stacked-item {
@@ -240,7 +247,7 @@
 
 @media (max-width: 1024px) {
   .offer-list-container {
-    grid-template-columns: 1fr;
+    flex-direction: column;
     gap: 16px;
   }
 

@@ -8,249 +8,235 @@ export default function decorate(block) {
   const container = document.createElement('div');
   container.className = 'offer-list-container';
 
-  // Helper to extract text content from a row
-  const getTextContent = (row) => {
-    const walker = document.createTreeWalker(row, NodeFilter.SHOW_TEXT, null, false);
-    const texts = [];
-    let node;
-    while ((node = walker.nextNode())) {
-      const text = node.textContent.trim();
-      if (text && !text.match(/^https?:\/\//)) {
-        texts.push(text);
-      }
-    }
-    return texts.join(' ').split(/\n/).filter((t) => t.trim());
+  // Helper to extract promo data from a row
+  const getPromoData = (row) => {
+    const link = row.querySelector('a[data-promo-title]');
+    const pic = row.querySelector('picture');
+    const img = pic?.querySelector('img');
+    
+    return {
+      link,
+      pic,
+      img,
+      title: link?.getAttribute('data-promo-title') || '',
+      href: link?.href || '',
+    };
   };
 
-  // Left section - Banner (first row with image)
+  // Helper to parse title text into discount and description
+  const parseTitle = (title) => {
+    if (!title) return { discount: '', description: [] };
+    
+    // Extract dollar amounts
+    const dollarMatch = title.match(/\$(\d+)/);
+    const discount = dollarMatch ? `$${dollarMatch[1]}` : '';
+    
+    // Split by common separators and clean up
+    const parts = title
+      .split(/[|:]/)
+      .map((p) => p.trim())
+      .filter((p) => p && !p.match(/^https?:\/\//));
+    
+    // First part is usually the main offer, rest is description
+    const description = parts.slice(1);
+    
+    return { discount, description, fullText: parts[0] || title };
+  };
+
+  // Left section - Banner (first row)
   const leftSection = document.createElement('div');
   leftSection.className = 'offer-list-item offer-list-banner';
   if (rows[0]) {
     moveInstrumentation(rows[0], leftSection);
+    const promo = getPromoData(rows[0]);
     const bannerText = document.createElement('div');
     bannerText.className = 'offer-list-banner-text';
     
-    const pic = rows[0].querySelector('picture');
-    const link = rows[0].querySelector('a');
-    const textLines = getTextContent(rows[0]);
-    
-    // If there's a link wrapping the image, make banner clickable
-    if (link && pic && pic.closest('a')) {
+    if (promo.link) {
       const bannerLink = document.createElement('a');
-      bannerLink.href = link.href;
+      bannerLink.href = promo.href;
       bannerLink.className = 'offer-list-banner-link';
-      moveInstrumentation(link, bannerLink);
+      moveInstrumentation(promo.link, bannerLink);
       
-      // Add text lines
-      textLines.forEach((line) => {
-        const lineEl = document.createElement('div');
-        lineEl.className = 'offer-list-banner-line';
-        lineEl.textContent = line;
-        bannerLink.appendChild(lineEl);
-      });
+      // Extract text from title (e.g., "Cyber Monday Sale")
+      const titleParts = promo.title.split(':')[0].split('|')[0].trim();
+      const lines = titleParts.split(/\s+/).filter((w) => w);
       
-      // If no text, use alt text or default
-      if (textLines.length === 0) {
-        const img = pic.querySelector('img');
-        if (img && img.alt) {
+      // Group into banner lines (e.g., "CYBER", "MONDAY", "SALE")
+      if (lines.length >= 3) {
+        lines.forEach((line) => {
           const lineEl = document.createElement('div');
           lineEl.className = 'offer-list-banner-line';
-          lineEl.textContent = img.alt.replace(/-/g, ' ').toUpperCase();
+          lineEl.textContent = line.toUpperCase();
           bannerLink.appendChild(lineEl);
-        }
+        });
+      } else {
+        // Single line
+        const lineEl = document.createElement('div');
+        lineEl.className = 'offer-list-banner-line';
+        lineEl.textContent = titleParts.toUpperCase();
+        bannerLink.appendChild(lineEl);
       }
       
       bannerText.appendChild(bannerLink);
-    } else if (pic) {
-      // Just add the picture
-      const img = pic.querySelector('img');
-      if (textLines.length > 0) {
-        textLines.forEach((line) => {
-          const lineEl = document.createElement('div');
-          lineEl.className = 'offer-list-banner-line';
-          lineEl.textContent = line;
-          bannerText.appendChild(lineEl);
-        });
-      } else if (img && img.alt) {
-        const lineEl = document.createElement('div');
-        lineEl.className = 'offer-list-banner-line';
-        lineEl.textContent = img.alt.replace(/-/g, ' ').toUpperCase();
-        bannerText.appendChild(lineEl);
-      }
-    } else {
-      // No picture, just move children
-      while (rows[0].firstElementChild) {
-        bannerText.appendChild(rows[0].firstElementChild);
-      }
     }
     
     leftSection.appendChild(bannerText);
   }
   container.appendChild(leftSection);
 
-  // Middle section - Large offer (second row)
-  const middleSection = document.createElement('div');
-  middleSection.className = 'offer-list-item offer-list-large';
-  if (rows[1]) {
-    moveInstrumentation(rows[1], middleSection);
-    
-    const discountEl = document.createElement('div');
-    discountEl.className = 'offer-list-discount';
-    const detailsEl = document.createElement('div');
-    detailsEl.className = 'offer-list-details';
-
-    const link = rows[1].querySelector('a');
-    const textParts = getTextContent(rows[1]);
-    
-    if (textParts.length > 0) {
-      const firstLine = textParts[0];
-      discountEl.innerHTML = firstLine
-        .replace(/\$(\d+)\s*OFF/gi, '<span class="offer-list-amount">$$1</span> <span class="offer-list-off">OFF</span>')
-        .replace(/\$(\d+)/g, '<span class="offer-list-amount">$$1</span>');
-    }
-
-    // Add remaining text as details
-    textParts.slice(1).forEach((text) => {
-      const detailLine = document.createElement('div');
-      detailLine.className = 'offer-list-detail-line';
-      detailLine.textContent = text;
-      detailsEl.appendChild(detailLine);
-    });
-
-    // Add CTA button
-    if (link) {
-      const ctaButton = document.createElement('a');
-      ctaButton.href = link.href;
-      ctaButton.className = 'offer-list-cta';
-      ctaButton.textContent = 'GET DETAILS';
-      moveInstrumentation(link, ctaButton);
-      detailsEl.appendChild(ctaButton);
-    }
-
-    middleSection.appendChild(discountEl);
-    middleSection.appendChild(detailsEl);
-  }
-  container.appendChild(middleSection);
-
-  // Right section - Stacked offers
+  // Right section - Stacked offers (second and third rows)
   const rightSection = document.createElement('div');
   rightSection.className = 'offer-list-item offer-list-stacked';
 
-  // Top stacked offer (third row)
-  if (rows[2]) {
+  // Top stacked offer (second row)
+  if (rows[1]) {
     const topOffer = document.createElement('div');
     topOffer.className = 'offer-list-stacked-item offer-list-stacked-top';
-    moveInstrumentation(rows[2], topOffer);
-
+    moveInstrumentation(rows[1], topOffer);
+    
+    const promo = getPromoData(rows[1]);
+    const parsed = parseTitle(promo.title);
+    
     const leftHalf = document.createElement('div');
     leftHalf.className = 'offer-list-stacked-left';
     const rightHalf = document.createElement('div');
     rightHalf.className = 'offer-list-stacked-right';
-
-    const textParts = getTextContent(rows[2]);
     
-    if (textParts.length > 0) {
+    // Discount
+    if (parsed.discount) {
       const discountEl = document.createElement('div');
       discountEl.className = 'offer-list-discount';
-      discountEl.innerHTML = textParts[0].replace(/\$(\d+)/g, '<span class="offer-list-amount">$$1</span>');
+      discountEl.innerHTML = `<span class="offer-list-amount">${parsed.discount}</span>`;
       leftHalf.appendChild(discountEl);
     }
-
+    
+    // Description
     const descEl = document.createElement('div');
     descEl.className = 'offer-list-description';
-    textParts.slice(1).forEach((text) => {
-      const line = document.createElement('div');
-      line.className = 'offer-list-description-line';
-      line.textContent = text;
-      descEl.appendChild(line);
-    });
+    
+    // Extract "IN SAVINGS ON A" type text
+    const savingsMatch = promo.title.match(/IN SAVINGS ON A (.+)/i);
+    if (savingsMatch) {
+      const line1 = document.createElement('div');
+      line1.className = 'offer-list-description-line';
+      line1.textContent = 'GET UP TO';
+      descEl.appendChild(line1);
+      
+      const line2 = document.createElement('div');
+      line2.className = 'offer-list-description-line';
+      line2.textContent = savingsMatch[1].toUpperCase();
+      descEl.appendChild(line2);
+    } else if (parsed.fullText) {
+      const parts = parsed.fullText.split(/\s+/).slice(1); // Skip the dollar amount
+      parts.forEach((part) => {
+        if (part && part.length > 2) {
+          const line = document.createElement('div');
+          line.className = 'offer-list-description-line';
+          line.textContent = part.toUpperCase();
+          descEl.appendChild(line);
+        }
+      });
+    }
+    
     leftHalf.appendChild(descEl);
-
-    // Find and optimize image
-    const pic = rows[2].querySelector('picture');
-    if (pic) {
+    
+    // Image/Icon
+    if (promo.pic && promo.img) {
       const iconEl = document.createElement('div');
       iconEl.className = 'offer-list-icon';
-      const img = pic.querySelector('img');
-      if (img) {
-        const optimizedPic = createOptimizedPicture(img.src, img.alt, false, [{ width: '100' }]);
-        moveInstrumentation(img, optimizedPic.querySelector('img'));
-        iconEl.appendChild(optimizedPic);
-      }
+      const optimizedPic = createOptimizedPicture(promo.img.src || promo.img.srcset, promo.img.alt || '', false, [{ width: '100' }]);
+      moveInstrumentation(promo.img, optimizedPic.querySelector('img'));
+      iconEl.appendChild(optimizedPic);
       rightHalf.appendChild(iconEl);
     }
-
-    // Add CTA button
-    const link = rows[2].querySelector('a');
-    if (link) {
+    
+    // CTA button
+    if (promo.link) {
       const ctaButton = document.createElement('a');
-      ctaButton.href = link.href;
+      ctaButton.href = promo.href;
       ctaButton.className = 'offer-list-cta';
       ctaButton.textContent = 'GET DETAILS';
-      moveInstrumentation(link, ctaButton);
+      moveInstrumentation(promo.link, ctaButton);
       rightHalf.appendChild(ctaButton);
     }
-
+    
     topOffer.appendChild(leftHalf);
     topOffer.appendChild(rightHalf);
     rightSection.appendChild(topOffer);
   }
 
-  // Bottom stacked offer (fourth row)
-  if (rows[3]) {
+  // Bottom stacked offer (third row)
+  if (rows[2]) {
     const bottomOffer = document.createElement('div');
     bottomOffer.className = 'offer-list-stacked-item offer-list-stacked-bottom';
-    moveInstrumentation(rows[3], bottomOffer);
-
+    moveInstrumentation(rows[2], bottomOffer);
+    
+    const promo = getPromoData(rows[2]);
+    const parsed = parseTitle(promo.title);
+    
     const leftHalf = document.createElement('div');
     leftHalf.className = 'offer-list-stacked-left';
     const rightHalf = document.createElement('div');
     rightHalf.className = 'offer-list-stacked-right';
-
-    const textParts = getTextContent(rows[3]);
     
-    if (textParts.length > 0) {
+    // Discount
+    if (parsed.discount) {
       const discountEl = document.createElement('div');
       discountEl.className = 'offer-list-discount';
-      discountEl.innerHTML = textParts[0].replace(/\$(\d+)/g, '<span class="offer-list-amount">$$1</span>');
+      discountEl.innerHTML = `<span class="offer-list-amount">${parsed.discount}</span>`;
       leftHalf.appendChild(discountEl);
     }
-
+    
+    // Description
     const descEl = document.createElement('div');
     descEl.className = 'offer-list-description';
-    textParts.slice(1).forEach((text) => {
-      const line = document.createElement('div');
-      line.className = 'offer-list-description-line';
-      line.textContent = text;
-      descEl.appendChild(line);
-    });
+    
+    const savingsMatch = promo.title.match(/IN SAVINGS ON A (.+)/i);
+    if (savingsMatch) {
+      const line1 = document.createElement('div');
+      line1.className = 'offer-list-description-line';
+      line1.textContent = 'GET UP TO';
+      descEl.appendChild(line1);
+      
+      const line2 = document.createElement('div');
+      line2.className = 'offer-list-description-line';
+      line2.textContent = savingsMatch[1].toUpperCase();
+      descEl.appendChild(line2);
+    } else if (parsed.fullText) {
+      const parts = parsed.fullText.split(/\s+/).slice(1);
+      parts.forEach((part) => {
+        if (part && part.length > 2) {
+          const line = document.createElement('div');
+          line.className = 'offer-list-description-line';
+          line.textContent = part.toUpperCase();
+          descEl.appendChild(line);
+        }
+      });
+    }
+    
     leftHalf.appendChild(descEl);
-
-    // Find and optimize image
-    const pic = rows[3].querySelector('picture');
-    if (pic) {
+    
+    // Image/Icon
+    if (promo.pic && promo.img) {
       const iconEl = document.createElement('div');
       iconEl.className = 'offer-list-icon';
-      const img = pic.querySelector('img');
-      if (img) {
-        const optimizedPic = createOptimizedPicture(img.src, img.alt, false, [{ width: '100' }]);
-        moveInstrumentation(img, optimizedPic.querySelector('img'));
-        iconEl.appendChild(optimizedPic);
-      }
+      const optimizedPic = createOptimizedPicture(promo.img.src || promo.img.srcset, promo.img.alt || '', false, [{ width: '100' }]);
+      moveInstrumentation(promo.img, optimizedPic.querySelector('img'));
+      iconEl.appendChild(optimizedPic);
       rightHalf.appendChild(iconEl);
     }
-
-    // Add CTA button
-    const link = rows[3].querySelector('a');
-    if (link) {
+    
+    // CTA button
+    if (promo.link) {
       const ctaButton = document.createElement('a');
-      ctaButton.href = link.href;
+      ctaButton.href = promo.href;
       ctaButton.className = 'offer-list-cta';
       ctaButton.textContent = 'GET DETAILS';
-      moveInstrumentation(link, ctaButton);
+      moveInstrumentation(promo.link, ctaButton);
       rightHalf.appendChild(ctaButton);
     }
-
+    
     bottomOffer.appendChild(leftHalf);
     bottomOffer.appendChild(rightHalf);
     rightSection.appendChild(bottomOffer);
