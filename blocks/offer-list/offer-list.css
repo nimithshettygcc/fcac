@@ -2,8 +2,30 @@
   display: flex;
   width: 100%;
   gap: 24px;
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Break out of section padding */
+.section.offer-list-container {
+  margin-left: -24px;
+  margin-right: -24px;
+  width: calc(100% + 48px);
+  max-width: none;
+}
+
+.section.offer-list-container > div {
+  padding: 0;
+  max-width: none;
+}
+
+@media (width >= 900px) {
+  .section.offer-list-container {
+    margin-left: -32px;
+    margin-right: -32px;
+    width: calc(100% + 64px);
+  }
 }
 
 .offer-list-item {
@@ -15,6 +37,8 @@
 .offer-list-left {
   display: block;
   width: 67%;
+  margin: 0;
+  padding: 0;
 }
 
 .offer-list-left-link {
@@ -22,6 +46,8 @@
   width: 100%;
   text-decoration: none;
   color: inherit;
+  margin: 0;
+  padding: 0;
 }
 
 .offer-list-left-link picture,
@@ -29,6 +55,8 @@
   width: 100%;
   height: auto;
   display: block;
+  margin: 0;
+  padding: 0;
 }
 
 /* Middle section - Large offer (if used, otherwise this would be in left) */
