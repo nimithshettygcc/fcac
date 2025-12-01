@@ -70,18 +70,31 @@ export default function decorate(block) {
   if (rows[1]) {
     const topOffer = document.createElement('div');
     topOffer.className = 'offer-list-stacked-item offer-list-stacked-top';
-    moveInstrumentation(rows[1], topOffer);
     
     const leftHalf = document.createElement('div');
     leftHalf.className = 'offer-list-stacked-left';
     const rightHalf = document.createElement('div');
     rightHalf.className = 'offer-list-stacked-right';
     
-    // Extract data (search at any depth)
+    // Extract data BEFORE moveInstrumentation (search at any depth)
     // Use the link from the left side image (rows[0]) for the first stacked offer
     const link = leftLink || rows[1].querySelector('a[data-promo-title], a.tile-link, a');
-    const pic = rows[1].querySelector('picture');
+    // Search more thoroughly for picture - check all descendants, including inside links
+    let pic = rows[1].querySelector('picture');
+    if (!pic && link) {
+      // Check if picture is inside the link
+      pic = link.querySelector('picture');
+    }
+    if (!pic) {
+      // Try finding img and getting its picture parent
+      const img = rows[1].querySelector('img');
+      if (img) {
+        pic = img.closest('picture');
+      }
+    }
     const title = link?.getAttribute('data-promo-title') || rows[1].textContent.trim() || '';
+    
+    moveInstrumentation(rows[1], topOffer);
     
     // Parse title for discount
     const dollarMatch = title.match(/\$(\d+)/);
@@ -133,10 +146,17 @@ export default function decorate(block) {
         moveInstrumentation(link, iconLink);
         
         // Move the actual picture element (not clone to preserve sources)
+        // Ensure pic is removed from its current parent first
+        if (pic.parentNode) {
+          pic.parentNode.removeChild(pic);
+        }
         iconLink.appendChild(pic);
         iconEl.appendChild(iconLink);
       } else {
         // Move picture directly
+        if (pic.parentNode) {
+          pic.parentNode.removeChild(pic);
+        }
         iconEl.appendChild(pic);
       }
       
@@ -162,17 +182,30 @@ export default function decorate(block) {
   if (rows[2]) {
     const bottomOffer = document.createElement('div');
     bottomOffer.className = 'offer-list-stacked-item offer-list-stacked-bottom';
-    moveInstrumentation(rows[2], bottomOffer);
     
     const leftHalf = document.createElement('div');
     leftHalf.className = 'offer-list-stacked-left';
     const rightHalf = document.createElement('div');
     rightHalf.className = 'offer-list-stacked-right';
     
-    // Extract data (search at any depth)
+    // Extract data BEFORE moveInstrumentation (search at any depth)
     const link = rows[2].querySelector('a[data-promo-title], a.tile-link, a');
-    const pic = rows[2].querySelector('picture');
+    // Search more thoroughly for picture - check all descendants, including inside links
+    let pic = rows[2].querySelector('picture');
+    if (!pic && link) {
+      // Check if picture is inside the link
+      pic = link.querySelector('picture');
+    }
+    if (!pic) {
+      // Try finding img and getting its picture parent
+      const img = rows[2].querySelector('img');
+      if (img) {
+        pic = img.closest('picture');
+      }
+    }
     const title = link?.getAttribute('data-promo-title') || rows[2].textContent.trim() || '';
+    
+    moveInstrumentation(rows[2], bottomOffer);
     
     // Parse title for discount
     const dollarMatch = title.match(/\$(\d+)/);
@@ -223,10 +256,17 @@ export default function decorate(block) {
         moveInstrumentation(link, iconLink);
         
         // Move the actual picture element (not clone to preserve sources)
+        // Ensure pic is removed from its current parent first
+        if (pic.parentNode) {
+          pic.parentNode.removeChild(pic);
+        }
         iconLink.appendChild(pic);
         iconEl.appendChild(iconLink);
       } else {
         // Move picture directly
+        if (pic.parentNode) {
+          pic.parentNode.removeChild(pic);
+        }
         iconEl.appendChild(pic);
       }
       
