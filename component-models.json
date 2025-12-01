@@ -267,29 +267,62 @@
     "id": "offer-list",
     "fields": [
       {
-        "component": "container",
-        "name": "offers",
-        "label": "Offers (3)",
-        "min": 3,
-        "max": 3,
-        "model": {
-          "id": "offer-item",
-          "fields": [
-            {
-              "component": "image",
-              "name": "image",
-              "label": "Image",
-              "value": ""
-            },
-            {
-              "component": "text",
-              "name": "href",
-              "label": "Link (full URL or internal path)",
-              "value": "#"
-            }
-          ]
-        }
+        "component": "reference",
+        "valueType": "string",
+        "name": "image1",
+        "label": "Image 1",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "image1Alt",
+        "label": "Image 1 Alt Text",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "name": "link1",
+        "label": "Link 1"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image2",
+        "label": "Image 2",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "image2Alt",
+        "label": "Image 2 Alt Text",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "name": "link2",
+        "label": "Link 2"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image3",
+        "label": "Image 3",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "image3Alt",
+        "label": "Image 3 Alt Text",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "name": "link3",
+        "label": "Link 3"
       }
     ]
-  }  
+  }
 ]
