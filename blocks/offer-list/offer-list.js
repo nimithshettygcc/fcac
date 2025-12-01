@@ -63,6 +63,9 @@ export default function decorate(block) {
   const rightSection = document.createElement('div');
   rightSection.className = 'offer-list-item offer-list-stacked';
 
+  // Get the link from the left side image (first row) for the first stacked offer
+  const leftLink = rows[0]?.querySelector('a[data-promo-title], a.tile-link, a');
+
   // Top stacked offer (second row)
   if (rows[1]) {
     const topOffer = document.createElement('div');
@@ -75,7 +78,8 @@ export default function decorate(block) {
     rightHalf.className = 'offer-list-stacked-right';
     
     // Extract data (search at any depth)
-    const link = rows[1].querySelector('a[data-promo-title], a.tile-link, a');
+    // Use the link from the left side image (rows[0]) for the first stacked offer
+    const link = leftLink || rows[1].querySelector('a[data-promo-title], a.tile-link, a');
     const pic = rows[1].querySelector('picture');
     const title = link?.getAttribute('data-promo-title') || rows[1].textContent.trim() || '';
     

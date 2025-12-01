@@ -169,6 +169,11 @@
   min-height: 140px;
 }
 
+.offer-list-stacked-top {
+  display: block;
+  width: 100%;
+}
+
 .offer-list-stacked-left {
   background-color: #fff;
   padding: 24px;
