@@ -18,35 +18,38 @@ export default function decorate(block) {
     const link = rows[0].querySelector('a[data-promo-title], a.tile-link, a');
     const pic = rows[0].querySelector('picture');
     
-    if (link && pic) {
+    // Check if picture is already inside a link
+    if (pic && pic.closest('a')) {
+      // Picture is already in a link, move the link
+      const existingLink = pic.closest('a');
+      existingLink.className = 'offer-list-left-link';
+      moveInstrumentation(existingLink, existingLink);
+      leftSection.appendChild(existingLink);
+    } else if (link && pic) {
       // Create clickable offer with image
       const offerLink = document.createElement('a');
       offerLink.href = link.href;
       offerLink.className = 'offer-list-left-link';
+      // Copy all link attributes
+      [...link.attributes].forEach((attr) => {
+        if (attr.name.startsWith('data-') || attr.name === 'href' || attr.name === 'title') {
+          offerLink.setAttribute(attr.name, attr.value);
+        }
+      });
       moveInstrumentation(link, offerLink);
       
-      // Clone and add the picture
-      const clonedPic = pic.cloneNode(true);
-      offerLink.appendChild(clonedPic);
+      // Move the actual picture element (not clone)
+      offerLink.appendChild(pic);
       
       leftSection.appendChild(offerLink);
-    } else if (pic) {
-      // Just picture, wrap in link if available
-      if (link) {
-        const offerLink = document.createElement('a');
-        offerLink.href = link.href;
-        offerLink.className = 'offer-list-left-link';
-        moveInstrumentation(link, offerLink);
-        offerLink.appendChild(pic.cloneNode(true));
-        leftSection.appendChild(offerLink);
-      } else {
-        leftSection.appendChild(pic.cloneNode(true));
-      }
     } else if (link) {
-      // Just link, move it
-      const offerLink = link.cloneNode(true);
-      moveInstrumentation(link, offerLink);
-      leftSection.appendChild(offerLink);
+      // Just link, move it and add class
+      link.className = 'offer-list-left-link';
+      moveInstrumentation(link, link);
+      leftSection.appendChild(link);
+    } else if (pic) {
+      // Just picture, move it
+      leftSection.appendChild(pic);
     } else {
       // Fallback: move all children
       while (rows[0].firstElementChild) {
