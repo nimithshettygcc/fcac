@@ -125,11 +125,12 @@ export default function decorate(block) {
         iconLink.className = 'offer-list-icon-link';
         moveInstrumentation(link, iconLink);
         
-        const clonedPic = pic.cloneNode(true);
-        iconLink.appendChild(clonedPic);
+        // Move the actual picture element (not clone to preserve sources)
+        iconLink.appendChild(pic);
         iconEl.appendChild(iconLink);
       } else {
-        iconEl.appendChild(pic.cloneNode(true));
+        // Move picture directly
+        iconEl.appendChild(pic);
       }
       
       rightHalf.appendChild(iconEl);
@@ -214,11 +215,12 @@ export default function decorate(block) {
         iconLink.className = 'offer-list-icon-link';
         moveInstrumentation(link, iconLink);
         
-        const clonedPic = pic.cloneNode(true);
-        iconLink.appendChild(clonedPic);
+        // Move the actual picture element (not clone to preserve sources)
+        iconLink.appendChild(pic);
         iconEl.appendChild(iconLink);
       } else {
-        iconEl.appendChild(pic.cloneNode(true));
+        // Move picture directly
+        iconEl.appendChild(pic);
       }
       
       rightHalf.appendChild(iconEl);
