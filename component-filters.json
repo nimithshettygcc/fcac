@@ -42,5 +42,11 @@
       "title",
       "offer-list"
     ]
+  },
+  {
+    "id": "hero-fcac",
+    "components": [
+      "hero-fcac-tab"
+    ]
   }
 ]
