@@ -359,18 +359,26 @@
         "name": "buttonText",
         "label": "Button Text",
         "value": ""
-      },
-      {
-        "component": "text",
-        "name": "buttonTitle",
-        "label": "Button Title",
-        "value": ""
       }
     ]
   },
   {
     "id": "hero-fcac-tab",
     "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "tab1Title",
+        "label": "Tab 1 - Title",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "tab1Subtab1Title",
+        "label": "Tab 1 - Subtab 1 - Title",
+        "value": ""
+      },
       {
         "component": "select",
         "name": "tab1Subtab1Dropdown1",
@@ -447,6 +455,20 @@
         "component": "text",
         "name": "tab1Subtab2ButtonText",
         "label": "Tab 1 - Subtab 2 - Button Text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "tab2Title",
+        "label": "Tab 2 - Title",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "tab2Subtab2Title",
+        "label": "Tab 2 - Subtab 2 - Title",
         "value": ""
       },
       {
