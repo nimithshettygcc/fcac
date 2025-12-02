@@ -788,5 +788,135 @@
         "value": ""
       }
     ]
+  },
+  {
+    "id": "tire-guide",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "eyebrow",
+        "label": "Eyebrow",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "textArea1",
+        "value": "",
+        "label": "Text Area 1",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "name": "button1Link",
+        "label": "Button 1 Link"
+      },
+      {
+        "component": "text",
+        "name": "button1Text",
+        "label": "Button 1 Text",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image1",
+        "label": "Image 1",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "image1Alt",
+        "label": "Image 1 Alt Text",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "textArea2",
+        "value": "",
+        "label": "Text Area 2",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "header",
+        "label": "Header",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "textArea3",
+        "value": "",
+        "label": "Text Area 3",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "name": "button2Link",
+        "label": "Button 2 Link"
+      },
+      {
+        "component": "text",
+        "name": "button2Text",
+        "label": "Button 2 Text",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "name": "button3Link",
+        "label": "Button 3 Link"
+      },
+      {
+        "component": "text",
+        "name": "button3Text",
+        "label": "Button 3 Text",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "name": "button4Link",
+        "label": "Button 4 Link"
+      },
+      {
+        "component": "text",
+        "name": "button4Text",
+        "label": "Button 4 Text",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "textArea4",
+        "value": "",
+        "label": "Text Area 4",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "name": "button5Link",
+        "label": "Button 5 Link"
+      },
+      {
+        "component": "text",
+        "name": "button5Text",
+        "label": "Button 5 Text",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image2",
+        "label": "Image 2",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "image2Alt",
+        "label": "Image 2 Alt Text",
+        "value": ""
+      }
+    ]
   }
 ]
