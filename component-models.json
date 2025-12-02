@@ -918,5 +918,151 @@
         "value": ""
       }
     ]
+  },
+  {
+    "id": "tire-service",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "header",
+        "label": "Header",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "name": "button1Link",
+        "label": "Button 1 Link"
+      },
+      {
+        "component": "text",
+        "name": "button1Text",
+        "label": "Button 1 Text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "name": "button1Title",
+        "label": "Button 1 Title",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "name": "button2Link",
+        "label": "Button 2 Link"
+      },
+      {
+        "component": "text",
+        "name": "button2Text",
+        "label": "Button 2 Text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "name": "button2Title",
+        "label": "Button 2 Title",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "tire-service-card",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image Alt Text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "eyebrow",
+        "label": "Eyebrow",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "name": "buttonLink",
+        "label": "Button Link"
+      },
+      {
+        "component": "text",
+        "name": "buttonText",
+        "label": "Button Text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "name": "buttonTitle",
+        "label": "Button Title",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "tire-service-section",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "textArea",
+        "value": "",
+        "label": "Text Area",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "name": "buttonLink",
+        "label": "Button Link"
+      },
+      {
+        "component": "text",
+        "name": "buttonText",
+        "label": "Button Text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "name": "buttonTitle",
+        "label": "Button Title",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image Alt Text",
+        "value": ""
+      }
+    ]
   }
 ]
