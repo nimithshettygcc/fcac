@@ -447,6 +447,13 @@
         "value": ""
       },
       {
+        "component": "text",
+        "valueType": "string",
+        "name": "tab1Subtab2TextBox2",
+        "label": "Tab 1 - Subtab 2 - Text Box 2",
+        "value": ""
+      },
+      {
         "component": "aem-content",
         "name": "tab1Subtab2ButtonLink",
         "label": "Tab 1 - Subtab 2 - Button Link"
@@ -739,34 +746,6 @@
         "value": ""
       },
       {
-        "component": "richtext",
-        "name": "tab2Section4TextArea1",
-        "value": "",
-        "label": "Tab 2 - Section 4 - Text Area 1",
-        "valueType": "string"
-      },
-      {
-        "component": "reference",
-        "valueType": "string",
-        "name": "tab2Section4Image",
-        "label": "Tab 2 - Section 4 - Image",
-        "multi": false
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "tab2Section4ImageAlt",
-        "label": "Tab 2 - Section 4 - Image Alt Text",
-        "value": ""
-      },
-      {
-        "component": "richtext",
-        "name": "tab2Section4TextArea2",
-        "value": "",
-        "label": "Tab 2 - Section 4 - Text Area 2",
-        "valueType": "string"
-      },
-      {
         "component": "aem-content",
         "name": "tab2Section4Button1Link",
         "label": "Tab 2 - Section 4 - Button 1 Link"
@@ -778,25 +757,34 @@
         "value": ""
       },
       {
-        "component": "aem-content",
-        "name": "tab2Section4Button2Link",
-        "label": "Tab 2 - Section 4 - Button 2 Link"
+        "component": "select",
+        "name": "tab2Section4Dropdown1",
+        "label": "Tab 1 - Subtab 2 - Dropdown 1",
+        "options": []
+      },
+      {
+        "component": "select",
+        "name": "tab2Section4Dropdown2",
+        "label": "Tab 1 - Subtab 2 - Dropdown 2",
+        "options": []
+      },
+      {
+        "component": "select",
+        "name": "tab2Section4Dropdown3",
+        "label": "Tab 1 - Subtab 2 - Dropdown 3",
+        "options": []
+      },
+      {
+        "component": "select",
+        "name": "tab2Section4Dropdown4",
+        "label": "Tab 1 - Subtab 2 - Dropdown 4",
+        "options": []
       },
       {
         "component": "text",
-        "name": "tab2Section4Button2Text",
-        "label": "Tab 2 - Section 4 - Button 2 Text",
-        "value": ""
-      },
-      {
-        "component": "aem-content",
-        "name": "tab2Section4Button3Link",
-        "label": "Tab 2 - Section 4 - Button 3 Link"
-      },
-      {
-        "component": "text",
-        "name": "tab2Section4Button3Text",
-        "label": "Tab 2 - Section 4 - Button 3 Text",
+        "valueType": "string",
+        "name": "tab1Subtab2TextBox",
+        "label": "Tab 1 - Subtab 2 - Text Box",
         "value": ""
       }
     ]
