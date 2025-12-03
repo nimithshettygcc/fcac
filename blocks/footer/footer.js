@@ -2,25 +2,19 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
   console.log('=== FOOTER DEBUG START ===');
-  console.log('Block:', block);
-  console.log('Block children count:', block.children.length);
   
-  const sections = [...block.children];
-  
-  // Log each section
-  sections.forEach((section, index) => {
-    console.log(`Section ${index}:`, section);
-    const contentWrapper = section.querySelector('.default-content-wrapper');
-    console.log(`  - Has content wrapper:`, !!contentWrapper);
-    if (contentWrapper) {
-      console.log(`  - Content preview:`, contentWrapper.innerHTML.substring(0, 100));
-    }
-  });
-  
-  if (sections.length === 0) {
-    console.warn('No sections found');
+  // The block has one wrapper div that contains all sections
+  const wrapper = block.children[0];
+  if (!wrapper) {
+    console.warn('No wrapper found');
     return;
   }
+  
+  // Get sections from INSIDE the wrapper
+  const sections = [...wrapper.querySelectorAll('.section')];
+  console.log('Found sections:', sections.length);
+  
+  if (sections.length === 0) return;
 
   // Create main footer structure
   const footerTop = document.createElement('div');
@@ -43,22 +37,27 @@ export default function decorate(block) {
 
     console.log(`Processing section ${index}`);
 
-    // Create column and move content
+    // Create column
     const column = document.createElement('div');
     column.className = 'footer-column';
     
-    // Clone all content
+    // Clone the content
     const contentClone = contentWrapper.cloneNode(true);
     column.appendChild(contentClone);
 
-    // Distribute to sections
+    // Distribute to appropriate sections
+    // Top bar: 0-4 (Questions, Coupons, Credit Card, App, Social)
     if (index <= 4) {
       console.log(`  -> Added to footer-top`);
       footerTop.appendChild(column);
-    } else if (index >= 5 && index <= 8) {
+    }
+    // Navigation: 5-8 (Tires, Services, Firestone, Blog)
+    else if (index >= 5 && index <= 8) {
       console.log(`  -> Added to footer-nav`);
       footerNav.appendChild(column);
-    } else if (index >= 9) {
+    }
+    // Bottom: 9-10 (Logo, Legal)
+    else if (index >= 9) {
       console.log(`  -> Added to footer-bottom`);
       footerBottom.appendChild(column);
     }
