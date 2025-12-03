@@ -1,37 +1,28 @@
-import { moveInstrumentation } from '../../scripts/scripts.js';
+import { getMetadata } from '../../scripts/aem.js';
+import { loadFragment } from '../fragment/fragment.js';
 
-export default function decorate(block) {
-  console.log('=== FOOTER DECORATE START ===');
-  console.log('Block:', block);
-  console.log('Block children:', block.children.length);
-  console.log('Block HTML preview:', block.innerHTML.substring(0, 300));
-  
+export default async function decorate(block) {
+  // Load footer fragment first
+  const footerMeta = getMetadata('footer');
+  const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
+  const fragment = await loadFragment(footerPath);
+
+  // Put fragment content into block temporarily
+  block.textContent = '';
+  const tempWrapper = document.createElement('div');
+  while (fragment.firstElementChild) {
+    tempWrapper.append(fragment.firstElementChild);
+  }
+  block.append(tempWrapper);
+
+  // NOW apply the simple processing logic
   // Get the wrapper div (first child of block)
   const wrapper = block.children[0];
-  if (!wrapper) {
-    console.error('No wrapper found!');
-    return;
-  }
-  
-  console.log('Wrapper:', wrapper);
-  console.log('Wrapper children:', wrapper.children.length);
+  if (!wrapper) return;
   
   // Get all section containers
   const sectionContainers = [...wrapper.children];
-  console.log('Section containers:', sectionContainers.length);
-  
-  sectionContainers.forEach((container, i) => {
-    console.log(`\nContainer ${i}:`, container);
-    console.log(`  Classes:`, container.className);
-    console.log(`  Has .section:`, !!container.querySelector('.section'));
-    console.log(`  Has .default-content-wrapper:`, !!container.querySelector('.default-content-wrapper'));
-    console.log(`  HTML preview:`, container.innerHTML.substring(0, 100));
-  });
-  
-  if (sectionContainers.length === 0) {
-    console.error('No section containers found!');
-    return;
-  }
+  if (sectionContainers.length === 0) return;
 
   // Create main footer structure
   const footerTop = document.createElement('div');
@@ -45,48 +36,33 @@ export default function decorate(block) {
 
   // Process each section container
   sectionContainers.forEach((container, index) => {
-    console.log(`\n--- Processing container ${index} ---`);
-    
     // Find content wrapper inside section
     const contentWrapper = container.querySelector('.default-content-wrapper');
-    
-    if (!contentWrapper) {
-      console.warn(`No content wrapper in container ${index}`);
-      return;
-    }
-    
-    console.log(`Content wrapper found with ${contentWrapper.children.length} children`);
+    if (!contentWrapper) return;
 
     // Create column
     const column = document.createElement('div');
     column.className = 'footer-column';
     
     // Move content (not clone) to preserve all elements
-    let moved = 0;
     while (contentWrapper.firstChild) {
       column.appendChild(contentWrapper.firstChild);
-      moved++;
     }
-    
-    console.log(`Moved ${moved} elements to column`);
 
     // Distribute to sections
+    // Top bar: 0-4 (Questions, Coupons, Credit Card, App, Social)
     if (index <= 4) {
-      console.log(`-> Adding to footer-top`);
       footerTop.appendChild(column);
-    } else if (index >= 5 && index <= 8) {
-      console.log(`-> Adding to footer-nav`);
+    }
+    // Navigation: 5-8 (Tires, Services, Firestone, Blog)
+    else if (index >= 5 && index <= 8) {
       footerNav.appendChild(column);
-    } else if (index >= 9) {
-      console.log(`-> Adding to footer-bottom`);
+    }
+    // Bottom: 9-10 (Logo, Legal)
+    else if (index >= 9) {
       footerBottom.appendChild(column);
     }
   });
-
-  console.log('\n=== FINAL COUNTS ===');
-  console.log('Footer-top columns:', footerTop.children.length);
-  console.log('Footer-nav columns:', footerNav.children.length);
-  console.log('Footer-bottom columns:', footerBottom.children.length);
 
   // Clear and rebuild
   block.innerHTML = '';
@@ -106,6 +82,4 @@ export default function decorate(block) {
   footerBottom.appendChild(copyright);
   
   block.appendChild(footer);
-  
-  console.log('=== FOOTER DECORATE END ===\n');
 }
