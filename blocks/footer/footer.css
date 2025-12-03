@@ -23,10 +23,11 @@ footer {
 .footer-top {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 30px;
+  gap: 40px;
   background-color: #e6e6e6;
   padding: 40px 60px;
   border-bottom: 1px solid #ccc;
+  align-items: start;
 }
 
 .footer-top .footer-column {
@@ -34,68 +35,181 @@ footer {
   flex-direction: column;
 }
 
-.footer-top p:first-child {
+/* Headings */
+.footer-top p:first-child,
+.footer-top .default-content-wrapper > p:first-child {
   font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
   margin: 0 0 15px 0;
   letter-spacing: 0.5px;
+  color: #000;
 }
 
-.footer-top .button-container {
-  margin: 10px 0;
+/* Regular text */
+.footer-top p {
+  margin: 0 0 10px 0;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
-.footer-top .button {
-  display: inline-block;
-  background-color: #e31e24;
-  color: #fff;
-  border: 2px solid #e31e24;
-  padding: 10px 20px;
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  text-align: center;
-  transition: all 0.3s ease;
-  cursor: pointer;
+/* Column 1: Have Questions - text link */
+.footer-top .footer-column:nth-child(1) a {
+  color: #000;
+  text-decoration: underline;
+  font-size: 13px;
 }
 
-.footer-top .button:hover {
-  background-color: #fff;
+.footer-top .footer-column:nth-child(1) a:hover {
   color: #e31e24;
 }
 
-/* Images in top section */
-.footer-top picture {
-  display: block;
-  margin-top: 15px;
+/* Column 2: Get Coupons - email input */
+.footer-top .footer-column:nth-child(2) {
+  /* Email form styling would go here if needed */
 }
 
-.footer-top img {
-  max-width: 100%;
+/* Column 3: Credit Card - horizontal layout */
+.footer-top .footer-column:nth-child(3) {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.footer-top .footer-column:nth-child(3) > p:first-child {
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.footer-top .footer-column:nth-child(3) picture {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.footer-top .footer-column:nth-child(3) picture img {
+  max-width: 70px;
   height: auto;
 }
 
-/* Social media icons */
+.footer-top .footer-column:nth-child(3) .default-content-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.footer-top .footer-column:nth-child(3) .default-content-wrapper > p:first-child {
+  display: none; /* Hide duplicate heading */
+}
+
+.footer-top .footer-column:nth-child(3) .button-container {
+  margin: 0;
+}
+
+.footer-top .footer-column:nth-child(3) a {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #000;
+  text-decoration: underline;
+  text-transform: none;
+  font-size: 13px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.footer-top .footer-column:nth-child(3) a:hover {
+  color: #e31e24;
+  background: none;
+}
+
+/* Column 4: My Firestone App - horizontal layout */
+.footer-top .footer-column:nth-child(4) {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.footer-top .footer-column:nth-child(4) > p:first-child {
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.footer-top .footer-column:nth-child(4) picture {
+  margin: 0;
+  flex-shrink: 0;
+  order: 2;
+}
+
+.footer-top .footer-column:nth-child(4) picture img {
+  max-width: 60px;
+  height: auto;
+}
+
+.footer-top .footer-column:nth-child(4) .default-content-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.footer-top .footer-column:nth-child(4) .default-content-wrapper > p:first-child {
+  display: none; /* Hide duplicate heading */
+}
+
+.footer-top .footer-column:nth-child(4) .button-container {
+  margin: 0;
+}
+
+.footer-top .footer-column:nth-child(4) a {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #000;
+  text-decoration: underline;
+  text-transform: none;
+  font-size: 13px;
+}
+
+.footer-top .footer-column:nth-child(4) a:hover {
+  color: #e31e24;
+  background: none;
+}
+
+/* Column 5: Social Media - horizontal icons */
+.footer-top .footer-column:nth-child(5) p:not(:first-child) {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  align-items: center;
+  margin: 0;
+}
+
+.footer-top .footer-column:nth-child(5) a {
+  display: inline-flex;
+  margin: 0;
+}
+
+.footer-top .footer-column:nth-child(5) br {
+  display: none;
+}
+
 .footer-top .icon {
-  display: inline-block;
-  margin-right: 15px;
-  margin-bottom: 10px;
+  display: inline-flex;
+  margin: 0;
 }
 
 .footer-top .icon img {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   transition: opacity 0.3s ease;
+  filter: brightness(0);
 }
 
 .footer-top .icon img:hover {
-  opacity: 0.7;
-}
-
-.footer-top p {
-  margin: 0 0 10px 0;
+  opacity: 0.6;
 }
 
 /* Main navigation - 4 columns */
@@ -150,7 +264,7 @@ footer {
   text-decoration: underline;
 }
 
-/* Bottom bar - Logo + Legal */
+/* Bottom bar */
 .footer-bottom {
   background-color: #e6e6e6;
   padding: 30px 60px;
