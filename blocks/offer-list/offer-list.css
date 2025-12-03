@@ -1,94 +1,105 @@
-/* Container styling */
-.section.offer-list-container {
-  margin: 40px auto;
-  padding: 0 20px;
-  max-width: 1200px;
-}
-
-.offer-list-wrapper {
+/* Block base - NO padding on block itself */
+.block.offer-list {
   padding: 0;
+  margin: 0;
 }
 
-/* Grid layout */
-.offer-list.offer-list-grid {
+/* Container - responsive grid */
+.offer-list-container {
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
   width: 100%;
+  padding: 0;
+  margin: 0;
 }
 
-/* Featured offer (first card) takes full width on desktop */
+/* Tablet and up - 2 column grid */
 @media (min-width: 768px) {
-  .offer-list.offer-list-grid {
+  .offer-list-container {
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
   }
   
-  .offer-card-featured {
-    grid-column: 1 / -1; /* Span full width */
+  /* Featured item spans full width */
+  .offer-list-featured {
+    grid-column: 1 / -1;
   }
 }
 
-/* Offer card styling */
-.offer-card {
+/* Individual offer item */
+.offer-list-item {
   position: relative;
   overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   background-color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.offer-card:hover {
+.offer-list-item:hover {
   transform: translateY(-4px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
-.offer-card-link {
+/* Clickable link wrapper */
+.offer-list-link {
   display: block;
+  width: 100%;
   text-decoration: none;
-  width: 100%;
-  height: 100%;
+  color: inherit;
 }
 
-/* Image styling */
-.offer-card picture.offer-image {
+.offer-list-link:hover {
+  text-decoration: none;
+}
+
+/* Picture and image styling */
+.offer-list-link picture {
   display: block;
   width: 100%;
+  line-height: 0;
 }
 
-.offer-card picture.offer-image img {
+.offer-list-link picture img {
   width: 100%;
   height: auto;
   display: block;
   object-fit: cover;
 }
 
-/* Featured card larger aspect ratio */
-.offer-card-featured picture.offer-image img {
+/* Featured item has taller images */
+.offer-list-featured .offer-list-link picture img {
   min-height: 300px;
 }
 
 @media (min-width: 768px) {
-  .offer-card-featured picture.offer-image img {
+  .offer-list-featured .offer-list-link picture img {
     min-height: 400px;
   }
 }
 
-/* Standard cards aspect ratio */
-.offer-card:not(.offer-card-featured) picture.offer-image img {
-  min-height: 200px;
+/* Non-featured items maintain aspect ratio */
+.offer-list-item:not(.offer-list-featured) .offer-list-link picture img {
   aspect-ratio: 465 / 210;
+  min-height: 200px;
 }
 
-/* Mobile responsive */
+/* Mobile adjustments */
 @media (max-width: 767px) {
-  .section.offer-list-container {
-    padding: 0 16px;
-    margin: 24px auto;
-  }
-  
-  .offer-list.offer-list-grid {
+  .offer-list-container {
     gap: 16px;
   }
+  
+  .offer-list-featured .offer-list-link picture img {
+    min-height: 250px;
+  }
+  
+  .offer-list-item:not(.offer-list-featured) .offer-list-link picture img {
+    min-height: 180px;
+  }
+}
+
+/* Remove section padding override if not needed */
+.section.offer-list-container {
+  padding-top: 40px;
+  padding-bottom: 40px;
 }

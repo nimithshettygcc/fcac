@@ -1,68 +1,67 @@
-import { createElement, addClassesToElements } from '../../scripts/dom.js';
+import { moveInstrumentation } from '../../scripts/scripts.js';
 
-/**
- * Creates an individual offer card
- */
-function createOfferCard(imageElement, linkElement, index) {
-  const offerCard = createElement('div', ['offer-card', `offer-card-${index}`]);
-  
-  // Add special class for first (featured) offer
-  if (index === 0) {
-    addClassesToElements([offerCard], ['offer-card-featured']);
-  }
-  
-  const link = linkElement.querySelector('a');
-  const linkUrl = link ? link.getAttribute('href') : '#';
-  
-  // Create clickable card wrapper
-  const cardLink = createElement('a', ['offer-card-link']);
-  cardLink.setAttribute('href', linkUrl);
-  cardLink.setAttribute('aria-label', `View offer ${index + 1}`);
-  
-  // Extract and optimize image
-  const picture = imageElement.querySelector('picture');
-  if (picture) {
-    const img = picture.querySelector('img');
-    const altText = img ? img.getAttribute('alt') : 'Offer';
-    
-    // Clone picture element
-    const clonedPicture = picture.cloneNode(true);
-    addClassesToElements([clonedPicture], ['offer-image']);
-    
-    cardLink.append(clonedPicture);
-  }
-  
-  offerCard.append(cardLink);
-  return offerCard;
-}
-
-/**
- * Main decorate function for offer-list block
- */
 export default function decorate(block) {
-  const originalRows = [...block.children];
+  console.log('✅ Offer-list decorate started');
   
-  // Clear block content
-  block.innerHTML = '';
-  addClassesToElements([block], ['offer-list-grid']);
-  
-  const offerCards = [];
-  
+  const rows = [...block.children];
+  if (rows.length === 0) return;
+
+  const container = document.createElement('div');
+  container.className = 'offer-list-container';
+
   // Process rows in pairs (image + link)
-  for (let i = 0; i < originalRows.length; i += 2) {
-    const imageRow = originalRows[i];
-    const linkRow = originalRows[i + 1];
+  for (let i = 0; i < rows.length; i += 2) {
+    const imageRow = rows[i];
+    const linkRow = rows[i + 1];
     
-    if (imageRow && linkRow) {
-      const offerCard = createOfferCard(
-        imageRow.children[0],
-        linkRow.children[0],
-        i / 2
-      );
-      offerCards.push(offerCard);
+    if (!imageRow || !linkRow) continue;
+    
+    const offerItem = document.createElement('div');
+    offerItem.className = 'offer-list-item';
+    
+    // Add special class for first (featured) item
+    if (i === 0) {
+      offerItem.classList.add('offer-list-featured');
     }
+    
+    moveInstrumentation(imageRow, offerItem);
+    
+    // Get link and picture
+    const link = linkRow.querySelector('a');
+    const picture = imageRow.querySelector('picture');
+    
+    if (!link || !picture) {
+      console.warn('Missing link or picture in row', i/2);
+      continue;
+    }
+    
+    // Create clickable wrapper
+    const offerLink = document.createElement('a');
+    offerLink.href = link.href;
+    offerLink.className = 'offer-list-link';
+    offerLink.setAttribute('aria-label', `View offer ${(i/2) + 1}`);
+    
+    // Copy link attributes
+    [...link.attributes].forEach((attr) => {
+      if (attr.name.startsWith('data-') || attr.name === 'title') {
+        offerLink.setAttribute(attr.name, attr.value);
+      }
+    });
+    
+    moveInstrumentation(link, offerLink);
+    
+    // Move picture (not clone) to preserve responsive sources
+    if (picture.parentNode) {
+      picture.parentNode.removeChild(picture);
+    }
+    offerLink.appendChild(picture);
+    
+    offerItem.appendChild(offerLink);
+    container.appendChild(offerItem);
   }
+
+  block.textContent = '';
+  block.appendChild(container);
   
-  // Append all offer cards to block
-  offerCards.forEach(card => block.append(card));
+  console.log('✅ Offer-list decorate complete - created', container.children.length, 'items');
 }
