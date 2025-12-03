@@ -359,6 +359,13 @@
         "name": "buttonText",
         "label": "Button Text",
         "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "backgroundImage",
+        "label": "Background Image",
+        "multi": false
       }
     ]
   },
