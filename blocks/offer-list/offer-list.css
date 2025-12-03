@@ -48,6 +48,7 @@
 .offer-list-stacked-item {
   flex: 1;
   display: flex;
+  background-color: #fff;
 }
 
 .offer-list-stacked-item .offer-list-link {
@@ -66,7 +67,7 @@
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover;
+  object-fit: contain; /* Changed from cover to contain - shows full image with red borders */
 }
 
 /* Hover effects */
