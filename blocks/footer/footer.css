@@ -1,20 +1,646 @@
+/* Footer base */
 footer {
-  background-color: var(--light-color);
-  font-size: var(--body-font-size-xs);
+  background-color: #e6e6e6;
+  color: #000;
+  font-size: 14px;
+  line-height: 1.6;
+  padding: 0;
+  margin: 0;
+  font-family: Avenir, Arial, sans-serif;
 }
 
-footer .footer > div {
-  margin: auto;
-  max-width: 1200px;
-  padding: 40px 24px 24px;
-}
-
-footer .footer p {
+.footer {
+  padding: 0;
   margin: 0;
 }
 
-@media (width >= 900px) {
-  footer .footer > div {
-    padding: 40px 32px 24px;
+.footer-content {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Top bar - 5 columns */
+.footer-top {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 30px;
+  background-color: #e6e6e6;
+  padding: 40px 60px;
+  border-bottom: none;
+  position: relative;
+}
+
+/* Border line with gap from edges */
+.footer-top::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 40px;
+  right: 40px;
+  height: 1px;
+  background-color: #ccc;
+}
+
+.footer-top .footer-column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ALL Headings in top section - Match live site exactly */
+.footer-top .footer-column > p:first-child,
+.footer-top h2,
+.footer-top h3 {
+  font-family: Avenir, Arial, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  line-height: 20px !important;
+  text-transform: uppercase !important;
+  margin: 0 0 15px 0 !important;
+  padding: 0 !important;
+  color: rgb(0, 0, 0) !important;
+  letter-spacing: normal !important;
+}
+
+/* Get Coupons Email Form - EXACT MATCH TO LIVE SITE */
+.footer-column-coupons {
+  display: flex;
+  flex-direction: column;
+}
+
+.coupon-form {
+  margin-top: 0;
+  width: 100%;
+}
+
+.email-input-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  max-width: 216px;
+  height: 26px;
+  gap: 5px;
+}
+
+.email-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0 10px;
+  font-size: 14px;
+  font-family: Avenir, Arial, sans-serif;
+  font-weight: 400;
+  line-height: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+  background: #fff;
+  color: rgb(51, 51, 51);
+  height: 26px;
+}
+
+.email-input::placeholder {
+  color: #999;
+}
+
+.email-submit-btn {
+  width: 26px !important;
+  min-width: 26px !important;
+  max-width: 26px !important;
+  height: 26px !important;
+  background-color: #e31e24 !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 0 !important;
+  font-size: 14px !important;
+  font-weight: bold !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+  flex-shrink: 0 !important;
+}
+
+.email-submit-btn:hover {
+  background-color: #c41a1f !important;
+}
+
+/* Regular paragraphs */
+.footer-top .footer-column p {
+  margin: 0 0 10px 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #000;
+  font-weight: 400;
+}
+
+/* FORCE ALL LINKS TO BE SIMPLE TEXT - NO RED ON HOVER */
+.footer-top a,
+.footer-top .footer-column a,
+.footer-top .button-container a,
+.footer-top .footer-column .button-container a,
+.footer-top a.button,
+.footer-top .cta-link {
+  background: none !important;
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  
+  color: #000 !important;
+  text-decoration: underline !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+  display: inline !important;
+  line-height: 1.5 !important;
+}
+
+.footer-top a:hover,
+.footer-top .footer-column a:hover,
+.footer-top .button-container a:hover {
+  color: #000 !important;
+  background: none !important;
+  border: none !important;
+  text-decoration: underline !important;
+}
+
+/* Credit Card Column - Vertical Layout with Heading on Top */
+.footer-column-credit {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0;
+}
+
+.footer-column-credit > p:first-child {
+  font-family: Avenir, Arial, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  text-transform: uppercase !important;
+  margin: 0 0 15px 0 !important;
+  padding: 0 !important;
+  color: rgb(0, 0, 0) !important;
+  line-height: 20px !important;
+}
+
+.footer-column-credit-content {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  align-items: flex-start;
+}
+
+.footer-img-left {
+  flex-shrink: 0;
+}
+
+.footer-img-left picture {
+  display: block;
+}
+
+.footer-img-left picture img {
+  max-width: 70px;
+  height: auto;
+  display: block;
+}
+
+.footer-text-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+}
+
+.footer-text-right p {
+  margin: 0 0 8px 0 !important;
+}
+
+.footer-text-right a {
+  display: inline;
+}
+
+/* App Column - Vertical Layout with Heading on Top */
+.footer-column-app {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0;
+}
+
+.footer-column-app > p:first-child {
+  font-family: Avenir, Arial, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  text-transform: uppercase !important;
+  margin: 0 0 15px 0 !important;
+  padding: 0 !important;
+  color: rgb(0, 0, 0) !important;
+  line-height: 20px !important;
+}
+
+.footer-column-app-content {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  align-items: flex-start;
+}
+
+.footer-column-app-content .footer-img-left {
+  flex-shrink: 0;
+}
+
+.footer-column-app-content .footer-img-left picture {
+  display: block;
+}
+
+.footer-column-app-content .footer-img-left picture img {
+  width: 54px;
+  height: 55px;
+  max-width: 100%;
+  display: block;
+}
+
+.footer-column-app-content .footer-text-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+  max-width: 150px;
+}
+
+.footer-column-app-content .footer-text-right p {
+  margin: 0 0 5px 0 !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  line-height: 16px !important;
+  color: rgb(0, 0, 0) !important;
+  text-transform: none !important;
+  word-wrap: break-word;
+}
+
+.footer-column-app-content .footer-text-right p:last-child {
+  margin-top: 10px !important;
+}
+
+.footer-column-app-content .footer-text-right a {
+  display: inline;
+  font-size: 13px !important;
+}
+
+/* Social Media Column */
+.footer-column-social {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.footer-column-social > p:first-child {
+  font-family: Avenir, Arial, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  text-transform: uppercase !important;
+  margin: 0 0 15px 0 !important;
+  padding: 0 !important;
+  color: rgb(0, 0, 0) !important;
+  line-height: 20px !important;
+}
+
+.social-icons-wrapper {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 25px !important;
+  align-items: center !important;
+}
+
+/* Social icon items with spacing */
+.social-icon-item {
+  display: inline-block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.social-icon-item:not(:last-child) {
+  margin-right: 25px !important;
+}
+
+/* Social icons - horizontal */
+.social-icon-item .icon {
+  display: inline-block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  cursor: pointer !important;
+}
+
+.social-icon-item .icon picture {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.social-icon-item .icon img {
+  width: 24px !important;
+  height: 24px !important;
+  max-width: 100% !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  filter: brightness(0) !important;
+  transition: opacity 0.3s !important;
+}
+
+.social-icon-item .icon:hover img {
+  opacity: 0.6 !important;
+}
+
+/* Images */
+.footer-top .footer-column picture {
+  display: block;
+  margin: 0;
+}
+
+.footer-top .footer-column picture img {
+  max-width: 100px;
+  height: auto;
+}
+
+/* Hide line breaks */
+.footer-top .footer-column a + br,
+.footer-top br {
+  display: none;
+}
+
+/* Navigation section - 4 columns + logo */
+.footer-nav {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  background-color: #e6e6e6;
+  padding: 40px 60px;
+  position: relative;
+}
+
+.footer-nav .footer-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-nav h2 {
+  font-family: Avenir, Arial, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  line-height: 18px !important;
+  text-transform: uppercase !important;
+  text-align: left !important;
+  margin: 0 0 14px 0 !important;
+  padding: 0 !important;
+  color: rgb(0, 0, 0) !important;
+  letter-spacing: normal !important;
+  display: inline !important;
+}
+
+.footer-nav h3 {
+  font-family: Avenir, Arial, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  font-style: normal !important;
+  line-height: 20px !important;
+  text-transform: capitalize !important;
+  margin: 0 0 16px 0 !important;
+  padding: 0 !important;
+  color: rgb(74, 74, 74) !important;
+  position: relative;
+}
+
+.footer-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+}
+
+.footer-nav li {
+  margin-bottom: 8px;
+}
+
+.footer-nav a {
+  font-family: Avenir, Arial, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  line-height: 20px !important;
+  color: rgb(74, 74, 74) !important;
+  text-decoration: none !important;
+}
+
+.footer-nav a:hover {
+  color: rgb(74, 74, 74) !important;
+  text-decoration: underline !important;
+  text-decoration-color: #000 !important;
+}
+
+/* Firestone Logo in Footer Nav - Bottom Right - Clickable */
+.footer-nav-logo {
+  position: absolute;
+  bottom: 40px;
+  right: 60px;
+  width: 49px;
+  height: auto;
+  display: block;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.footer-nav-logo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Bottom section - More Left Aligned, Less Top Padding, More Bottom Space */
+.footer-bottom {
+  background-color: #e6e6e6;
+  padding: 12px 60px 100px 40px;
+  border-top: none;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Border line with gap from edges */
+.footer-bottom::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 40px;
+  right: 40px;
+  height: 1px;
+  background-color: #ccc;
+}
+
+.footer-bottom .footer-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 0;
+  width: 100%;
+}
+
+/* Hide all pictures in footer-bottom */
+.footer-bottom picture {
+  display: none !important;
+}
+
+.footer-bottom img {
+  display: none !important;
+}
+
+.footer-bottom ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 8px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 0;
+}
+
+.footer-bottom li {
+  display: inline-block;
+  margin-bottom: 8px;
+  margin-right: 25px;
+}
+
+.footer-bottom li:last-child {
+  margin-right: 0;
+}
+
+.footer-bottom a {
+  font-family: Avenir, Arial, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  line-height: 16px !important;
+  color: rgb(51, 51, 51) !important;
+  text-decoration: none !important;
+  text-align: left;
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline !important;
+}
+
+.footer-copyright {
+  font-size: 11px;
+  color: #666;
+  margin-top: 0;
+  text-align: left;
+  font-family: Avenir, Arial, sans-serif;
+}
+
+/* Tablet responsive */
+@media (max-width: 1024px) {
+  .footer-top {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 30px 40px;
+    gap: 20px;
   }
+
+  .footer-top::after {
+    left: 30px;
+    right: 30px;
+  }
+
+  .footer-nav {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 30px 40px;
+    gap: 30px;
+  }
+
+  .footer-nav-logo {
+    bottom: 30px;
+    right: 40px;
+    width: 45px;
+  }
+
+  .footer-bottom {
+    padding: 12px 40px 40px 40px;
+  }
+
+  .footer-bottom::before {
+    left: 30px;
+    right: 30px;
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 767px) {
+  .footer-top {
+    grid-template-columns: 1fr;
+    padding: 20px;
+    gap: 30px;
+  }
+
+  .footer-top::after {
+    left: 20px;
+    right: 20px;
+  }
+
+  .footer-column-credit,
+  .footer-column-app {
+    flex-direction: column !important;
+  }
+
+  .footer-column-credit-content,
+  .footer-column-app-content {
+    flex-direction: column !important;
+  }
+
+  .footer-column-app-content .footer-text-right {
+    max-width: 100%;
+  }
+
+  .email-input-wrapper {
+    max-width: 100%;
+  }
+
+  .footer-nav {
+    grid-template-columns: 1fr;
+    padding: 20px;
+    gap: 25px;
+    padding-bottom: 100px;
+  }
+
+  .footer-nav-logo {
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+  }
+
+  .footer-bottom {
+    padding: 12px 20px 30px 20px;
+  }
+
+  .footer-bottom::before {
+    left: 20px;
+    right: 20px;
+  }
+
+  .footer-bottom ul {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .footer-bottom li {
+    margin-right: 0;
+  }
+}
+
+/* Remove wrapper padding */
+.footer-wrapper {
+  padding: 0 !important;
+  max-width: 100% !important;
+  margin: 0 !important;
 }
