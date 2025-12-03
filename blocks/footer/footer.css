@@ -1,4 +1,4 @@
-/* Footer base styling */
+/* Footer base */
 footer {
   background-color: #e6e6e6;
   color: #000;
@@ -19,15 +19,14 @@ footer {
   padding: 0;
 }
 
-/* Top bar - 5 columns */
+/* Top bar - 5 equal columns */
 .footer-top {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 40px;
+  gap: 30px;
   background-color: #e6e6e6;
   padding: 40px 60px;
   border-bottom: 1px solid #ccc;
-  align-items: start;
 }
 
 .footer-top .footer-column {
@@ -35,9 +34,8 @@ footer {
   flex-direction: column;
 }
 
-/* Headings */
-.footer-top p:first-child,
-.footer-top .default-content-wrapper > p:first-child {
+/* All headings (first paragraph in each column) */
+.footer-top .footer-column p:first-child {
   font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
@@ -47,169 +45,84 @@ footer {
 }
 
 /* Regular text */
-.footer-top p {
+.footer-top .footer-column p {
   margin: 0 0 10px 0;
   font-size: 13px;
   line-height: 1.5;
+  color: #000;
 }
 
-/* Column 1: Have Questions - text link */
-.footer-top .footer-column:nth-child(1) a {
+/* All links - default styling */
+.footer-top .footer-column a {
   color: #000;
   text-decoration: underline;
   font-size: 13px;
-}
-
-.footer-top .footer-column:nth-child(1) a:hover {
-  color: #e31e24;
-}
-
-/* Column 2: Get Coupons - email input */
-.footer-top .footer-column:nth-child(2) {
-  /* Email form styling would go here if needed */
-}
-
-/* Column 3: Credit Card - horizontal layout */
-.footer-top .footer-column:nth-child(3) {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 15px;
-}
-
-.footer-top .footer-column:nth-child(3) > p:first-child {
-  margin-bottom: 0;
-  width: 100%;
-}
-
-.footer-top .footer-column:nth-child(3) picture {
-  margin: 0;
-  flex-shrink: 0;
-}
-
-.footer-top .footer-column:nth-child(3) picture img {
-  max-width: 70px;
-  height: auto;
-}
-
-.footer-top .footer-column:nth-child(3) .default-content-wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 15px;
-}
-
-.footer-top .footer-column:nth-child(3) .default-content-wrapper > p:first-child {
-  display: none; /* Hide duplicate heading */
-}
-
-.footer-top .footer-column:nth-child(3) .button-container {
-  margin: 0;
-}
-
-.footer-top .footer-column:nth-child(3) a {
   background: none;
   border: none;
   padding: 0;
-  color: #000;
-  text-decoration: underline;
+  display: inline;
   text-transform: none;
-  font-size: 13px;
+}
+
+.footer-top .footer-column a:hover {
+  color: #e31e24;
+}
+
+/* Button styling for actual buttons */
+.footer-top .footer-column .button-container a,
+.footer-top .footer-column a.button {
+  display: inline-block;
+  background-color: #e31e24;
+  color: #fff;
+  border: 2px solid #e31e24;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+.footer-top .footer-column .button-container a:hover,
+.footer-top .footer-column a.button:hover {
+  background-color: #fff;
+  color: #e31e24;
+}
+
+/* Images */
+.footer-top .footer-column picture {
   display: block;
-  margin-bottom: 5px;
+  margin: 15px 0 0 0;
 }
 
-.footer-top .footer-column:nth-child(3) a:hover {
-  color: #e31e24;
-  background: none;
-}
-
-/* Column 4: My Firestone App - horizontal layout */
-.footer-top .footer-column:nth-child(4) {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 15px;
-}
-
-.footer-top .footer-column:nth-child(4) > p:first-child {
-  margin-bottom: 0;
-  width: 100%;
-}
-
-.footer-top .footer-column:nth-child(4) picture {
-  margin: 0;
-  flex-shrink: 0;
-  order: 2;
-}
-
-.footer-top .footer-column:nth-child(4) picture img {
-  max-width: 60px;
+.footer-top .footer-column picture img {
+  max-width: 100px;
   height: auto;
+  display: block;
 }
 
-.footer-top .footer-column:nth-child(4) .default-content-wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 15px;
-}
-
-.footer-top .footer-column:nth-child(4) .default-content-wrapper > p:first-child {
-  display: none; /* Hide duplicate heading */
-}
-
-.footer-top .footer-column:nth-child(4) .button-container {
-  margin: 0;
-}
-
-.footer-top .footer-column:nth-child(4) a {
-  background: none;
-  border: none;
-  padding: 0;
-  color: #000;
-  text-decoration: underline;
-  text-transform: none;
-  font-size: 13px;
-}
-
-.footer-top .footer-column:nth-child(4) a:hover {
-  color: #e31e24;
-  background: none;
-}
-
-/* Column 5: Social Media - horizontal icons */
-.footer-top .footer-column:nth-child(5) p:not(:first-child) {
-  display: flex;
-  flex-direction: row;
-  gap: 15px;
-  align-items: center;
-  margin: 0;
-}
-
-.footer-top .footer-column:nth-child(5) a {
+/* Social media icons - horizontal */
+.footer-top .footer-column .icon {
   display: inline-flex;
-  margin: 0;
+  margin-right: 15px;
 }
 
-.footer-top .footer-column:nth-child(5) br {
-  display: none;
-}
-
-.footer-top .icon {
-  display: inline-flex;
-  margin: 0;
-}
-
-.footer-top .icon img {
+.footer-top .footer-column .icon img {
   width: 32px;
   height: 32px;
-  transition: opacity 0.3s ease;
   filter: brightness(0);
+  transition: opacity 0.3s;
 }
 
-.footer-top .icon img:hover {
+.footer-top .footer-column .icon img:hover {
   opacity: 0.6;
+}
+
+/* Hide line breaks in social media section */
+.footer-top .footer-column a + br {
+  display: none;
 }
 
 /* Main navigation - 4 columns */
@@ -309,7 +222,6 @@ footer {
   color: #000;
   text-decoration: none;
   font-size: 12px;
-  transition: color 0.3s ease;
 }
 
 .footer-bottom a:hover {
@@ -324,7 +236,7 @@ footer {
   text-align: center;
 }
 
-/* Tablet responsive */
+/* Tablet */
 @media (max-width: 1024px) {
   .footer-top {
     grid-template-columns: repeat(3, 1fr);
@@ -337,13 +249,9 @@ footer {
     padding: 30px 40px;
     gap: 30px;
   }
-
-  .footer-bottom {
-    padding: 20px 40px;
-  }
 }
 
-/* Mobile responsive */
+/* Mobile */
 @media (max-width: 767px) {
   .footer-top {
     grid-template-columns: 1fr;
@@ -364,7 +272,6 @@ footer {
   .footer-bottom ul {
     flex-direction: column;
     gap: 10px;
-    text-align: center;
   }
 }
 
