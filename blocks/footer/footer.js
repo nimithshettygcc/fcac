@@ -1,20 +1,55 @@
-import { getMetadata } from '../../scripts/aem.js';
-import { loadFragment } from '../fragment/fragment.js';
+import { moveInstrumentation } from '../../scripts/scripts.js';
 
-/**
- * loads and decorates the footer
- * @param {Element} block The footer block element
- */
-export default async function decorate(block) {
-  // load footer as fragment
-  const footerMeta = getMetadata('footer');
-  const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
-  const fragment = await loadFragment(footerPath);
+export default function decorate(block) {
+  const sections = [...block.children];
+  if (sections.length === 0) return;
 
-  // decorate footer DOM
+  // Create main footer structure
+  const footerTop = document.createElement('div');
+  footerTop.className = 'footer-top';
+
+  const footerNav = document.createElement('div');
+  footerNav.className = 'footer-nav';
+
+  const footerBottom = document.createElement('div');
+  footerBottom.className = 'footer-bottom';
+
+  // Process sections
+  sections.forEach((section, index) => {
+    const content = section.querySelector('.default-content-wrapper');
+    if (!content) return;
+
+    const column = document.createElement('div');
+    column.className = 'footer-column';
+    moveInstrumentation(section, column);
+
+    // Clone the content
+    const contentClone = content.cloneNode(true);
+    column.appendChild(contentClone);
+
+    // Top bar sections (0-4): Questions, Coupons, Credit Card, App, Social
+    if (index <= 4) {
+      footerTop.appendChild(column);
+    }
+    // Navigation sections (5-8): Tires, Services, Firestone, Blog
+    else if (index >= 5 && index <= 8) {
+      footerNav.appendChild(column);
+    }
+    // Bottom sections (9-10): Logo and Legal links
+    else if (index >= 9) {
+      footerBottom.appendChild(column);
+    }
+  });
+
+  // Clear and rebuild
   block.textContent = '';
-  const footer = document.createElement('div');
-  while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
+  block.appendChild(footerTop);
+  block.appendChild(footerNav);
+  block.appendChild(footerBottom);
 
-  block.append(footer);
+  // Add copyright text if not present
+  const copyright = document.createElement('div');
+  copyright.className = 'footer-copyright';
+  copyright.textContent = '© 2025 Firestone Complete Auto Care. All Rights Reserved.';
+  footerBottom.appendChild(copyright);
 }
