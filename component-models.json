@@ -500,6 +500,20 @@
         "value": ""
       },
       {
+        "component": "reference",
+        "valueType": "string",
+        "name": "tab2Section1TitleImage",
+        "label": "Tab 2 - Section 1 - Title Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "tab2Section1TitleImageAlt",
+        "label": "Tab 2 - Section 1 - Title Image Alt Text",
+        "value": ""
+      },
+      {
         "component": "text",
         "valueType": "string",
         "name": "tab2Section1Header",
@@ -579,6 +593,20 @@
         "valueType": "string",
         "name": "tab2Section2Title",
         "label": "Tab 2 - Section 2 - Title",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "tab2Section2TitleImage",
+        "label": "Tab 2 - Section 2 - Title Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "tab2Section2TitleImageAlt",
+        "label": "Tab 2 - Section 2 - Title Image Alt Text",
         "value": ""
       },
       {
@@ -664,6 +692,20 @@
         "value": ""
       },
       {
+        "component": "reference",
+        "valueType": "string",
+        "name": "tab2Section3TitleImage",
+        "label": "Tab 2 - Section 3 - Title Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "tab2Section3TitleImageAlt",
+        "label": "Tab 2 - Section 3 - Title Image Alt Text",
+        "value": ""
+      },
+      {
         "component": "text",
         "valueType": "string",
         "name": "tab2Section3Header",
@@ -746,6 +788,20 @@
         "value": ""
       },
       {
+        "component": "reference",
+        "valueType": "string",
+        "name": "tab2Section4TitleImage",
+        "label": "Tab 2 - Section 4 - Title Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "tab2Section4TitleImageAlt",
+        "label": "Tab 2 - Section 4 - Title Image Alt Text",
+        "value": ""
+      },
+      {
         "component": "text",
         "valueType": "string",
         "name": "tab2Section4Header",
@@ -757,6 +813,20 @@
         "valueType": "string",
         "name": "tab2Section4Text",
         "label": "Tab 2 - Section 4 - Text",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "tab2Section4Image",
+        "label": "Tab 2 - Section 4 - Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "tab2Section4ImageAlt",
+        "label": "Tab 2 - Section 4 - Image Alt Text",
         "value": ""
       },
       {
