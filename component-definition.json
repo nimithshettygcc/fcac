@@ -212,7 +212,7 @@
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
-                  "name": "hero-fcac-tab",
+                  "name": "Hero FCAC",
                   "model": "hero-fcac-tab"
                 }
               }
