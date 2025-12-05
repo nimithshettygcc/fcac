@@ -1,0 +1,13 @@
+{
+    "definitions": [],
+    "models": [],
+    "filters": [
+      {
+        "id": "hero-fcac",
+        "components": [
+          "hero-fcac-tab"
+        ]
+      }
+    ]
+  }
+  
