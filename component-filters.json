@@ -15,7 +15,12 @@
       "hero",
       "cards",
       "columns",
-      "fragment"
+      "fragment",
+      "flyer",
+      "offer-list",
+      "hero-fcac",
+      "tire-guide",
+      "tire-service"
     ]
   },
   {
@@ -36,7 +41,8 @@
       "text",
       "image",
       "button",
-      "title"
+      "title",
+      "offer-list"
     ]
   },
   {
