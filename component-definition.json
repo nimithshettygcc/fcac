@@ -197,7 +197,8 @@
                 "template": {
                   "name": "hero-fcac",
                   "model": "hero-fcac",
-                  "filter": "hero-fcac"	
+                  "filter": "hero-fcac",
+                  "container": true
                 }
               }
             }

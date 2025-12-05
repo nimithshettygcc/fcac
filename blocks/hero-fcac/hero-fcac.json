@@ -1,0 +1,8 @@
+{
+  "id": "hero-fcac",
+  "fields": [],
+  "container": {
+    "itemResourceType": "core/franklin/components/block/v1/block/item",
+    "itemLabel": "Hero FCAC Tab"
+  }
+}
