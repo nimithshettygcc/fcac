@@ -50,5 +50,12 @@
     "components": [
       "hero-fcac-tab"
     ]
+  },
+  {
+    "id": "tire-service",
+    "components": [
+      "tire-service-card",
+      "tire-service-section"
+    ]
   }
 ]
