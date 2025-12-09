@@ -21,7 +21,8 @@
       "offer-list",
       "hero-fcac",
       "tire-guide",
-      "tire-service"
+      "tire-service",
+      "articles"
     ]
   },
   {
@@ -56,6 +57,12 @@
     "id": "offers-coupons",
     "components": [
       "offers-coupons-filter"
+    ]
+  },
+  {
+    "id": "articles",
+    "components": [
+      "article"
     ]
   }
 ]
