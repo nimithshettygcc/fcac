@@ -290,7 +290,8 @@
                 "template": {
                   "name": "offers-coupons",
                   "model": "offers-coupons",
-                  "filter": "offers-coupons"
+                  "filter": "offers-coupons",
+                  "container": true 
                 }
               }
             }
