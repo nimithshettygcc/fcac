@@ -1140,18 +1140,6 @@
     ]
   },
   {
-    "id": "offers-coupons-filter",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "filterText",
-        "label": "Filter Text",
-        "value": ""
-      }
-    ]
-  },
-  {
     "id": "offers-coupons",
     "fields": [
       {
@@ -1166,6 +1154,18 @@
         "valueType": "string",
         "name": "apiEndpoint",
         "label": "API Endpoint",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "offers-coupons-filter",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "filterText",
+        "label": "Filter Text",
         "value": ""
       }
     ]
