@@ -1162,5 +1162,36 @@
         "value": ""
       }
     ]
+  },
+  {
+    "id": "offers-coupons-filter",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "filterText",
+        "label": "Filter Text",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "offers-coupons",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "header",
+        "label": "Header",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "apiEndpoint",
+        "label": "API Endpoint",
+        "value": ""
+      }
+    ]
   }
 ]
