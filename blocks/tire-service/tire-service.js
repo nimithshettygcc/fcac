@@ -1,4 +1,12 @@
 export default function decorate(block) {
+    // Debug: Log block info to help diagnose loading issues
+    // eslint-disable-next-line no-console
+    console.log('tire-service block loaded', {
+      blockName: block.dataset.blockName,
+      classes: Array.from(block.classList),
+      children: block.children.length,
+    });
+    
     const rows = [...block.children];
   
     // --- 1. Extract Header & Nav (Rows 0-6) ---
@@ -160,3 +168,5 @@ export default function decorate(block) {
   
     block.append(featureDiv);
   }
+
+  /* Cache busting update */

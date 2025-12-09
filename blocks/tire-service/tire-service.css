@@ -326,3 +326,5 @@
     .ts-nav { flex-direction: column; gap: 5px; }
     .ts-sep { display: none; }
   }
+
+  /* Update styles: cache reset */
