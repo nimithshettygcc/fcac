@@ -22,7 +22,8 @@
       "hero-fcac",
       "tire-guide",
       "tire-service",
-      "articles"
+      "articles",
+      "about-us"
     ]
   },
   {
@@ -63,6 +64,12 @@
     "id": "articles",
     "components": [
       "article"
+    ]
+  },
+  {
+    "id": "about-us",
+    "components": [
+      "about-us-item"
     ]
   }
 ]
