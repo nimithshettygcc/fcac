@@ -1,0 +1,190 @@
+/* =========================================
+   VARIABLES
+   ========================================= */
+   :root {
+    --art-red: #d81e05;
+    --art-red-hover: #b41904;
+    --art-font-title: 'Ultramagnetic', Arial, sans-serif;
+    --art-font-body: 'Avenir', Arial, sans-serif;
+  }
+  
+  /* 1. OUTER BLOCK */
+  .articles-container {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #fff;
+    padding-top: 50px; 
+    padding-bottom: 50px;
+  }
+  
+  /* 2. INNER WRAPPER */
+  .articles-inner-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1264.67px;
+    margin: 0 auto;
+    font-family: var(--art-font-body);
+    color: rgb(51, 51, 51);
+    box-sizing: border-box;
+    min-height: 588px;
+  }
+  
+  /* =========================================
+     HEADER SECTION
+     ========================================= */
+  .articles-header {
+    box-sizing: border-box;
+    width: 100%;
+    border-top: 4px solid var(--art-red);
+    padding-top: 7px;
+    margin-bottom: 25px;
+    display: block;
+  }
+  
+  .articles-title {
+    font-family: var(--art-font-body);
+    font-weight: 900; 
+    font-size: 20px;
+    line-height: 22px;
+    color: rgb(0, 0, 0);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: left;
+    margin: 0;
+  }
+  
+  /* =========================================
+     GRID LAYOUT
+     ========================================= */
+  .articles-grid {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 40px; 
+  }
+  
+  /* =========================================
+     ARTICLE CARD
+     ========================================= */
+  .article-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
+  
+  .article-card:hover .article-heading {
+    text-decoration: underline;
+  }
+  
+  .article-image {
+    width: 100%;
+    height: 270px;
+    overflow: hidden;
+    background-color: #f4f4f4;
+    
+    /* REDUCED GAP BELOW IMAGE */
+    margin-bottom: 15px; 
+  }
+  
+  .article-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .article-content {
+    display: flex;
+    flex-direction: column;
+    
+    /* REDUCED GAP BETWEEN CATEGORY AND TITLE */
+    gap: 5px; 
+  }
+  
+  .article-category {
+    display: block;
+    box-sizing: border-box;
+    font-family: var(--art-font-body); 
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 15.7143px;
+    letter-spacing: 1px;
+    color: rgb(224, 0, 0);
+    text-transform: uppercase;
+    text-align: left;
+    margin: 0;
+  }
+  
+  .article-heading {
+    display: block;
+    box-sizing: border-box;
+    font-family: var(--art-font-body);
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 28px;
+    color: rgb(0, 0, 0);
+    text-transform: capitalize;
+    text-align: left;
+    height: 84px; 
+    margin: 0;
+    padding: 0;
+    overflow: hidden; 
+  }
+  
+  /* =========================================
+     BOTTOM BUTTON SECTION
+     ========================================= */
+  .articles-button-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center; 
+    margin-top: 10px;
+  }
+  
+  .articles-view-more-btn {
+    display: inline-block;
+    box-sizing: border-box;
+    background-color: rgb(216, 30, 5);
+    border: 2px solid rgb(216, 30, 5);
+    color: #fff !important; 
+    font-family: var(--art-font-title);
+    font-size: 19px;
+    font-weight: 700; 
+    line-height: 20.9px;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 8px 11px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, border 0.3s ease-in-out;
+  }
+  
+  .articles-view-more-btn:hover {
+    background-color: var(--art-red-hover);
+    border-color: var(--art-red-hover);
+    color: #fff !important;
+    text-decoration: none;
+  }
+  
+  /* =========================================
+     RESPONSIVE
+     ========================================= */
+  @media (max-width: 900px) {
+    .articles-grid {
+      flex-direction: column;
+      gap: 40px;
+    }
+    .article-image {
+      height: auto;
+      aspect-ratio: 16/9;
+    }
+    .article-heading {
+      height: auto;
+    }
+  }
