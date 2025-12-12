@@ -7,7 +7,6 @@
   overflow: hidden;
 }
 
-
 /* Image Wrap - Full Background */
 .hero-image-wrap {
   position: absolute;
@@ -20,13 +19,11 @@
   z-index: 1;
 }
 
-
 .hero-image-wrap picture {
   width: 100%;
   height: 100%;
   display: block;
 }
-
 
 .hero-image-wrap img {
   width: 100%;
@@ -34,7 +31,6 @@
   object-fit: cover;
   display: block;
 }
-
 
 /* Widget Wrap - Absolutely Positioned with padding */
 .hero-widget-wrap {
@@ -49,13 +45,11 @@
   overflow: hidden;
 }
 
-
-/* Top Navigation - Horizontal Tabs */
+/* Top Navigation - Horizontal Tabs (ACCESSIBILITY FIX APPLIED) */
 .hero-top-nav {
   width: 100%;
-  background-color: #7a7a7a;
+  background-color: #707070; /* Changed from #7a7a7a for WCAG AA */
 }
-
 
 .hero-top-nav ul {
   display: table;
@@ -65,7 +59,6 @@
   padding: 0;
 }
 
-
 .hero-top-nav li {
   display: table-cell;
   text-align: center;
@@ -73,13 +66,12 @@
   height: 37px;
 }
 
-
 .hero-top-nav a {
   display: block;
   padding: 7px 15px;
   height: 37px;
   line-height: 22.8571px;
-  background-color: #7a7a7a;
+  background-color: #707070; /* Changed from #7a7a7a for WCAG AA */
   color: #fff;
   text-decoration: none;
   font-family: Ultramagnetic, Arial, sans-serif;
@@ -90,22 +82,18 @@
   box-sizing: border-box;
 }
 
-
 .hero-top-nav li.active a {
   background-color: #fff;
   color: rgb(0, 0, 0);
 }
 
-
 .hero-top-nav a:hover {
-  background-color: #666;
+  background-color: #555; /* Darkened hover state */
 }
-
 
 .hero-top-nav li.active a:hover {
   background-color: #fff;
 }
-
 
 /* Tab Navigation - Vertical List (for Get Services) */
 .hero-tab-nav {
@@ -114,24 +102,20 @@
   display: none;
 }
 
-
 .hero-tab-nav ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-
 .hero-tab-nav li {
   border-bottom: 1px solid #d0d0d0;
   position: relative;
 }
 
-
 .hero-tab-nav li:last-child {
   border-bottom: none;
 }
-
 
 .hero-tab-nav a {
   display: flex;
@@ -151,16 +135,13 @@
   box-sizing: border-box;
 }
 
-
 .hero-tab-nav a:hover {
   background-color: #f9f9f9;
 }
 
-
 .hero-tab-nav li.active a {
   background-color: #f0f0f0;
 }
-
 
 .hero-tab-nav .icon {
   position: absolute;
@@ -173,7 +154,6 @@
   object-position: center;
 }
 
-
 /* Tab Content */
 .hero-tab-content {
   padding: 20px 15px;
@@ -182,16 +162,13 @@
   height: calc(522px - 37px);
 }
 
-
 .tire-search-widget {
   display: none;
 }
 
-
 .tire-search-widget.active {
   display: block;
 }
-
 
 /* Service Detail View */
 .service-detail-view {
@@ -204,7 +181,6 @@
   display: block;
 }
 
-
 .service-detail-header {
   display: block;
   width: 345px;
@@ -212,7 +188,6 @@
   position: relative;
   padding-right: 40px;
 }
-
 
 .service-detail-header h2 {
   font-family: Ultramagnetic, Arial, sans-serif;
@@ -230,7 +205,6 @@
   display: block;
   padding-right: 40px;
 }
-
 
 .service-close-btn {
   background: none;
@@ -252,11 +226,9 @@
   flex-shrink: 0;
 }
 
-
 .service-close-btn:hover {
   color: #a01604;
 }
-
 
 /* "YOUR NEAREST STORE" heading */
 .service-store-info h3 {
@@ -271,7 +243,6 @@
   box-sizing: border-box;
 }
 
-
 /* Store block */
 .store-details-wrapper {
   display: grid;
@@ -280,7 +251,6 @@
   margin-bottom: 10px;
 }
 
-
 .store-address-info p {
   font-family: Avenir, Arial, sans-serif;
   font-size: 14px;
@@ -288,7 +258,6 @@
   margin: 0 0 2px 0;
   color: #333;
 }
-
 
 /* Phone + Directions row - HORIZONTAL */
 .store-contact-row {
@@ -299,7 +268,6 @@
   margin-top: 12px;
   flex-wrap: nowrap;
 }
-
 
 /* Phone link - RED with icon inline */
 .store-phone {
@@ -319,18 +287,15 @@
   filter: grayscale(100%) brightness(0) saturate(100%) invert(23%) sepia(89%) saturate(6394%) hue-rotate(356deg) brightness(94%) contrast(104%);
 }
 
-
 .store-phone::before {
   content: '📞';
   font-size: 18px;
   filter: none;
 }
 
-
 .store-phone:hover {
   text-decoration: underline;
 }
-
 
 /* Directions link - RED with icon inline */
 .directions-link {
@@ -350,24 +315,20 @@
   filter: grayscale(100%) brightness(0) saturate(100%) invert(23%) sepia(89%) saturate(6394%) hue-rotate(356deg) brightness(94%) contrast(104%);
 }
 
-
 .directions-link::before {
   content: '📍';
   font-size: 18px;
   filter: none;
 }
 
-
 .directions-link:hover {
   text-decoration: underline;
 }
-
 
 /* Map */
 .store-map-wrapper {
   text-align: center;
 }
-
 
 .store-map-wrapper img {
   width: 116px;
@@ -376,14 +337,12 @@
   margin-bottom: 4px;
 }
 
-
 /* Store hours */
 .store-hours {
   margin: 10px 0;
   padding-top: 10px;
   border-top: 1px solid #e0e0e0;
 }
-
 
 .store-hours h4 {
   font-family: Avenir, Arial, sans-serif;
@@ -393,7 +352,6 @@
   margin: 0 0 6px 0;
 }
 
-
 .hours-list {
   font-family: Avenir, Arial, sans-serif;
   font-size: 13px;
@@ -401,29 +359,24 @@
   color: #333;
 }
 
-
 .hours-list div {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1px;
 }
 
-
 .hours-list .day {
   font-weight: 500;
   color: #000;
 }
 
-
 .hours-list .time {
   color: #555;
 }
 
-
 .hours-list .special {
   color: #d81e05;
 }
-
 
 /* Buttons area */
 .service-buttons {
@@ -432,7 +385,6 @@
   gap: 10px;
   margin: 12px 0 10px 0;
 }
-
 
 .btn-outline {
   display: inline-block;
@@ -451,17 +403,14 @@
   line-height: 1.1;
 }
 
-
 .btn-outline:hover {
   background-color: #d81e05;
   color: #fff;
 }
 
-
 .service-appointment {
   margin-top: 10px;
 }
-
 
 /* SCHEDULE APPOINTMENT button - BRIGHTER white text */
 .btn-primary {
@@ -489,23 +438,19 @@
   text-shadow: none;
 }
 
-
 .btn-primary:hover {
   background-color: #0052a3;
 }
-
 
 /* Inner Tabs */
 .hero-inner-tabs {
   width: 100%;
 }
 
-
 .inner-tab-nav {
   border: 1px solid #c4c7c7;
   border-bottom: none;
 }
-
 
 .inner-tab-nav ul {
   display: table;
@@ -515,14 +460,12 @@
   padding: 0;
 }
 
-
 .inner-tab-nav li {
   display: table-cell;
   text-align: center;
   vertical-align: middle;
   height: 28.6667px;
 }
-
 
 .inner-tab-nav a {
   display: block;
@@ -541,11 +484,9 @@
   background-color: #ffffff;
 }
 
-
 .inner-tab-nav li:last-child a {
   border-right: none;
 }
-
 
 .inner-tab-nav li.active a {
   color: #d81e05;
@@ -553,16 +494,13 @@
   border-bottom-width: 1px;
 }
 
-
 .inner-tab-nav li.active + li a {
   border-left-color: #d81e05;
 }
 
-
 .inner-tab-content {
   padding-top: 12px;
 }
-
 
 .inner-tab-content .required-text {
   font-size: 14px;
@@ -572,16 +510,13 @@
   margin: 0 0 6px 0;
 }
 
-
 .inner-tab-content section {
   display: none;
 }
 
-
 .inner-tab-content section.active {
   display: block;
 }
-
 
 /* Form Styling */
 .search-by-vehicle {
@@ -589,7 +524,6 @@
   flex-direction: column;
   gap: 0;
 }
-
 
 .form-field {
   display: block;
@@ -602,7 +536,6 @@
   color: rgb(0, 0, 0);
 }
 
-
 .form-field label {
   display: block;
   font-size: 14px;
@@ -613,11 +546,9 @@
   margin-bottom: 5px;
 }
 
-
 .custom-select {
   position: relative;
 }
-
 
 .custom-select select {
   width: 100%;
@@ -636,20 +567,17 @@
   box-sizing: border-box;
 }
 
-
 .custom-select select:disabled {
   background-color: #c4c7c7 !important;
   color: #5c5f5f !important;
   cursor: not-allowed;
 }
 
-
 .zip-wrapper {
   display: flex;
   align-items: center;
   gap: 8px;
 }
-
 
 .zip-input {
   flex: 1;
@@ -662,13 +590,11 @@
   box-sizing: border-box;
 }
 
-
 .zip-input:disabled {
   background-color: #c4c7c7 !important;
   color: #5c5f5f !important;
   cursor: not-allowed;
 }
-
 
 .why-link {
   font-size: 12px;
@@ -678,12 +604,10 @@
   white-space: nowrap;
 }
 
-
 .why-link:hover {
   color: #000000 !important;
   text-decoration: underline !important;
 }
-
 
 .btn-submit {
   width: 100%;
@@ -706,7 +630,6 @@
   box-sizing: border-box;
 }
 
-
 .btn-submit:disabled {
   background: #d81e05 !important;
   border: 2px solid #6f3f3f !important;
@@ -716,11 +639,9 @@
   pointer-events: none !important;
 }
 
-
 .btn-submit:not(:disabled):hover {
   background-color: #c41a1f;
 }
-
 
 /* Copy Overlay - Right Side */
 .hero-copy-overlay {
@@ -733,7 +654,6 @@
   z-index: 5;
   text-align: left;
 }
-
 
 /* Main Heading - "INSTANT SAVINGS" */
 .hero-copy-overlay h1 {
@@ -751,7 +671,6 @@
   -webkit-font-smoothing: antialiased;
 }
 
-
 /* Subheading - "$100 OFF..." */
 .hero-copy-overlay h1 .subhead {
   display: block;
@@ -767,16 +686,13 @@
   -webkit-font-smoothing: antialiased;
 }
 
-
 .description {
   margin-top: 20px;
 }
 
-
 .description-content {
   margin-bottom: 20px;
 }
-
 
 /* Description paragraph */
 .description-content p {
@@ -791,7 +707,6 @@
   display: block;
   -webkit-font-smoothing: antialiased;
 }
-
 
 /* GET DETAILS button - BRIGHT WHITE TEXT */
 .btn-cta {
@@ -814,20 +729,17 @@
   -webkit-font-smoothing: antialiased;
 }
 
-
 .btn-cta:hover {
   background-color: #c41a1f;
   border-color: #c41a1f;
   color: rgb(255, 255, 255) !important;
 }
 
-
 /* Responsive */
 @media (max-width: 1024px) {
   .hero-fcac-section {
     height: auto;
   }
-
 
   .hero-widget-wrap {
     position: relative;
@@ -836,7 +748,6 @@
     width: 100%;
     height: auto;
   }
-
 
   .hero-copy-overlay {
     position: relative;
@@ -848,45 +759,37 @@
     text-align: center;
   }
 
-
   .hero-image-wrap {
     position: relative;
     min-height: 400px;
   }
 
-
   .hero-copy-overlay h1 {
     font-size: 48px;
   }
-
 
   .hero-copy-overlay h1 .subhead {
     font-size: 24px;
   }
 }
 
-
 @media (max-width: 768px) {
   .hero-copy-overlay h1 {
     font-size: 36px;
   }
 
-
   .hero-copy-overlay h1 .subhead {
     font-size: 20px;
   }
-
 
   .description-content p {
     font-size: 16px;
   }
 
-
   .hero-top-nav a {
     font-size: 14px;
     padding: 10px 12px;
   }
-
 
   .hero-tab-content {
     padding: 20px 15px 20px 15px;

@@ -155,35 +155,42 @@
     border-color: var(--es-red-hover);
   }
   
-  /* Privacy Text (UPDATED) */
-  .es-privacy {
-    display: block;
-    font-family: var(--es-font-body);
-    font-size: 16px;
-    font-weight: 400;
-    color: rgb(0, 0, 0);
-    line-height: 25.6px;
-    
-    /* Push to bottom via Auto margin */
-    margin-top: auto; 
-    
-    /* Lift up slightly (1em) */
-    margin-bottom: 1em; 
-    
-    margin-left: 0px;
-    margin-right: 0px;
-  }
+  /* Privacy Text */
+.es-privacy {
+  display: block;
+  font-family: var(--es-font-body);
+  font-size: 16px;
+  font-weight: 400;
+  color: rgb(0, 0, 0);
+  line-height: 25.6px;
   
-  .es-privacy p {
-    margin: 0;
-    line-height: inherit;
-  }
+  /* Push to bottom via Auto margin */
+  margin-top: auto; 
   
-  .es-privacy a {
-    color: var(--es-red);
-    text-decoration: underline;
-  }
+  /* Lift up slightly (1em) */
+  margin-bottom: 1em; 
   
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.es-privacy p {
+  margin: 0;
+  line-height: inherit;
+}
+
+.es-privacy a {
+  /* INITIAL: Darker Red to pass WCAG AA Contrast (4.5:1) */
+  /* Original brand red (#d81e05) fails here. This shade passes. */
+  color: #b81a04; 
+  text-decoration: underline;
+  transition: color 0.2s ease-in-out;
+}
+
+.es-privacy a:hover {
+  /* HOVER: Black */
+  color: #000000;
+}
   /* =========================================
      RESPONSIVE (Mobile)
      ========================================= */
