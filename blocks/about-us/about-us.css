@@ -1,0 +1,340 @@
+/* =========================================
+   VARIABLES
+   ========================================= */
+   :root {
+    --au-red: #d81e05;
+    --au-red-dark: #b41904;
+    --au-grey-bg: rgb(235, 235, 235);
+    --au-text-grey: rgb(51, 51, 51);
+    --au-font-title: 'Ultramagnetic', Arial, sans-serif;
+    --au-font-body: 'Avenir', Arial, sans-serif;
+  }
+  
+  /* 1. OUTER CONTAINER */
+  .about-us-container {
+    width: 100%;
+    background-color: var(--au-grey-bg);
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  /* 2. INNER FLEX CONTAINER */
+  .au-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--au-font-body);
+    color: var(--au-text-grey);
+    
+    padding-top: 50px; 
+    padding-bottom: 0; 
+  }
+  
+  /* =========================================
+     WHITE CARD
+     ========================================= */
+  .au-white-card {
+    background-color: #fff;
+    width: 90%;
+    max-width: 1264px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 50px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    overflow: visible; 
+  }
+  
+  /* =========================================
+     HEADER
+     ========================================= */
+  .au-header {
+    width: 100%;
+    text-align: center;
+    padding: 40px 20px 20px 20px;
+    box-sizing: border-box;
+  }
+  
+  .au-logo {
+    position: absolute;
+    top: -30px; 
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+  }
+  .au-logo img {
+    width: 50px;
+    height: auto;
+    object-fit: contain;
+  }
+  
+  .au-title {
+    box-sizing: border-box;
+    display: block;
+    font-family: var(--au-font-title);
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 20px;
+    color: rgb(74, 74, 74);
+    text-transform: uppercase;
+    text-align: center;
+    margin: 15px 0 10px 0;
+    width: 100%;
+  }
+  
+  /* =========================================
+     FEATURES GRID
+     ========================================= */
+  .au-features {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    width: 100%;
+    padding: 20px 40px 60px 40px;
+    box-sizing: border-box;
+  }
+  
+  .au-feature-card {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .au-icon-circle {
+    width: 65px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .au-icon-circle svg {
+    width: 64px;
+    height: 64px;
+    display: block;
+  }
+  .au-icon-circle svg path,
+  .au-icon-circle svg polygon,
+  .au-icon-circle svg circle {
+    fill: var(--au-red);
+  }
+  .au-icon-circle img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    filter: invert(19%) sepia(96%) saturate(6084%) hue-rotate(356deg) brightness(96%) contrast(116%);
+  }
+  
+  .au-feature-card h3 {
+    font-family: var(--au-font-title);
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 15px 0;
+  }
+  
+  .au-feature-card p {
+    box-sizing: border-box;
+    display: block;
+    font-family: var(--au-font-body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22.4px;
+    color: rgb(74, 74, 74);
+    text-align: center;
+    margin: 20px 30.5px;
+    width: auto;
+  }
+  
+  a.au-cta, 
+  .au-cta {
+    font-family: var(--au-font-title);
+    font-size: 13px;
+    font-weight: 700;
+    color: #000 !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-top: auto;
+    border-bottom: 1px solid transparent; 
+  }
+  .au-cta:hover {
+    text-decoration: underline;
+    text-decoration-color: #000;
+  }
+  .au-cta-arrow {
+    color: var(--au-red);
+    font-weight: 700;
+    margin-left: 5px;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  /* =========================================
+     QUOTE BOX
+     ========================================= */
+  .au-quote-wrapper {
+    width: 100%;
+    max-width: 1264px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+    margin-top: -50px; 
+  }
+  
+  .au-quote-box {
+    box-sizing: border-box;
+    background-color: var(--au-red);
+    color: #fff;
+    padding: 32px;
+    max-width: 825px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  
+  .au-quote-box::after {
+    content: '';
+    position: absolute;
+    bottom: -52px;
+    left: 26px;
+    width: 0;
+    height: 0;
+    border-top: 52px solid var(--au-red);
+    border-right: 56px solid transparent;
+    border-left: 0 solid transparent;
+    border-bottom: 0 solid transparent;
+  }
+  
+  .au-quote-text {
+    font-family: var(--au-font-body);
+    font-size: 27px;
+    font-weight: 400;
+    line-height: 38.6px;
+    color: rgb(255, 255, 255);
+    margin-top: 27px;
+    margin-bottom: 10px;
+  }
+  
+  .au-quote-author {
+    box-sizing: border-box;
+    display: block;
+    font-family: var(--au-font-body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22.9px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    margin: 0;
+  }
+  
+  /* =========================================
+     BOTTOM CONTENT
+     ========================================= */
+  .au-bottom {
+    width: 100%;
+    max-width: 1264px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 60px;
+  }
+  
+  /* 95 YEARS TITLE (REVERTED TO FLUID WIDTH) */
+  .au-bottom-title {
+    box-sizing: border-box;
+    display: block;
+    
+    font-family: var(--au-font-title);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 26.4px;
+    color: rgb(102, 102, 102);
+    
+    text-transform: uppercase;
+    text-align: center;
+    
+    /* FLUID WIDTH - KEEPS TEXT ON ONE LINE */
+    width: 100%; 
+    margin: 0 auto;
+    margin-bottom: 19px;
+    position: relative;
+  }
+  
+  /* RED SEPARATOR LINE (INCREASED LENGTH) */
+  .au-bottom-title::after {
+    content: '';
+    display: block;
+    
+    /* Increased Width */
+    width: 560px; 
+    height: 1px;
+    background-color: var(--au-red);
+    
+    /* Standard Centering */
+    margin: 10px auto 0 auto; 
+  }
+  
+  /* BOTTOM DESCRIPTION */
+  .au-bottom-body {
+    box-sizing: border-box;
+    display: block;
+    
+    font-family: var(--au-font-body);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: rgb(51, 51, 51);
+    
+    text-align: center;
+    
+    /* Margins */
+    margin-left: 158px;
+    margin-right: 158px;
+    margin-top: 0;
+    margin-bottom: 0;
+    
+    padding-bottom: 50px;
+    width: auto;
+  }
+  
+  .au-bottom-body p {
+    margin-bottom: 20px;
+  }
+  
+  /* =========================================
+     RESPONSIVE
+     ========================================= */
+  @media (max-width: 900px) {
+    .au-bottom-body {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+    .au-bottom-title::after {
+      width: 80%; /* Responsive line */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .au-features {
+      flex-direction: column;
+      padding-bottom: 40px;
+    }
+    .au-quote-wrapper {
+      margin-top: -30px;
+    }
+    .au-white-card {
+      width: 95%;
+    }
+  }
