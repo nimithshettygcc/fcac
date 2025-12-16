@@ -9,6 +9,54 @@
 }
 
 @font-face {
+  font-family: 'RobotoCondensed';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/RobotoCondensed-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'RobotoCondensed';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/RobotoCondensed-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Avenir';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/Avenir-Book.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'FoundationSans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/FoundationSans-Roman.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'FoundationSans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/FoundationSans-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Ultramagnetic';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/Ultramagnetic.woff2') format('woff2');
+}
+
+@font-face {
   font-family: roboto;
   font-style: normal;
   font-weight: 700;
