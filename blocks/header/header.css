@@ -1,268 +1,1080 @@
-/* header and nav layout */
-header .nav-wrapper {
-  background-color: var(--background-color);
-  width: 100%;
-  z-index: 2;
-  position: fixed;
-}
-
-header nav {
-  box-sizing: border-box;
-  display: grid;
-  grid-template:
-    'hamburger brand tools' var(--nav-height)
-    'sections sections sections' 1fr / auto 1fr auto;
-  align-items: center;
-  gap: 0 24px;
-  margin: auto;
-  max-width: 1248px;
-  height: var(--nav-height);
-  padding: 0 24px;
-  font-family: var(--body-font-family);
-}
-
-header nav[aria-expanded='true'] {
-  grid-template:
-    'hamburger brand' var(--nav-height)
-    'sections sections' 1fr
-    'tools tools' var(--nav-height) / auto 1fr;
-  overflow-y: auto;
-  min-height: 100dvh;
-}
-
-@media (width >= 900px) {
-  header nav {
-    display: flex;
-    justify-content: space-between;
-    gap: 0 32px;
-    max-width: 1264px;
-    padding: 0 32px;
+/* =========================================
+   VARIABLES
+   ========================================= */
+   :root {
+    --nav-height: 82px;
+    --nav-red: #d81e05;
+    --nav-font: 'Avenir', 'Helvetica Neue', Arial, sans-serif;
+    --nav-dark: #333;
+    --nav-grey-bg: #f4f4f4;
+    --sec-nav-border: rgb(196, 199, 199);
   }
-
-  header nav[aria-expanded='true'] {
-    min-height: 0;
-    overflow: visible;
-  }
-}
-
-header nav p {
-  margin: 0;
-  line-height: 1;
-}
-
-header nav a:any-link {
-  color: currentcolor;
-}
-
-/* hamburger */
-header nav .nav-hamburger {
-  grid-area: hamburger;
-  height: 22px;
-  display: flex;
-  align-items: center;
-}
-
-header nav .nav-hamburger button {
-  height: 22px;
-  margin: 0;
-  border: 0;
-  border-radius: 0;
-  padding: 0;
-  background-color: var(--background-color);
-  color: inherit;
-  overflow: initial;
-  text-overflow: initial;
-  white-space: initial;
-}
-
-header nav .nav-hamburger-icon,
-header nav .nav-hamburger-icon::before,
-header nav .nav-hamburger-icon::after {
-  box-sizing: border-box;
-  display: block;
-  position: relative;
-  width: 20px;
-}
-
-header nav .nav-hamburger-icon::before,
-header nav .nav-hamburger-icon::after {
-  content: '';
-  position: absolute;
-  background: currentcolor;
-}
-
-header nav[aria-expanded='false'] .nav-hamburger-icon,
-header nav[aria-expanded='false'] .nav-hamburger-icon::before,
-header nav[aria-expanded='false'] .nav-hamburger-icon::after {
-  height: 2px;
-  border-radius: 2px;
-  background: currentcolor;
-}
-
-header nav[aria-expanded='false'] .nav-hamburger-icon::before {
-  top: -6px;
-}
-
-header nav[aria-expanded='false'] .nav-hamburger-icon::after {
-  top: 6px;
-}
-
-header nav[aria-expanded='true'] .nav-hamburger-icon {
-  height: 22px;
-}
-
-header nav[aria-expanded='true'] .nav-hamburger-icon::before,
-header nav[aria-expanded='true'] .nav-hamburger-icon::after {
-  top: 3px;
-  left: 1px;
-  transform: rotate(45deg);
-  transform-origin: 2px 1px;
-  width: 24px;
-  height: 2px;
-  border-radius: 2px;
-}
-
-header nav[aria-expanded='true'] .nav-hamburger-icon::after {
-  top: unset;
-  bottom: 3px;
-  transform: rotate(-45deg);
-}
-
-@media (width >= 900px) {
-  header nav .nav-hamburger {
-    display: none;
-    visibility: hidden;
-  }
-}
-
-/* brand */
-header .nav-brand {
-  grid-area: brand;
-  flex-basis: 128px;
-  font-size: var(--heading-font-size-s);
-  font-weight: 700;
-  line-height: 1;
-}
-
-header nav .nav-brand img {
-  width: 128px;
-  height: auto;
-}
-
-/* sections */
-header nav .nav-sections {
-  grid-area: sections;
-  flex: 1 1 auto;
-  display: none;
-  visibility: hidden;
-}
-
-header nav[aria-expanded='true'] .nav-sections {
-  display: block;
-  visibility: visible;
-  align-self: start;
-}
-
-header nav .nav-sections ul {
-  list-style: none;
-  padding-left: 0;
-  font-size: var(--body-font-size-s);
-}
-
-header nav .nav-sections ul > li {
-  font-weight: 500;
-}
-
-header nav .nav-sections ul > li > ul {
-  margin-top: 0;
-}
-
-header nav .nav-sections ul > li > ul > li {
-  font-weight: 400;
-}
-
-@media (width >= 900px) {
-  header nav .nav-sections {
-    display: block;
-    visibility: visible;
-    white-space: nowrap;
-  }
-
-  header nav[aria-expanded='true'] .nav-sections {
-    align-self: unset;
-  }
-
-  header nav .nav-sections .nav-drop {
+  
+  header .nav-wrapper {
+    background-color: #fff;
+    width: 100%;
     position: relative;
-    padding-right: 16px;
+    z-index: 999;
+    font-family: var(--nav-font);
+  }
+  
+  header nav {
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  /* =========================================
+     1. FLYER (Top Bar)
+     ========================================= */
+  .nav-flyer {
+    width: 100%;
+    background-color: #fff;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  
+  .nav-flyer a {
+    display: inline-block;
+    max-width: 1264.51px;
+    width: 100%;
+  }
+  
+  .nav-flyer img {
+    width: 100%;
+    height: auto;
+    max-height: 62px;
+    object-fit: contain;
+    display: block;
+  }
+  
+  /* =========================================
+     2. PRIMARY BAR (The Strip)
+     ========================================= */
+  .nav-primary {
+    border-bottom: 1px solid #dcdcdc;
+    background: #fff;
+  }
+  
+  .nav-primary-content {
+    width: 100%;
+    max-width: 1264px;
+    height: 72px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0 auto;
+    padding-left: 60px; 
+    padding-right: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* --- LOGO --- */
+  .nav-brand {
+    flex-shrink: 0;
+    margin-right: 60px;
+  }
+  
+  .nav-brand a {
+    display: block;
+    width: 170px;
+  }
+  
+  .nav-brand img {
+    width: 100%;
+    height: auto;
+    max-height: 35px;
+    display: block;
+  }
+  
+  /* --- HAMBURGER (Mobile) --- */
+  .nav-hamburger {
+    display: none;
+  }
+  
+  .nav-hamburger button {
+    background: transparent;
+    border: none;
+    padding: 0;
     cursor: pointer;
   }
-
-  header nav .nav-sections .nav-drop::after {
+  
+  .nav-hamburger-icon,
+  .nav-hamburger-icon::before,
+  .nav-hamburger-icon::after {
+    background: #000;
+    width: 20px;
+    height: 2px;
+    display: block;
+    position: relative;
+  }
+  
+  .nav-hamburger-icon::before {
     content: '';
-    display: inline-block;
     position: absolute;
-    top: 0.5em;
-    right: 2px;
-    transform: rotate(135deg);
-    width: 6px;
-    height: 6px;
-    border: 2px solid currentcolor;
-    border-radius: 0 1px 0 0;
-    border-width: 2px 2px 0 0;
+    top: -6px;
   }
-
-  header nav .nav-sections .nav-drop[aria-expanded='true']::after {
-    top: unset;
-    bottom: 0.5em;
-    transform: rotate(315deg);
+  
+  .nav-hamburger-icon::after {
+    content: '';
+    position: absolute;
+    top: 6px;
   }
-
-  header nav .nav-sections ul {
+  
+  /* =========================================
+     3. MENU ITEMS (Center Navigation)
+     ========================================= */
+  .nav-sections {
+    flex: 1;
+  }
+  
+  .nav-sections ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: flex;
-    gap: 24px;
+    gap: 45px;
+    justify-content: flex-start;
+  }
+  
+  .nav-sections > ul > li {
+    position: static !important;
+    height: 82px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
     margin: 0;
   }
-
-  header nav .nav-sections .default-content-wrapper > ul > li {
-    flex: 0 1 auto;
+  
+  /* Link Styling */
+  .nav-sections > ul > li > a {
+    text-decoration: none;
+    font-family: var(--nav-font);
+    font-size: 16px;
+    font-weight: 500;
+    color: #000000;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     position: relative;
+    transition: color 0.2s;
   }
-
-  header nav .nav-sections .default-content-wrapper > ul > li > ul {
-    display: none;
-    position: relative;
+  
+  /* A. GENERAL HOVER: Turn Red */
+  .nav-sections > ul > li:hover > a {
+    color: var(--nav-red);
   }
-
-  header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > ul {
-    display: block;
-    position: absolute;
-    left: -24px;
-    width: 200px;
-    top: 150%;
-    padding: 16px;
-    background-color: var(--light-color);
-    white-space: initial;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li > ul::before {
+  
+  /* B. SPECIFIC HOVER: Add Down Arrow */
+  .nav-sections .nav-drop > a::after {
     content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-right: 2px solid var(--nav-red);
+    border-bottom: 2px solid var(--nav-red);
+    transform: rotate(45deg);
     position: absolute;
-    top: -8px;
-    left: 16px;
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 8px solid var(--light-color);
+    bottom: -15px; 
+    opacity: 0;
+    transition: opacity 0.2s, bottom 0.2s;
   }
-
-  header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
-    padding: 8px 0;
+  
+  /* Show Arrow on Hover */
+  .nav-sections .nav-drop:hover > a::after {
+    opacity: 1;
+    bottom: -12px;
   }
-}
-
-/* tools */
-header nav .nav-tools {
-  grid-area: tools;
-}
+  
+  .nav-sections > ul > li:hover::after {
+    display: none;
+  }
+  
+  /* =========================================
+     TOOLS (Right Side: Blog / Sign In)
+     ========================================= */
+  .nav-tools {
+    display: flex;
+    gap: 35px;
+    margin-left: auto;
+    padding-right: 10px;
+  }
+  
+  .nav-tool-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none !important;
+    color: #000;
+    cursor: pointer;
+    min-width: 50px;
+    box-sizing: border-box;
+  }
+  
+  .tool-icon {
+    width: 34px;
+    height: 34px;
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .tool-icon img, 
+  .tool-icon svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+  
+  .nav-tool-item span {
+    font-family: var(--nav-font);
+    font-size: 11px;
+    font-weight: 400;
+    color: rgb(51, 51, 51);
+    text-transform: capitalize;
+    line-height: 1.2;
+    text-align: center;
+  }
+  
+  .nav-tool-item:hover,
+  .nav-tool-item:hover span {
+    text-decoration: none !important;
+    border-bottom: none !important;
+    color: rgb(51, 51, 51);
+  }
+  
+  /* =========================================
+     4. MEGA MENU CONTAINER (Shared)
+     ========================================= */
+  .nav-dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0 !important;
+    width: 100% !important;
+    transform: none !important;
+    background: #fff;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid #eee;
+    z-index: 1000;
+    cursor: default;
+  }
+  
+  @media (min-width: 900px) {
+    .nav-drop:hover .nav-dropdown-content {
+      display: block;
+    }
+  }
+  
+  /* =========================================
+     TIRES MEGA MENU
+     ========================================= */
+  .tires-nav-item .nav-dropdown-content {
+    background-image: url("https://s7d1.scene7.com/is/image/bridgestone/tires-bg-nav-global-web-bsro?scl=1"), linear-gradient(179deg, rgb(235, 235, 235) 54.86%, rgb(219, 216, 218) 99.4%) !important;
+    background-size: contain, contain !important;
+    background-repeat: no-repeat, no-repeat !important;
+    background-position: 0px 100%, 0px 100% !important;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.6) 0px 5px 8px -4px !important;
+  }
+  
+  .tires-mega-menu {
+    display: flex;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    height: 581px;
+    min-height: 581px;
+    padding-left: 320px;
+    background: transparent;
+    box-sizing: border-box;
+  }
+  
+  /* --- COL 1: Shop For Tires --- */
+  .tires-col-left {
+    width: 273px;
+    padding: 40px 0px; 
+    border-right: none;
+    box-sizing: border-box;
+  }
+  
+  .tires-col-left h3 {
+    font-family: 'Ultramagnetic', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000;
+    margin: 0 0 20px 0;
+    text-transform: uppercase;
+  }
+  
+  .tires-col-left ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .tires-col-left li {
+    margin: 0;
+    border: none;
+    display: block;
+    height: auto;
+  }
+  
+  .tires-col-left a {
+    display: block;
+    position: relative; 
+    font-family: var(--nav-font);
+    font-size: 16px;
+    font-weight: 400;
+    color: #000;
+    text-decoration: none;
+    line-height: 20px;
+    padding: 6px 0; 
+    box-sizing: border-box;
+    align-items: flex-start;
+  }
+  
+  /* Side Arrow for Tire List */
+  .tires-col-left a::after {
+    content: '›';
+    font-size: 20px;
+    color: #333;
+    transition: color 0.2s;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none; 
+    width: auto;
+    height: auto;
+    opacity: 1;
+    bottom: auto;
+  }
+  
+  .tires-col-left a:hover {
+    color: var(--nav-red);
+  }
+  
+  .tires-col-left a:hover::after {
+    color: var(--nav-red);
+  }
+  
+  /* --- COL 2: Brands --- */
+  .tires-col-right {
+    flex: 1;
+    padding: 40px 40px 40px 50px;
+    background: transparent;
+    box-sizing: border-box;
+  }
+  
+  .tires-col-right h3 {
+    font-family: 'Ultramagnetic', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000;
+    margin: 0 0 30px 0;
+    text-transform: uppercase;
+  }
+  
+  .brands-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .brand-section {
+    width: 50%;
+    padding-right: 20px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+  }
+  
+  .brand-section h4 {
+    margin: 0 0 15px 0;
+  }
+  
+  .brand-section h4 a {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--nav-font);
+  }
+  
+  .brand-section h4 a::after {
+    content: '›';
+    color: #000; 
+    font-size: 20px;
+    line-height: 1;
+    border: none;
+    transform: none;
+    position: static;
+    width: auto;
+    height: auto;
+    opacity: 1;
+    transition: color 0.2s;
+  }
+  
+  .brand-section h4 a:hover::after {
+    color: var(--nav-red);
+  }
+  
+  .tire-model-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+  }
+  
+  .tire-model-list li {
+    width: 100% !important;
+    margin: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin-bottom: 12px !important;
+    padding-bottom: 2px !important;
+    display: block !important;
+    border: none;
+  }
+  
+  .tire-model-list a {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    text-decoration: none;
+  }
+  
+  .tire-icon {
+    width: 13px;  
+    height: 14px; 
+    margin-top: 3px; 
+    flex-shrink: 0;
+    display: block;
+  }
+  
+  .tire-icon svg,
+  .tire-icon img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    filter: none;
+    overflow: visible;
+  }
+  
+  .tire-text {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .tire-text span {
+    display: block;
+    line-height: 1.1;
+    font-family: var(--nav-font);
+  }
+  
+  .tire-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #000;
+  }
+  
+  .tire-tagline {
+    font-size: 13px;
+    color: #666;
+    font-style: italic;
+  }
+  
+  .tire-model-list a:hover .tire-name {
+    color: var(--nav-red);
+    text-decoration: underline;
+  }
+  
+  .suredrive-link {
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    height: 20px !important;
+    column-gap: 5px !important;
+    row-gap: 5px !important;
+    margin-top: 10px !important;
+    font-family: roboto-condensed, roboto-condensed-fallback, sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: rgb(0, 0, 0) !important;
+    line-height: 20px !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    cursor: pointer !important;
+    visibility: visible !important;
+    transition: color 0.2s ease !important;
+  }
+  
+  .suredrive-link::after {
+    content: '›';
+    color: #000; 
+    font-size: 20px;
+    line-height: 1;
+    display: block;
+    border: none;
+    width: auto;
+    height: auto;
+    position: static;
+    transform: none;
+    opacity: 1;
+    transition: color 0.2s;
+  }
+  
+  .suredrive-link:hover::after {
+    color: var(--nav-red);
+  }
+  
+  /* =========================================
+     AUTO REPAIR MEGA MENU
+     ========================================= */
+  .auto-repair-dropdown {
+    background-image: url("https://s7d1.scene7.com/is/image/bridgestone/repair-bg-nav-global-web-bsro?scl=1"), linear-gradient(179deg, rgb(235, 235, 235) 54.86%, rgb(219, 216, 218) 99.4%) !important;
+    background-size: cover, cover !important;
+    background-repeat: no-repeat, no-repeat !important;
+    background-position: 0 100%, 0 100% !important;
+    box-shadow: rgba(0, 0, 0, 0.6) 0px 5px 8px -4px !important;
+  }
+  
+  .auto-repair-mega-menu {
+    display: flex;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    min-height: 370px;
+    padding-left: 281.6px;
+    background: transparent;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 0;
+    padding-bottom: 0;
+    box-sizing: border-box;
+    position: relative;
+  }
+  
+  .repair-hero {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 280px;
+    background: transparent !important;
+    border: none !important;
+    display: none;
+  }
+  
+  .repair-services-grid {
+    width: 597px;
+    padding: 30px 30px 20px 30px;
+    border-right: none;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 10;
+    box-sizing: border-box;
+  }
+  
+  .repair-services-grid h3 {
+    width: 100%;
+    font-family: 'Ultramagnetic', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    text-transform: uppercase;
+    color: #000;
+    padding-top: 16px;
+    padding-bottom: 5px;
+    padding-right: 19px;
+    padding-left: 0px;
+    margin: 0;
+    border-bottom: none;
+  }
+  
+  .services-grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 20px;
+    row-gap: 5px;
+    margin-top: 0;
+  }
+  
+  .service-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .service-item picture,
+  .service-item img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    flex-shrink: 0;
+    mix-blend-mode: multiply;
+  }
+  
+  .service-item a {
+    display: inline-block;
+    width: 125px;
+    vertical-align: middle;
+    font-family: var(--nav-font);
+    font-size: 16px;
+    line-height: 16px;
+    color: #000;
+    text-decoration: none;
+    font-weight: 400;
+    white-space: normal;
+  }
+  
+  .service-item a:hover {
+    color: var(--nav-red);
+    text-decoration: underline;
+  }
+  
+  .repair-cta {
+    width: 336px;
+    flex-shrink: 0;
+    padding: 0 40px 0 40px;
+    margin-top: 30px;
+    border-left: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+    z-index: 10;
+    box-sizing: border-box;
+  }
+  
+  .repair-cta > picture,
+  .repair-cta > img {
+    display: none !important;
+  }
+  
+  .repair-cta h3 {
+    font-family: 'Ultramagnetic', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #000;
+    margin: 0 0 12px 0;
+    line-height: 17.6px;
+    padding-top: 16px;
+  }
+  
+  .repair-cta p {
+    font-family: var(--nav-font);
+    font-size: 14px;
+    line-height: 20px;
+    color: rgb(51, 51, 51);
+    margin-top: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .repair-cta a.button,
+  .repair-cta .button-container a {
+    background-color: var(--nav-red) !important;
+    color: #fff !important;
+    padding: 14px 20px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 15px;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid var(--nav-red);
+    border-radius: 0;
+    transition: background-color 0.2s;
+    font-family: 'Ultramagnetic', sans-serif;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  
+  .repair-cta a.button:hover,
+  .repair-cta .button-container a:hover {
+    background-color: #b31400 !important;
+    border-color: #b31400 !important;
+  }
+  
+  /* =========================================
+     AUTO MAINTENANCE MEGA MENU
+     ========================================= */
+  .auto-maintenance-dropdown {
+    background-image: url("https://s7d1.scene7.com/is/image/bridgestone/maintenance-bg-nav-global-web-bsro?scl=1"), linear-gradient(179deg, rgb(235, 235, 235) 54.86%, rgb(219, 216, 218) 99.4%) !important;
+    background-size: cover, cover !important;
+    background-repeat: no-repeat, no-repeat !important;
+    background-position: 0 100%, 0 100% !important;
+    box-shadow: rgba(0, 0, 0, 0.6) 0px 5px 8px -4px !important;
+  }
+  
+  .auto-maintenance-mega-menu {
+    display: flex;
+    width: 100%;
+    max-width: 1440px; 
+    margin: 0 auto;
+    min-height: 370px;
+    padding-left: 281.6px;
+    background: transparent;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 0;
+    padding-bottom: 0;
+    box-sizing: border-box;
+    position: relative;
+  }
+  
+  .maintenance-hero {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 280px;
+    background: transparent !important;
+    border: none !important;
+    display: none;
+  }
+  
+  .maintenance-services-grid {
+    width: 597px; 
+    padding: 30px 30px 20px 30px; 
+    border-right: none; 
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 10;
+    box-sizing: border-box;
+  }
+  
+  .maintenance-services-grid h3 {
+    width: 100%;
+    font-family: 'Ultramagnetic', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    text-transform: uppercase;
+    color: #000;
+    padding-top: 16px;
+    padding-bottom: 5px;
+    margin: 0;
+    border-bottom: none;
+  }
+  
+  .maintenance-grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 20px;
+    row-gap: 15px; 
+    margin-top: 15px;
+  }
+  
+  .maintenance-service-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .maintenance-service-item picture, 
+  .maintenance-service-item img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    flex-shrink: 0;
+    mix-blend-mode: multiply;
+  }
+  
+  .maintenance-service-item a {
+    display: inline-block;
+    width: 125px;
+    vertical-align: middle;
+    font-family: var(--nav-font);
+    font-size: 16px;
+    line-height: 18px;
+    color: #000;
+    text-decoration: none;
+    font-weight: 400;
+    white-space: normal;
+  }
+  
+  .maintenance-service-item a:hover {
+    color: var(--nav-red);
+    text-decoration: underline;
+  }
+  
+  .maintenance-cta {
+    width: 336px;
+    flex-shrink: 0;
+    padding: 0 40px 0 40px; 
+    margin-top: 30px; 
+    border-left: 1px solid #ccc; /* Vertical Divider */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+    z-index: 10;
+    box-sizing: border-box;
+  }
+  
+  .maintenance-cta > picture, 
+  .maintenance-cta > img { 
+    display: none !important; 
+  }
+  
+  .maintenance-cta h3 {
+    font-family: 'Ultramagnetic', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #000;
+    margin: 0 0 12px 0;
+    line-height: 17.6px;
+    padding-top: 16px;
+  }
+  
+  .maintenance-cta p {
+    font-family: var(--nav-font);
+    font-size: 14px;
+    line-height: 20px;
+    color: rgb(51, 51, 51);
+    margin-top: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .maintenance-cta a.button {
+    background-color: var(--nav-red) !important;
+    color: #fff !important;
+    padding: 14px 20px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 15px;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid var(--nav-red);
+    border-radius: 0;
+    transition: background-color 0.2s;
+    font-family: 'Ultramagnetic', sans-serif;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  
+  .maintenance-cta a.button:hover {
+    background-color: #b31400 !important;
+    border-color: #b31400 !important;
+  }
+  
+  /* =========================================
+     5. SECONDARY NAV BAR (Schedule, Garage, Store)
+     ========================================= */
+  .nav-secondary {
+    border-bottom: 1px solid #dcdcdc;
+    background: #fff;
+    width: 100%;
+  }
+  
+  .nav-secondary-content {
+    width: 100%;
+    max-width: 1264px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 48px; 
+    padding-left: 0; 
+    padding-right: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Generic Item Style */
+  .sec-item {
+    display: flex;
+    align-items: center;
+    height: 48px;
+    box-sizing: border-box;
+    font-family: var(--nav-font);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: rgb(0, 0, 0);
+    cursor: pointer; /* Force pointer cursor for all items */
+  }
+  
+  /* --- 1. Schedule Appointment --- */
+  .sec-schedule {
+    flex-grow: 1; 
+    flex-shrink: 1;
+    flex-basis: auto;
+    width: 441.667px;
+    padding-left: 60px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-right: 0.666667px solid rgb(196, 199, 199);
+  }
+  
+  /* --- 2. My Garage --- */
+  .sec-garage {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 317px;
+    width: 317px;
+    max-width: 317px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-right: 0.666667px solid rgb(196, 199, 199);
+    position: relative;
+    z-index: 9003;
+  }
+  
+  /* --- 3. My Store --- */
+  .sec-store {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 317px;
+    width: 317px;
+    max-width: 317px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  /* --- 4. Contact (Call My Store) --- */
+  .sec-contact {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 189px;
+    width: 189px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-left: 0.666667px solid rgb(196, 199, 199);
+    position: relative;
+  }
+  
+  /* --- Shared Inner Styles --- */
+  
+  /* Icon Wrapper */
+  .sec-icon {
+    width: 32px; 
+    height: 32px;
+    margin-right: 20px;
+    flex-shrink: 0; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .sec-icon img, .sec-icon svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+  
+  /* Text Wrapper */
+  .sec-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  /* Schedule Link */
+  .sec-schedule a {
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: var(--nav-font);
+  }
+  
+  .sec-schedule a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Labels (Garage/Store/Call) */
+  .sec-label {
+    font-size: 11px;
+    color: #666;
+    line-height: 1.2;
+  }
+  
+  /* Values */
+  .sec-value {
+    font-size: 14px;
+    color: #000;
+    font-weight: 400; 
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+  }
+  
+  /* FIX: Only phone number in Contact section is bold */
+  .sec-contact .sec-value {
+    font-weight: 600;
+  }
+  
+  /* FIX: Underline BOTH Label and Value on hover for ALL sec items */
+  .sec-item:hover .sec-label,
+  .sec-item:hover .sec-value {
+    text-decoration: underline;
+  }
+  
+  /* Chevron */
+  .has-dropdown {
+    justify-content: space-between; 
+  }
+  
+  .has-dropdown::after {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid #000;
+    border-bottom: 2px solid #000;
+    transform: rotate(45deg);
+    margin-left: auto;
+    margin-right: 5px;
+  }
+  
+  /* Mobile Adjustments */
+  @media (max-width: 899px) {
+    .nav-secondary-content {
+      flex-direction: column;
+      height: auto;
+    }
+    
+    .sec-item, .sec-schedule, .sec-garage, .sec-store, .sec-contact {
+      width: 100%;
+      max-width: none;
+      flex-basis: auto;
+      border-right: none;
+      border-left: none;
+      border-bottom: 1px solid #eee;
+      padding: 15px 20px;
+    }
+  }
