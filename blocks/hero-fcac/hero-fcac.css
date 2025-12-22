@@ -11,6 +11,8 @@
   overflow: hidden;
   margin-top: 110px; /* Spacing to clear header */
   z-index: 0; 
+  /* FIX: Remove bottom whitespace */
+  margin-bottom: 0 !important;
 }
 
 /* Background Image */
@@ -425,11 +427,11 @@
 }
 
 /* FIX: Specific Grey Disabled State for Batteries AND Alignment Buttons ONLY */
-/* Background is White, Text is Grey */
+/* Background is White, Text is Lighter Grey */
 #batteries-submit-btn:disabled,
 #alignment-submit-btn:disabled {
-  background-color: #ffffff !important; /* White Background */
-  color: #C0C0C0 !important; /* Grey Text */
+  background-color: #ffffff !important; 
+  color: #999999 !important; /* Lighter Grey Text */
   border: 2px solid #c4c7c7 !important; /* Grey Border */
   opacity: 1 !important; /* Solid */
   cursor: not-allowed !important;

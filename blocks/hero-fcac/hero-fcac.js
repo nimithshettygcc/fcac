@@ -4,6 +4,14 @@ export default function decorate(block) {
     return;
   }
 
+  // --- FIX 1: Remove default margins from the parent section wrapper ---
+  const parentSection = block.closest('.section');
+  if (parentSection) {
+    parentSection.style.margin = '0';
+    parentSection.style.padding = '0';
+    parentSection.style.maxWidth = '100%';
+  }
+
   // Get all direct child divs (rows)
   const rows = [...block.children];
 
@@ -132,12 +140,13 @@ export default function decorate(block) {
       btnId: 'batteries-submit-btn',
       fourthField: 'Engine'
     },
+    // --- FIX 2: ALIGNMENT DATA MATCHING SCREENSHOT ---
     alignment: {
       type: 'form',
-      heading: 'ALIGNMENT SERVICE',
+      heading: 'ALIGNMENT SERVICE', // Matches red header in screenshot
       buttonText: 'GET ALIGNMENT PRICING',
       btnId: 'alignment-submit-btn',
-      fourthField: 'Submodel'
+      fourthField: 'Submodel' // Matches 4th dropdown in screenshot
     },
   };
 
@@ -427,7 +436,6 @@ export default function decorate(block) {
       const { field: yearF, select: yearS } = createNoLabelSelect('year', 'Year', false);
       const { field: makeF, select: makeS } = createNoLabelSelect('make', 'Make', true);
       const { field: modelF, select: modelS } = createNoLabelSelect('model', 'Model', true);
-      // Dynamic 4th field (Engine vs Submodel)
       const { field: fourthF, select: fourthS } = createNoLabelSelect(data.fourthField.toLowerCase(), data.fourthField, true);
 
       yearS.addEventListener('change', () => { makeS.disabled = !yearS.value; if(!yearS.value) makeS.value = ''; });
