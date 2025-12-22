@@ -2,506 +2,598 @@
    TIRE GUIDE - VARIABLES & BASE
    ============================================ */
 
-   :root {
-    --tg-red: rgb(216, 30, 5);
-    --tg-red-hover: rgb(180, 25, 4);
-    --tg-blue-cta-bg: rgb(28, 122, 189);
-    --tg-blue-cta-border: rgb(11, 83, 137);
-    --tg-text-black: rgb(0, 0, 0);
-    --tg-text-grey: rgb(51, 51, 51);
-    --tg-text-light-grey: rgb(85, 85, 85);
-    --tg-bg-container: #f5f5f5;
-    
-    /* Fonts */
-    --tg-font-title: 'Ultramagnetic', Arial, sans-serif;
-    --tg-font-body: 'Avenir', Arial, sans-serif;
+/* FIX: Remove default section margins */
+.section.tire-guide-container {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+}
+
+:root {
+  --tg-red: rgb(216, 30, 5);
+  --tg-red-hover: rgb(180, 25, 4);
+  --tg-blue-cta-bg: rgb(28, 122, 189);
+  --tg-blue-cta-border: rgb(11, 83, 137);
+  --tg-text-black: rgb(0, 0, 0);
+  --tg-text-grey: rgb(51, 51, 51);
+  --tg-text-light-grey: rgb(85, 85, 85);
+  --tg-bg-container: #f5f5f5;
+  
+  /* Fonts */
+  --tg-font-title: 'Ultramagnetic', Arial, sans-serif;
+  --tg-font-body: 'Avenir', Arial, sans-serif;
+}
+
+.tire-guide-container {
+  background: linear-gradient(to bottom, #ffffff 0%, #f5f5f5 100%);
+  padding: 0;
+  width: 100%;
+}
+
+.tire-guide-wrapper {
+  position: relative;
+}
+
+.tire-guide {
+  max-width: 1264px;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--tg-font-body);
+  color: var(--tg-text-grey);
+  font-size: 14px;
+  line-height: 20px;
+  background-color: transparent !important; 
+}
+
+/* ============================================
+   PART 1: HERO SECTION
+   ============================================ */
+
+.tg-top {
+  display: block; 
+  width: 100%;
+  box-sizing: border-box;
+  
+  /* Height fixed at 395px */
+  height: 395px !important;
+  min-height: 0 !important;
+  overflow: hidden; 
+  
+  padding: 40px 20px;
+  background-color: transparent !important; 
+}
+
+/* Clearfix for floated children */
+.tg-top::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* --- Left Side: Image Wrapper --- */
+.tg-hero {
+  float: left;
+  width: 50%;
+  height: 100%;
+  
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  padding: 0; 
+  box-sizing: border-box;
+  overflow: hidden; 
+  
+  background-color: transparent !important; 
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* --- The Image Itself --- */
+.tg-hero picture,
+.tg-hero img {
+  display: block;
+  
+  /* ZOOM: 105% */
+  width: 105% !important; 
+  max-width: none !important; 
+  
+  /* ALIGNMENT: -3% (Slightly left of center) */
+  margin-left: -3% !important; 
+  
+  height: auto !important;
+  max-height: none !important; 
+  
+  object-fit: cover; 
+  
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  mix-blend-mode: multiply; 
+}
+
+/* --- Right Side: Text Container --- */
+.tg-copy {
+  box-sizing: border-box;
+  color: rgb(51, 51, 51);
+  display: block;
+  float: left;
+  font-family: 'Avenir', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  height: 100%; 
+  line-height: 20px;
+  position: relative;
+  width: 50%;
+  
+  padding-left: 20px; 
+  padding-top: 0px; 
+  
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.tg-title {
+  /* Tighter spacing: Reduced bottom margin to 5px */
+  margin: 0 0 5px 0;
+  font-size: 32px;
+  line-height: 1.1;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-family: var(--tg-font-title);
+  color: #4a4a4a;
+}
+
+/* --- DESCRIPTION --- */
+.tg-desc {
+  box-sizing: border-box;
+  color: rgb(51, 51, 51);
+  display: block;
+  font-family: 'Avenir', Arial, sans-serif;
+  font-size: 20px; 
+  font-weight: 400;
+  line-height: 28.5714px; 
+  
+  /* Tighter spacing: 5px top, 15px bottom */
+  margin-top: 5px;
+  margin-bottom: 15px;
+  margin-left: 0;
+  margin-right: 0;
+  
+  max-width: 480px; 
+}
+
+/* --- BUTTON --- */
+.tg-primary-cta {
+  display: inline-block;
+  box-sizing: border-box;
+  background-color: rgb(216, 30, 5);
+  border: 2px solid rgb(216, 30, 5);
+  color: rgb(255, 255, 255) !important;
+  font-family: 'Ultramagnetic', Arial, sans-serif;
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 20.9px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 8px 11px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, border 0.3s ease-in-out;
+  -webkit-font-smoothing: antialiased;
+}
+
+.tg-primary-cta:hover {
+  background-color: var(--tg-red-hover);
+  border-color: var(--tg-red-hover);
+}
+
+/* ============================================
+   PART 2: STORE BAR (THE TOGGLE)
+   ============================================ */
+
+.tg-store-wrapper {
+  width: 100%;
+  display: block;
+  
+  /* INCREASED BOTTOM GAP: 10px Top, 10px Bottom */
+  padding: 10px 0 10px 0;
+  
+  background: transparent;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
+  clear: both;
+}
+
+.tg-store-bar-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Small gap for arrow spacing */
+  gap: 4px; 
+  
+  cursor: pointer;
+  padding: 5px 0;
+  user-select: none; 
+}
+
+/* Icon Wrapper */
+.icon-location-wrapper {
+  display: inline-flex;
+  align-items: center;
+}
+
+.icon-location-wrapper img,
+.icon-location-wrapper svg {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) saturate(100%) invert(23%) sepia(95%) saturate(6247%) hue-rotate(356deg) brightness(92%) contrast(98%);
+}
+
+.tg-store-bar {
+  text-align: center;
+  color: rgb(51, 51, 51);
+  
+  /* ADDRESS: Use Avenir + Normal (400) */
+  font-family: 'Avenir', Arial, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 16px;
+  text-transform: uppercase;
+  line-height: 22.8571px;
+}
+
+/* Ensure any spans or links inside inherit Avenir + 400 */
+.tg-store-bar a,
+.tg-store-bar span {
+  font-family: 'Avenir', Arial, sans-serif !important;
+  font-weight: 400 !important;
+}
+
+/* LABEL: Use Ultramagnetic + Normal Weight (400) */
+.tg-store-bar strong {
+  font-family: 'Ultramagnetic', Arial, sans-serif !important;
+  font-weight: 400 !important; 
+}
+
+/* --- ARROW FIX --- */
+.tg-arrow-icon {
+  display: inline-block;
+  margin-left: 0px; 
+  font-size: 14px;
+  color: var(--tg-red);
+  transition: transform 0.3s ease;
+  
+  /* Point DOWN by default */
+  transform: rotate(180deg);
+}
+
+/* --- TOGGLE STATE CLASSES --- */
+.tg-bar-state-close { display: none; font-weight: 400; font-family: var(--tg-font-title); }
+.tg-bar-state-info { display: inline; }
+
+/* OPEN STATE: Point UP */
+.tire-guide.tg-store-open .tg-arrow-icon { transform: rotate(0deg); }
+
+.tire-guide.tg-store-open .icon-location-wrapper { display: none; }
+.tire-guide.tg-store-open .tg-bar-state-info { display: none; }
+.tire-guide.tg-store-open .tg-bar-state-close { display: inline; }
+
+
+/* ============================================
+   PART 3: EXPANDED PANEL
+   ============================================ */
+
+.tg-store-panel {
+  display: none;
+  border-top: none; 
+  padding: 30px 40px 40px 40px; 
+  width: 100%;
+  gap: 40px;
+  align-items: stretch;
+  justify-content: space-between;
+  box-sizing: border-box;
+  background-color: var(--tg-bg-container); 
+}
+
+.tire-guide.tg-store-open .tg-store-panel {
+  display: flex; 
+  flex-direction: row;
+}
+
+/* --- Left Side Text Columns --- */
+.tg-store-info {
+  flex: 1 1 60%;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.tg-col-contact {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* 1. "YOUR NEAREST STORE:" */
+.tg-store-label {
+  display: block;
+  font-family: var(--tg-font-title);
+  font-weight: 700; 
+  font-size: 30px;  
+  line-height: 30px;
+  color: var(--tg-text-black);
+  margin: 0 0 22px 0;
+  text-transform: uppercase;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 2. PHONE NUMBER */
+.tg-store-phone {
+  display: block;
+  font-family: var(--tg-font-title);
+  font-weight: 700;
+  font-size: 32px;  
+  line-height: 1; 
+  color: var(--tg-red); 
+  margin: 0 0 22px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* 3. ADDRESS BLOCK */
+.tg-address-block {
+  width: 100%; 
+  max-width: 350px; 
+  margin-bottom: 10px; 
+}
+
+.tg-address-block p, 
+.tg-addr-line,
+.tg-address-block div {
+  font-family: var(--tg-font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--tg-text-grey);
+  margin: 0;
+  display: block;
+  background: none !important; 
+  padding: 0 !important;
+  border: none !important;
+  text-decoration: none !important;
+}
+
+/* 4. LINKS */
+.tg-store-links {
+  display: block;
+  margin-top: auto; 
+  margin-bottom: 22px; 
+}
+
+.tg-store-links a {
+  display: inline;
+  font-family: var(--tg-font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--tg-red); 
+  text-decoration: underline;
+  text-decoration-color: var(--tg-red);
+  margin-right: 20px;
+  cursor: pointer;
+}
+.tg-store-links a:hover { text-decoration: none; }
+
+/* 5. BLUE BUTTON */
+.tg-secondary-cta {
+  display: inline-block;
+  box-sizing: border-box;
+  background-color: var(--tg-blue-cta-bg); 
+  color: #ffffff !important;
+  border: 2px solid var(--tg-blue-cta-border);
+  font-family: var(--tg-font-title);
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 20.9px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  
+  width: auto;
+  min-width: 0;
+  padding: 10px 18px;
+  
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+.tg-secondary-cta:hover { background-color: var(--tg-blue-cta-border); }
+
+/* --- Column 2: Hours (Grid Layout + 140px Line) --- */
+.tg-col-hours {
+  flex: 0 0 40%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 30px;
+  padding-top: 52px;
+  position: relative;
+  border-left: none;
+}
+
+/* Custom 140px Vertical Line */
+.tg-col-hours::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 55px; /* Aligns with Store Hours text */
+  width: 1px;
+  height: 140px; 
+  background-color: #dcdcdc;
+}
+
+.tg-hours-title {
+  font-family: var(--tg-font-body);
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+  color: var(--tg-text-black);
+}
+
+.tg-hours-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Flex Row for each hour entry */
+.tg-hour-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 2px;
+  
+  font-family: var(--tg-font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--tg-text-light-grey);
+}
+
+/* The Day Label */
+.tg-day {
+  width: 115px; 
+  flex-shrink: 0;
+  font-weight: 500;
+}
+
+/* The Time Value */
+.tg-time {
+  flex-grow: 1;
+}
+
+/* Red Holiday Text */
+.tg-hour-row.tg-holiday .tg-day,
+.tg-hour-row.tg-holiday .tg-time {
+  color: var(--tg-red);
+}
+
+/* DIRECTIONS */
+.tg-directions {
+  display: inline;
+  box-sizing: border-box;
+  
+  font-family: var(--tg-font-title);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 25.7143px;
+  color: rgb(51, 51, 51) !important; 
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.tg-directions:hover {
+  text-decoration: underline;
+  text-decoration-color: rgb(51, 51, 51);
+}
+
+.tg-directions::after {
+  content: '\203A'; 
+  color: var(--tg-red);
+  font-size: 24px;
+  line-height: 18px;
+  margin-left: 5px;
+  font-weight: bold;
+  transform: translateY(-2px); 
+  display: inline-block; 
+  text-decoration: none;
+}
+
+/* --- Right Side: Map --- */
+.tg-store-map {
+  flex: 1 1 35%;
+  min-height: 300px;
+  position: relative;
+}
+
+.tg-store-map img,
+.tg-store-map picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 1px solid #ddd;
+}
+
+/* ============================================
+   RESPONSIVE QUERIES
+   ============================================ */
+
+/* Tablet / Small Laptop */
+@media (max-width: 1024px) {
+  .tire-guide { padding: 0 20px; }
+  .tire-guide.tg-store-open .tg-store-panel { flex-wrap: wrap; padding: 30px 20px; }
+  .tg-store-info { flex: 0 0 100%; margin-bottom: 30px; }
+  .tg-store-map { flex: 0 0 100%; height: 350px; }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .tg-top { 
+    display: flex; /* Reset flex for column layout on mobile */
+    flex-direction: column; 
+    height: auto !important; /* Allow auto height on mobile */
   }
   
-  .tire-guide-container {
-    background: var(--tg-bg-container);
-    padding: 0;
-    width: 100%;
-  }
-  
-  .tire-guide-wrapper {
-    position: relative;
-  }
-  
-  .tire-guide {
-    max-width: 1264px;
-    margin: 0 auto;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: var(--tg-font-body);
-    color: var(--tg-text-grey);
-    font-size: 14px;
-    line-height: 20px;
-  }
-  
-  /* ============================================
-     PART 1: HERO SECTION
-     ============================================ */
-  
-  .tg-top {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    justify-content: center;
-    width: 100%;
-    box-sizing: border-box;
-    overflow: hidden;
-    min-height: 335px;
-  }
-  
-  /* --- Left Side: Image --- */
-  .tg-hero {
-    flex: 0 0 50%;
-    max-width: 50%;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px 40px 20px 20px;
-    box-sizing: border-box;
-    overflow: hidden;
-    /* FIX: Background removed (default white/transparent) */
-    background-color: transparent; 
-  }
-  
-  .tg-hero picture,
-  .tg-hero img {
-    display: block;
-    width: auto;
-    max-width: 100%;
-    height: auto;
-    max-height: 100%;
-    object-fit: contain;
-  }
-  
-  /* --- Right Side: Text --- */
-  .tg-copy {
-    flex: 0 0 50%;
-    max-width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 40px;
-    padding-left: 60px;
-    box-sizing: border-box;
-    font-family: var(--tg-font-body);
-    color: var(--tg-text-grey);
-  }
-  
-  .tg-title {
-    margin: 0 0 15px 0;
-    font-size: 32px;
-    line-height: 1.1;
-    font-weight: 400;
-    text-transform: uppercase;
-    font-family: var(--tg-font-title);
-    color: #4a4a4a;
-  }
-  
-  .tg-desc {
-    margin: 0 0 20px 0;
-    font-size: 16px;
-    line-height: 1.5;
-    max-width: 450px;
-  }
-  
-  /* Red CTA Button (Hero) */
-  .tg-primary-cta {
-    display: inline-block;
-    padding: 12px 24px;
-    background-color: var(--tg-red);
-    border: 2px solid var(--tg-red);
-    color: #ffffff !important;
-    font-family: var(--tg-font-title);
-    font-size: 16px;
-    text-transform: uppercase;
-    text-decoration: none;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background-color 0.3s ease-in-out;
-    text-align: center;
-  }
-  
-  .tg-primary-cta:hover {
-    background-color: var(--tg-red-hover);
-    border-color: var(--tg-red-hover);
-  }
-  
-  /* ============================================
-     PART 2: STORE BAR (THE TOGGLE)
-     ============================================ */
-  
-  .tg-store-wrapper {
-    width: 100%;
-    display: block;
-    padding: 14px 0;
-    background: transparent;
-    padding-left: 20px;
-    padding-right: 20px;
-    box-sizing: border-box;
-  }
-  
-  .tg-store-bar-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    cursor: pointer;
-    padding: 10px 0;
-    user-select: none; 
-  }
-  
-  /* Icon Wrapper */
-  .icon-location-wrapper {
-    display: inline-flex;
-    align-items: center;
-  }
-  
-  .icon-location-wrapper img,
-  .icon-location-wrapper svg {
-    width: 20px;
-    height: 20px;
-    filter: brightness(0) saturate(100%) invert(23%) sepia(95%) saturate(6247%) hue-rotate(356deg) brightness(92%) contrast(98%);
-  }
-  
-  .tg-store-bar {
-    text-align: center;
-    color: var(--tg-text-dark);
-    font-size: 16px;
-    text-transform: uppercase;
-  }
-  
-  .tg-store-bar strong {
-    font-family: var(--tg-font-title);
-    font-weight: 700;
-  }
-  
-  .tg-arrow-icon {
-    display: inline-block;
-    margin-left: 8px;
-    font-size: 14px;
-    color: var(--tg-red);
-    transition: transform 0.3s ease;
-  }
-  
-  /* --- TOGGLE STATE CLASSES --- */
-  .tg-bar-state-close { display: none; font-weight: 700; font-family: var(--tg-font-title); }
-  .tg-bar-state-info { display: inline; }
-  
-  .tire-guide.tg-store-open .tg-arrow-icon { transform: rotate(180deg); }
-  .tire-guide.tg-store-open .icon-location-wrapper { display: none; }
-  .tire-guide.tg-store-open .tg-bar-state-info { display: none; }
-  .tire-guide.tg-store-open .tg-bar-state-close { display: inline; }
-  
-  
-  /* ============================================
-     PART 3: EXPANDED PANEL
-     ============================================ */
-  
-  .tg-store-panel {
-    display: none;
-    /* No line below "CLOSE" */
-    border-top: none; 
-    padding: 30px 40px 40px 40px; 
-    width: 100%;
-    gap: 40px;
-    align-items: stretch;
-    justify-content: space-between;
-    box-sizing: border-box;
-    background-color: var(--tg-bg-container); 
-  }
-  
-  .tire-guide.tg-store-open .tg-store-panel {
-    display: flex; 
-    flex-direction: row;
-  }
-  
-  /* --- Left Side Text Columns --- */
-  .tg-store-info {
-    flex: 1 1 60%;
-    display: flex;
-    justify-content: space-between;
-    gap: 30px;
-  }
-  
-  .tg-col-contact {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  /* 1. "YOUR NEAREST STORE:" */
-  .tg-store-label {
-    display: block;
-    font-family: var(--tg-font-title);
-    font-weight: 700; 
-    font-size: 30px;  
-    line-height: 30px;
-    color: var(--tg-text-black);
-    margin: 0 0 22px 0;
-    text-transform: uppercase;
-    white-space: nowrap; 
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  
-  /* 2. PHONE NUMBER */
-  .tg-store-phone {
-    display: block;
-    font-family: var(--tg-font-title);
-    font-weight: 700;
-    font-size: 32px;  
-    line-height: 1; 
-    color: var(--tg-red); 
-    margin: 0 0 22px 0;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  
-  /* 3. ADDRESS BLOCK */
-  .tg-address-block {
+  .tg-hero, 
+  .tg-copy { 
+    float: none; /* Disable floats on mobile */
+    flex: 0 0 100%; 
     width: 100%; 
-    max-width: 350px; 
-    margin-bottom: 10px; 
+    max-width: 100%; 
+    height: auto; 
+    padding: 30px 20px; 
   }
   
-  .tg-address-block p, 
-  .tg-addr-line,
-  .tg-address-block div {
-    font-family: var(--tg-font-body);
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-    color: var(--tg-text-grey);
-    margin: 0;
-    display: block;
-    background: none !important; 
-    padding: 0 !important;
-    border: none !important;
-    text-decoration: none !important;
+  .tg-hero { margin-bottom: 0; height: 300px; }
+  
+  .tg-copy { 
+    align-items: center; 
+    text-align: center; 
+    margin-bottom: 30px; 
+    padding-left: 20px; 
   }
   
-  /* 4. LINKS */
-  .tg-store-links {
-    display: block;
-    margin-top: auto; 
-    margin-bottom: 22px; 
+  .tg-title { font-size: 24px; }
+  .tg-desc { font-size: 16px; }
+  .tg-primary-cta { width: 100%; max-width: 300px; }
+
+  .tg-store-info { flex-direction: column; gap: 30px; }
+  
+  .tg-col-hours { 
+    padding-left: 0; 
+    padding-top: 25px; 
+    border-top: 1px solid #dcdcdc; 
   }
   
-  .tg-store-links a {
-    display: inline;
-    font-family: var(--tg-font-body);
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-    color: var(--tg-red); 
-    text-decoration: underline;
-    text-decoration-color: var(--tg-red);
-    margin-right: 20px;
-    cursor: pointer;
-  }
-  .tg-store-links a:hover { text-decoration: none; }
+  .tg-col-hours::before { display: none; }
   
-  /* 5. BLUE BUTTON */
-  .tg-secondary-cta {
-    display: inline-block;
-    box-sizing: border-box;
-    background-color: var(--tg-blue-cta-bg); 
-    color: #ffffff !important;
-    border: 2px solid var(--tg-blue-cta-border);
-    font-family: var(--tg-font-title);
-    font-size: 19px;
-    font-weight: 400;
-    line-height: 20.9px;
-    text-align: center;
-    text-transform: uppercase;
-    text-decoration: none;
-    
-    width: auto;
-    min-width: 0;
-    padding: 10px 18px;
-    
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-  }
-  .tg-secondary-cta:hover { background-color: var(--tg-blue-cta-border); }
+  .tg-address-block { max-width: 100%; }
+  .tg-secondary-cta { width: 100%; }
+  .tg-store-map { height: 250px; }
   
-  /* --- Column 2: Hours (Grid Layout + 140px Line) --- */
-  .tg-col-hours {
-    flex: 0 0 40%;
-    display: flex;
-    flex-direction: column;
-    padding-left: 30px;
-    padding-top: 52px;
-    position: relative;
-    border-left: none;
-  }
-  
-  /* Custom 140px Vertical Line */
-  .tg-col-hours::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 55px; /* Aligns with Store Hours text */
-    width: 1px;
-    height: 140px; 
-    background-color: #dcdcdc;
-  }
-  
-  .tg-hours-title {
-    font-family: var(--tg-font-body);
-    font-size: 16px;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin: 0 0 10px;
-    color: var(--tg-text-black);
-  }
-  
-  .tg-hours-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  /* Flex Row for each hour entry */
-  .tg-hour-row {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    margin-bottom: 2px;
-    
-    font-family: var(--tg-font-body);
-    font-size: 14px;
-    line-height: 1.6;
-    color: var(--tg-text-light-grey);
-  }
-  
-  /* The Day Label */
-  .tg-day {
-    width: 115px; 
-    flex-shrink: 0;
-    font-weight: 500;
-  }
-  
-  /* The Time Value */
-  .tg-time {
-    flex-grow: 1;
-  }
-  
-  /* Red Holiday Text */
-  .tg-hour-row.tg-holiday .tg-day,
-  .tg-hour-row.tg-holiday .tg-time {
-    color: var(--tg-red);
-  }
-  
-  /* DIRECTIONS */
-  .tg-directions {
-    display: inline;
-    box-sizing: border-box;
-    
-    font-family: var(--tg-font-title);
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 25.7143px;
-    color: rgb(51, 51, 51) !important; 
-    text-transform: uppercase;
-    text-decoration: none;
-    cursor: pointer;
-    
-    margin-top: auto;
-    padding-top: 20px;
-  }
-  
-  .tg-directions:hover {
-    text-decoration: underline;
-    text-decoration-color: rgb(51, 51, 51);
-  }
-  
-  .tg-directions::after {
-    content: '\203A'; 
-    color: var(--tg-red);
-    font-size: 24px;
-    line-height: 18px;
-    margin-left: 5px;
-    font-weight: bold;
-    transform: translateY(-2px); 
-    display: inline-block; 
-    text-decoration: none;
-  }
-  
-  /* --- Right Side: Map --- */
-  .tg-store-map {
-    flex: 1 1 35%;
-    min-height: 300px;
-    position: relative;
-  }
-  
-  .tg-store-map img,
-  .tg-store-map picture {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border: 1px solid #ddd;
-  }
-  
-  /* ============================================
-     RESPONSIVE QUERIES
-     ============================================ */
-  
-  /* Tablet / Small Laptop */
-  @media (max-width: 1024px) {
-    .tire-guide { padding: 0 20px; }
-    .tire-guide.tg-store-open .tg-store-panel { flex-wrap: wrap; padding: 30px 20px; }
-    .tg-store-info { flex: 0 0 100%; margin-bottom: 30px; }
-    .tg-store-map { flex: 0 0 100%; height: 350px; }
-  }
-  
-  /* Mobile */
-  @media (max-width: 767px) {
-    .tg-top { flex-direction: column; height: auto; }
-    
-    .tg-hero, 
-    .tg-copy { 
-      flex: 0 0 100%; 
-      width: 100%; 
-      max-width: 100%; 
-      height: auto; 
-      padding: 30px 20px; 
-    }
-    
-    .tg-hero { margin-bottom: 0; height: 300px; }
-    
-    .tg-copy { 
-      align-items: center; 
-      text-align: center; 
-      margin-bottom: 30px; 
-      padding-left: 20px; 
-    }
-    
-    .tg-title { font-size: 24px; }
-    .tg-desc { font-size: 16px; }
-    .tg-primary-cta { width: 100%; max-width: 300px; }
-  
-    .tg-store-info { flex-direction: column; gap: 30px; }
-    
-    .tg-col-hours { 
-      padding-left: 0; 
-      padding-top: 25px; 
-      border-top: 1px solid #dcdcdc; 
-    }
-    
-    .tg-col-hours::before { display: none; }
-    
-    .tg-address-block { max-width: 100%; }
-    .tg-secondary-cta { width: 100%; }
-    .tg-store-map { height: 250px; }
-    
-    .tg-store-label { white-space: normal; } 
-  }
+  .tg-store-label { white-space: normal; } 
+}
