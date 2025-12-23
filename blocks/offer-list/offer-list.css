@@ -60,10 +60,15 @@
   flex-direction: column;
 }
 
-.offer-list-left img {
+/* LIGHTHOUSE FIX: 
+   Use 'cover' to maintain aspect ratio. 
+   'object-position: left' ensures the left border (red line) is never cropped out.
+*/
+.offer-list-stacked-item img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; 
+  object-position: left center; /* <--- THIS IS THE FIX */
   display: block;
 }
 
