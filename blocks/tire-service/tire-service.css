@@ -279,19 +279,29 @@
     opacity: 1; 
   }
   
-  /* CARD 1: Tire Advisor */
-  .feature-0 .ts-feature-image { width: 65%; }
+/* CARD 1: Tire Advisor */
+/* CARD 1: Tire Advisor */
+.feature-0 .ts-feature-image { 
+  width: 100%;
   
-  .feature-0 .ts-bg-img img {
-    object-position: center right;
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 60%);
-    mask-image: linear-gradient(to right, transparent 0%, black 60%);
-    opacity: 1; 
-  }
+  /* UPDATED: Moves the image container down by 30px */
+  top: 30px; 
+  height: calc(100% - 30px);
+}
+
+.feature-0 .ts-bg-img img {
+  object-position: center right;
+  -webkit-mask-image: none; 
+  mask-image: none;
+  opacity: 1; 
+}
   
   /* CARD 2: Financing */
-  .feature-1 .ts-feature-image { width: 100%; }
-  .feature-1 .ts-bg-img img { opacity: 0.3; }
+  /* CARD 2: Financing */
+.feature-1 .ts-feature-image { width: 100%; }
+
+/* UPDATED: Increased opacity from 0.3 to 0.85 so the image texture is visible */
+.feature-1 .ts-bg-img img { opacity: 0.85; }
   
   /* UPDATED: Credit Card Overlay - Specific Positioning */
   .ts-overlay-img {
