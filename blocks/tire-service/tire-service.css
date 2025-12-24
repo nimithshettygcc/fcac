@@ -184,7 +184,7 @@
     color: #fff;
     min-height: 350px;
     display: flex;
-    overflow: hidden; 
+    overflow: visible; 
   }
   
   /* TEXT WRAPPER */
@@ -217,7 +217,7 @@
   .feature-0 .ts-feature-text h3 { max-width: 480px; }
   .feature-1 .ts-feature-text h3 { max-width: 580px; }
   
-  /* --- DESCRIPTION STYLES (UPDATED WIDTH) --- */
+  /* --- DESCRIPTION STYLES --- */
   .ts-feature-text p {
     box-sizing: border-box;
     display: block;
@@ -228,11 +228,8 @@
     margin: 14px 0;
     color: #ffffff;
     text-align: left;
-    
-    /* UPDATED: Fixed width */
     width: 242px;
     max-width: none;
-    
     overflow-wrap: break-word;
   }
   
@@ -272,6 +269,7 @@
     right: 0;
     height: 100%;
     z-index: 1;
+    overflow: visible;
   }
   
   .ts-bg-img img {
@@ -295,19 +293,22 @@
   .feature-1 .ts-feature-image { width: 100%; }
   .feature-1 .ts-bg-img img { opacity: 0.3; }
   
-  /* Credit Card Overlay */
+  /* UPDATED: Credit Card Overlay - Rotated right */
   .ts-overlay-img {
     position: absolute;
-    bottom: 20px; 
-    right: 20px; 
-    width: 45%;
+    bottom: 21px;  
+    right: -20px;
+    width: 56%;    
     z-index: 5;
   }
   
   .ts-overlay-img img {
     width: 100%;
     height: auto;
-    transform: rotate(-15deg);
+    
+    /* UPDATED: Changed rotation to positive 15deg */
+    transform: rotate(15deg);
+    
     display: block;
     filter: drop-shadow(0 10px 15px rgba(0,0,0,0.4));
   }
@@ -333,11 +334,15 @@
         mask-image: linear-gradient(to bottom, transparent 0%, black 80%);
     }
     
-    .ts-overlay-img { bottom: 10px; right: 10px; }
+    /* On smaller screens, bring it back in or adjust as needed */
+    .ts-overlay-img { bottom: 0px; right: 0px; width: 40%; }
   }
   
   @media (max-width: 767px) {
     .ts-card { flex: 0 0 100%; margin-bottom: 20px; }
     .ts-nav { flex-direction: column; gap: 5px; }
     .ts-sep { display: none; }
+    
+    /* Further adjustment for mobile */
+    .ts-overlay-img { bottom: -20px; right: -10px; width: 50%; }
   }
