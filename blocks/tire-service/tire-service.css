@@ -293,12 +293,12 @@
   .feature-1 .ts-feature-image { width: 100%; }
   .feature-1 .ts-bg-img img { opacity: 0.3; }
   
-  /* UPDATED: Credit Card Overlay - Rotated right */
+  /* UPDATED: Credit Card Overlay - Specific Positioning */
   .ts-overlay-img {
     position: absolute;
-    bottom: 21px;  
-    right: -20px;
-    width: 56%;    
+    bottom: 3px;    /* Matches provided style */
+    right: -30px;   /* Matches provided style */
+    width: 60%;     /* Matches provided style */
     z-index: 5;
   }
   
@@ -306,8 +306,8 @@
     width: 100%;
     height: auto;
     
-    /* UPDATED: Changed rotation to positive 15deg */
-    transform: rotate(15deg);
+    /* UPDATED: Matches provided style */
+    transform: rotate(-2deg);
     
     display: block;
     filter: drop-shadow(0 10px 15px rgba(0,0,0,0.4));
