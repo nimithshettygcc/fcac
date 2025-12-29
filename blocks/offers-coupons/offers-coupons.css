@@ -466,6 +466,7 @@
     text-decoration: underline;
     text-decoration-color: #000 !important;
     cursor: pointer;
+    font-weight: 600;
   }
 
   .oc-details-cta:hover {
