@@ -2,7 +2,6 @@ export default async function decorate(block) {
   // 1. SETUP
   const rows = [...block.children];
   const titleText = rows[0]?.textContent.trim();
-  const linkRow = rows[1]?.querySelector('a');
   
   // Force MockAPI URL (Prevents CORS errors)
   const apiUrl = 'https://674422deb4e2e04abea0f2ee.mockapi.io/api/v1/offers-coupons';
@@ -209,30 +208,32 @@ export default async function decorate(block) {
         const expiryIconSrc = `/icons/offer-expire-icon.svg`;
 
         card.innerHTML = `
-          <div class="oc-card-red-top"></div>
-          <div class="oc-icon-wrapper">
-            <img src="${iconSrc}" alt="icon" onerror="this.src='${fallbackIcon}'; this.onerror=null;">
-          </div>
-          <div class="oc-content-top">
-            <span class="oc-eyebrow">${titleSmall}</span>
-            <h3 class="oc-price">${price}</h3>
-            <p class="oc-desc">${desc}</p>
-            ${details ? `<p class="oc-details">${details}</p>` : ''}
-          </div>
-          <div class="oc-separator-container">
-            <div class="oc-cutout-left"></div>
-            <div class="oc-line"></div>
-            <div class="oc-cutout-right"></div>
-          </div>
-          <div class="oc-content-bottom">
-            <div class="oc-btn-group">
-              <button class="oc-btn-red">SEND TO ME</button>
-              <button class="oc-btn-white">PRINT</button>
+          <div class="oc-icon-ribbon"></div>
+          <div class="oc-container-inner">
+            <div class="oc-icon-arc">
+              <img src="${iconSrc}" alt="icon" class="oc-icon" onerror="this.src='${fallbackIcon}'; this.onerror=null;">
             </div>
-            <a href="#" class="oc-details-link">SEE DETAILS</a>
-            <div class="oc-expiry">
-              <img src="${expiryIconSrc}" alt="clock" class="oc-expiry-icon" onerror="this.style.display='none'">
-              Exp. ${expiry} <strong>(${daysLeft})</strong>
+            <div class="oc-body-wrap">
+              <div class="oc-body-copy">
+                <h2 class="oc-title">${titleSmall}</h2>
+                <h2 class="oc-discount-copy">${price}</h2>
+                <h2 class="oc-subtitle">${desc}</h2>
+                ${details ? `<h3 class="oc-summary">${details}</h3>` : ''}
+              </div>
+            </div>
+            <div class="oc-separator"></div>
+            <div class="oc-footer-wrap">
+              <div class="oc-ctas">
+                <button class="oc-phone-cta">Send to Me</button>
+                <button class="oc-print-cta">Print</button>
+              </div>
+              <div class="oc-footer-copy">
+                <a href="#" class="oc-details-cta">See Details</a>
+                <div class="oc-expiry-wrap">
+                  <img src="${expiryIconSrc}" alt="clock" class="oc-expiry-icon" onerror="this.style.display='none'">
+                  <span class="oc-expiry-date">Exp. ${expiry} <span>(${daysLeft})</span></span>
+                </div>
+              </div>
             </div>
           </div>
         `;

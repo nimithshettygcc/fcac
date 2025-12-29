@@ -3,12 +3,18 @@
    ========================================= */
    :root {
     --oc-red: #d81e05;
-    --oc-red-hover: #b41904;
+    --oc-red-hover: #b81a05;
     --oc-black: #000;
     --oc-grey: #333;
     --oc-light-grey: #f5f5f5;
     --oc-font-title: 'Ultramagnetic', Arial, sans-serif;
     --oc-font-body: 'Avenir', Arial, sans-serif;
+    --brand-color-red: #d81e05;
+    --white: #fff;
+    --black: #000;
+    --dark-gray: #333;
+    --light-gray: #d6d6d6;
+    --shadow-gray: #e8e8e8;
   }
   
   .offers-coupons-container {
@@ -173,246 +179,326 @@
   }
   
   /* =========================================
-     CARD DESIGN
+     CARD DESIGN - Matching Main Site
      ========================================= */
   .oc-card {
-    flex: 0 0 272.5px;
-    height: 446.125px;
-    background: #fff;
-    border-radius: 10px; 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     position: relative;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    overflow: hidden; 
+    flex: 0 0 272.5px;
+    margin: 35px auto;
+    min-width: 270px;
+    max-width: 395px;
     cursor: pointer;
-    
-    background: 
-      radial-gradient(circle at 50% 60px, transparent 35px, #d81e05 36px),
-      linear-gradient(to bottom, #d81e05 0%, #d81e05 70px, transparent 70px),
-      linear-gradient(to bottom, #fff 0%, #fff 100%);
-    background-repeat: no-repeat;
-    /* Removed transition to stop jumping */
   }
-  
-  .oc-icon-wrapper {
-    width: 60px;
-    height: 60px;
-    background-color: #fff;
-    border: 4px solid var(--oc-red);
-    border-radius: 50%;
+
+  /* Icon Ribbon - red horizontal bar at top */
+  .oc-icon-ribbon {
+    background-color: var(--oc-red);
     position: absolute;
-    top: 25px; 
+    width: 100%;
+    transform: scale(0.85);
+    height: 70px;
+    z-index: 0;
+    top: -34px;
+    left: 0;
+    text-align: center;
+    border-radius: 10px;
+  }
+
+  /* Inner Container */
+  .oc-container-inner {
+    position: relative;
+    z-index: 0;
+  }
+
+  /* Icon Arc - semi-circular red element overlapping ribbon */
+  .oc-icon-arc {
+    position: absolute;
+    width: 80px;
+    height: 60px;
+    background: var(--oc-red);
     left: 50%;
     transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
-  }
-  
-  .oc-icon-wrapper img {
-    width: 30px;
-    height: 30px;
-    object-fit: contain;
-  }
-  
-  .oc-content-top {
-    margin-top: 70px; 
-    padding: 30px 20px 0 20px;
-    flex-grow: 1;
-    position: relative;
+    top: -29px;
     z-index: 1;
-    background: #fff;
+    border-radius: 50%;
+    overflow: visible;
   }
-  
-  .oc-eyebrow {
-    display: block;
-    font-family: var(--oc-font-title);
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-    text-transform: uppercase;
-    color: #000;
-    margin: 0 0 5px 0;
-    padding: 0 10px;
-    text-align: center;
-  }
-  
-  .oc-price {
-    font-family: var(--oc-font-title);
-    color: rgb(216, 30, 5);
-    font-size: 30px;
-    font-weight: 400;
-    line-height: 33px;
-    text-transform: uppercase;
-    margin: 0 0 5px 0;
-    padding: 0 10px;
-    text-align: center;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    word-break: break-word;
-  }
-  
-  .oc-desc {
-    font-family: var(--oc-font-title);
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 20px;
-    text-transform: uppercase;
-    color: #000;
-    text-align: center;
-    margin: 0 0 5px 0;
-    padding: 0 10px;
-  }
-  
-  .oc-details {
-    font-family: var(--oc-font-body);
-    color: rgb(0, 0, 0);
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 15.4px;
-    text-transform: none;
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 0;
-    padding-bottom: 20px;
-  }
-  
-  .oc-separator-container {
-    height: 20px;
-    position: relative;
-    width: 100%;
-    background: #fff;
+
+  /* Icon - positioned inside the arc */
+  .oc-icon {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 7px;
+    filter: invert(100%);
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
     z-index: 2;
   }
-  
-  .oc-line {
-    position: absolute;
-    top: 50%;
-    left: 20px;
-    right: 20px;
-    border-top: 2px dashed #ccc;
-  }
-  
-  .oc-cutout-left {
-    position: absolute;
-    top: 0;
-    left: -10px;
-    width: 20px;
-    height: 20px;
-    background-color: #fff; 
-    border-radius: 50%;
-    box-shadow: inset -2px 0 3px rgba(0,0,0,0.05); 
-  }
-  
-  .oc-cutout-right {
-    position: absolute;
-    top: 0;
-    right: -10px;
-    width: 20px;
-    height: 20px;
-    background-color: #fff; 
-    border-radius: 50%;
-    box-shadow: inset 2px 0 3px rgba(0,0,0,0.05);
-  }
-  
-  .oc-content-bottom {
-    padding: 0 20px 20px 20px;
+
+  /* Body Wrap - white card body */
+  .oc-body-wrap {
+    background-color: #fff;
+    border-radius: 7px;
+    text-align: center;
+    border: 1px solid #d6d6d6;
+    z-index: 0;
+    padding: 0 15px;
+    box-shadow: 1px 6px 10px -1px #e8e8e8;
+    position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background: #fff;
+    justify-content: flex-end;
+    min-height: 120px;
+    border-bottom-color: #fff;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    overflow: visible;
   }
-  
-  .oc-btn-group {
-    display: flex;
-    gap: 10px;
-    width: 100%;
-    margin-bottom: 5px; 
+
+  /* Body Copy */
+  .oc-body-copy {
+    padding-top: 40px;
+    position: relative;
+    z-index: 0;
   }
-  
-  .oc-btn-red,
-  .oc-btn-white {
-    flex: 1;
-    padding: 12px 0;
+
+  /* Title */
+  .oc-title {
+    margin: 0;
+    font-size: 14px;
+    margin-bottom: 5px;
+    text-align: center;
+    line-height: 20px;
+    padding: 0 10px;
+    font-family: var(--oc-font-body);
+    font-weight: 400;
+    text-transform: none;
+    color: #000;
+  }
+
+  /* Discount Copy - large red price */
+  .oc-discount-copy {
+    color: var(--oc-red);
+    margin: 0;
+    margin-bottom: 5px;
+    font-size: 30px;
+    padding: 0 10px;
+    overflow: hidden;
+    word-break: break-word;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     font-family: var(--oc-font-title);
     font-weight: 700;
-    font-size: 13px;
     text-transform: uppercase;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background 0.3s;
-    outline: none;
   }
-  
-  .oc-btn-red {
-    background-color: var(--oc-red);
-    color: #fff;
-    border: none;
-  }
-  .oc-btn-red:hover { background-color: var(--oc-red-hover); }
-  
-  .oc-btn-white {
-    background-color: #fff;
-    color: #000;
-    border: 1px solid #ccc;
-  }
-  .oc-btn-white:hover { border-color: #000; }
-  
-  .oc-details-link,
-  .oc-details-link:link,
-  .oc-details-link:visited,
-  .oc-details-link:active,
-  .oc-details-link:focus {
-    font-family: 'AvenirHeavy', Arial, sans-serif;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 17.14px;
-    color: #000 !important;
-    text-decoration: underline !important;
-    text-decoration-color: #000 !important;
-    text-transform: uppercase;
+
+  /* Subtitle */
+  .oc-subtitle {
+    margin: 0;
+    font-size: 14px;
+    margin-bottom: 5px;
     text-align: center;
-    cursor: pointer;
-    display: inline-block;
+    line-height: 20px;
+    padding: 0 10px;
+    font-family: var(--oc-font-title);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #000;
+  }
+
+  /* Summary */
+  .oc-summary {
+    margin: 0;
+    padding-bottom: 20px;
+    font-size: 14px;
+    text-transform: none;
+    font-family: var(--oc-font-body);
     margin-top: 10px;
-    margin-bottom: 13px;
-    background: none !important;
-    transition: color 0.3s, text-decoration-color 0.3s;
+    color: #000;
+  }
+
+  /* Separator - dashed line with cutouts */
+  .oc-separator {
+    margin: -1px 10px;
+    height: 20px;
+    background: repeating-linear-gradient(to right, #cccccc 0, #cccccc 10px, transparent 10px, transparent 15px) bottom;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    position: relative;
+    background-position: 50%;
+    background-color: #fff;
+  }
+
+  .oc-separator::before,
+  .oc-separator::after {
+    box-sizing: border-box;
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 5px solid #fff;
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: inset 0 0 0 1.3px #cccccc;
+    z-index: 2;
+  }
+
+  .oc-separator::before {
+    left: -24px;
+    clip: rect(0px, auto, auto, 15px);
+    top: -5px;
+  }
+
+  .oc-separator::after {
+    right: -24px;
+    clip: rect(15px, auto, auto, 0px);
+    top: -5px;
+    transform: rotate(90deg);
+  }
+
+  /* Footer Wrap */
+  .oc-footer-wrap {
+    background-color: #fff;
+    border-radius: 7px;
+    text-align: center;
+    border: 1px solid #d6d6d6;
+    z-index: 0;
+    padding: 0 15px;
+    box-shadow: 1px 6px 10px -1px #e8e8e8;
+    border-top-color: #fff;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  /* CTAs Container */
+  .oc-ctas {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  /* Phone CTA and Print CTA - Base Styles */
+  .oc-phone-cta,
+  .oc-print-cta {
+    text-decoration: none;
+    padding: 17px 5px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-family: var(--oc-font-title);
+    flex: 1;
+    font-size: 12px;
+    cursor: pointer;
+    border: 2px solid;
+    box-sizing: border-box;
+    min-width: 0;
+  }
+
+  /* Phone CTA - Red button with white text */
+  .oc-phone-cta {
+    background: var(--oc-red);
+    color: #fff !important;
+    border-color: var(--oc-red);
+    box-sizing: border-box;
+  }
+
+  @media only screen and (min-width: 701px) {
+    .oc-phone-cta,
+    .oc-print-cta {
+      font-size: 10px;
+    }
+  }
+
+  @media only screen and (min-width: 768px) {
+    .oc-phone-cta,
+    .oc-print-cta {
+      font-size: 12px;
+    }
+  }
+
+  /* Phone CTA Hover */
+  .oc-phone-cta:hover,
+  .oc-phone-cta:active {
+    background-color: #b81a05;
+    border-color: #b81a05;
+    color: #fff !important;
+    text-decoration: none !important;
+  }
+
+  /* Print CTA - White button with black text */
+  .oc-print-cta {
+    border: 2px solid #d6d6d6;
+    background: #fff;
+    color: #000 !important;
+    box-sizing: border-box;
+  }
+
+  .oc-print-cta:hover,
+  .oc-print-cta:active {
+    background-color: #e6e6e6;
+    border-color: #e6e6e6;
+    color: #000 !important;
+    text-decoration: none !important;
   }
   
-  .oc-details-link:hover {
+  /* Footer Copy */
+  .oc-footer-copy {
+    /* Additional styles if needed */
+  }
+
+  /* Details CTA */
+  .oc-details-cta,
+  .oc-details-cta:link,
+  .oc-details-cta:visited,
+  .oc-details-cta:active {
+    text-transform: uppercase;
+    color: #000 !important;
+    font-size: 12px;
+    font-family: 'AvenirHeavy', Arial, sans-serif;
+    margin-top: 10px;
+    display: inline-block;
+    margin-bottom: 13px;
+    text-decoration: underline;
+    text-decoration-color: #000 !important;
+    cursor: pointer;
+  }
+
+  .oc-details-cta:hover {
     color: var(--oc-red) !important;
     text-decoration-color: var(--oc-red) !important;
   }
-  
-  .oc-expiry {
+
+  /* Expiry Wrap */
+  .oc-expiry-wrap {
+    font-size: 12px;
+    font-style: italic;
+    color: #000;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
-    font-family: var(--oc-font-body);
-    font-size: 12px;
-    font-style: italic; 
-    font-weight: 400;   
-    color: #000;
     padding-bottom: 10px;
   }
-  
+
   .oc-expiry-icon {
-    width: 13px;  
-    height: 13px;
+    margin-right: 5px;
+    width: 16px;
+    height: 16px;
     object-fit: contain;
   }
-  
-  .oc-expiry strong {
-    font-weight: 700;
+
+  .oc-expiry-date {
     font-style: italic;
+    color: #000;
+  }
+
+  .oc-expiry-date span {
+    font-family: 'AvenirHeavy', Arial, sans-serif;
+    font-weight: 600;
   }
   
   /* =========================================
