@@ -14,8 +14,8 @@
     width: 100%;
     box-sizing: border-box;
     background-color: #fff;
-    padding-top: 50px; 
-    padding-bottom: 50px;
+    padding-top: 0px; 
+    padding-bottom: 0px;
   }
   
   /* 2. INNER WRAPPER */
@@ -28,58 +28,76 @@
     font-family: var(--art-font-body);
     color: rgb(51, 51, 51);
     box-sizing: border-box;
-    min-height: 588px;
+    padding-top: 0px;
+    
+    /* UPDATED: Reduced padding bottom */
+    padding-bottom: 45px; 
+    
+    min-height: auto; 
   }
   
   /* =========================================
-     HEADER SECTION
+      HEADER SECTION
      ========================================= */
   .articles-header {
     box-sizing: border-box;
     width: 100%;
-    border-top: 4px solid var(--art-red);
+    max-width: 1141px;
+    margin: 0 auto 25px auto; 
+    border-top: 4px solid rgb(216, 30, 5);
     padding-top: 7px;
-    margin-bottom: 25px;
     display: block;
   }
   
   .articles-title {
-    font-family: var(--art-font-body);
+    font-family: 'AvenirHeavy', 'Avenir', Arial, sans-serif;
     font-weight: 900; 
     font-size: 20px;
     line-height: 22px;
+    letter-spacing: 2px;
     color: rgb(0, 0, 0);
     text-transform: uppercase;
-    letter-spacing: 2px;
     text-align: left;
     margin: 0;
   }
   
   /* =========================================
-     GRID LAYOUT
+      GRID LAYOUT
      ========================================= */
   .articles-grid {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    gap: 30px;
-    margin-bottom: 40px; 
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 25px; 
   }
   
   /* =========================================
-     ARTICLE CARD
+      ARTICLE CARD
      ========================================= */
   .article-card {
-    flex: 1;
+    width: 367px;
+    flex: 0 0 367px;
+    height: 440px; /* Fixed height for hover box */
+    
     display: flex;
     flex-direction: column;
-    text-decoration: none;
+    text-decoration: none !important;
     color: inherit;
     cursor: pointer;
+    margin: 0;
+    
+    /* Smooth transition */
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  /* Darker grey outline on hover */
+  .article-card:hover {
+     box-shadow: 0 0 0 2px #999999; 
   }
   
   .article-card:hover .article-heading {
-    text-decoration: underline;
+    text-decoration: none !important;
   }
   
   .article-image {
@@ -87,8 +105,6 @@
     height: 270px;
     overflow: hidden;
     background-color: #f4f4f4;
-    
-    /* REDUCED GAP BELOW IMAGE */
     margin-bottom: 15px; 
   }
   
@@ -102,15 +118,13 @@
   .article-content {
     display: flex;
     flex-direction: column;
-    
-    /* REDUCED GAP BETWEEN CATEGORY AND TITLE */
     gap: 5px; 
   }
   
   .article-category {
     display: block;
     box-sizing: border-box;
-    font-family: var(--art-font-body); 
+    font-family: 'Avenir', Arial, sans-serif; 
     font-size: 11px;
     font-weight: 700;
     line-height: 15.7143px;
@@ -124,27 +138,35 @@
   .article-heading {
     display: block;
     box-sizing: border-box;
-    font-family: var(--art-font-body);
+    font-family: 'AvenirHeavy', 'Avenir', Arial, sans-serif;
     font-weight: 700;
     font-size: 22px;
     line-height: 28px;
     color: rgb(0, 0, 0);
     text-transform: capitalize;
     text-align: left;
+    max-width: 342px; 
     height: 84px; 
+    overflow: hidden;
     margin: 0;
     padding: 0;
-    overflow: hidden; 
+  }
+  
+  /* Specific fix for the 3rd card */
+  .article-card:nth-child(3) .article-heading {
+    max-width: 290px;
   }
   
   /* =========================================
-     BOTTOM BUTTON SECTION
+      BOTTOM BUTTON SECTION
      ========================================= */
   .articles-button-wrapper {
     width: 100%;
     display: flex;
     justify-content: center; 
-    margin-top: 10px;
+    
+    /* UPDATED: Reduced margin top */
+    margin-top: 20px;
   }
   
   .articles-view-more-btn {
@@ -152,10 +174,10 @@
     box-sizing: border-box;
     background-color: rgb(216, 30, 5);
     border: 2px solid rgb(216, 30, 5);
-    color: #fff !important; 
-    font-family: var(--art-font-title);
+    color: rgb(255, 255, 255) !important; 
+    font-family: 'Ultramagnetic', Arial, sans-serif;
     font-size: 19px;
-    font-weight: 700; 
+    font-weight: 400; 
     line-height: 20.9px;
     text-align: center;
     text-transform: uppercase;
@@ -173,12 +195,17 @@
   }
   
   /* =========================================
-     RESPONSIVE
+      RESPONSIVE
      ========================================= */
   @media (max-width: 900px) {
     .articles-grid {
       flex-direction: column;
       gap: 40px;
+    }
+    .article-card {
+        width: 100%;
+        height: auto; 
+        flex: 1;
     }
     .article-image {
       height: auto;
@@ -186,5 +213,14 @@
     }
     .article-heading {
       height: auto;
+      max-width: 100%;
+    }
+    .article-card:nth-child(3) .article-heading {
+      max-width: 100%; 
+    }
+    .articles-header {
+      max-width: 100%;
+      padding-left: 20px;
+      padding-right: 20px;
     }
   }

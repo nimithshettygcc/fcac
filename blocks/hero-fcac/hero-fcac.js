@@ -4,61 +4,63 @@ export default function decorate(block) {
     return;
   }
 
+  // --- FIX 1: Remove default margins from the parent section wrapper ---
+  const parentSection = block.closest('.section');
+  if (parentSection) {
+    parentSection.style.margin = '0';
+    parentSection.style.padding = '0';
+    parentSection.style.maxWidth = '100%';
+  }
+
   // Get all direct child divs (rows)
   const rows = [...block.children];
-  
+
   // Helper function to get text from first paragraph only
   const getFirstText = (row) => {
     const p = row?.querySelector('p');
     return p ? p.textContent.trim() : '';
   };
-  
+
   // Helper function to get link from row
   const getFirstLink = (row) => {
     const a = row?.querySelector('a');
     return a ? a.href : '#';
   };
-  
-  // Extract banner content (rows 0-5)
+
+  // Extract banner content
   const heading = getFirstText(rows[0]) || 'Cyber Monday Sale';
   const subheading = getFirstText(rows[1]) || 'Tire & Service Offers';
   const description = getFirstText(rows[2]) || '';
   const ctaLink = getFirstLink(rows[3]) || '#';
   const ctaText = getFirstText(rows[4]) || 'GET DETAILS';
   const heroPicture = rows[5]?.querySelector('picture');
-  
+
   // Row 6 contains ALL the nested content
   const nestedDivs = rows[6] ? [...rows[6].children] : [];
-  
+
   // Extract Shop Tires content
   const shopTiresTab = getFirstText(nestedDivs[0]) || 'SHOP TIRES';
   const byVehicleTab = getFirstText(nestedDivs[1]) || 'BY VEHICLE';
   const zipCode = getFirstText(nestedDivs[6]) || '37206';
   const getTirePricingBtn = getFirstText(nestedDivs[8]) || 'GET TIRE PRICING';
-  
+
   // Get Services tab
   const getServicesTab = getFirstText(nestedDivs[16]) || 'GET SERVICES';
-  
+
   // Service names and icons
   const oilChangeText = getFirstText(nestedDivs[17]) || 'OIL CHANGE';
   const oilChangeIcon = nestedDivs[19]?.querySelector('img')?.src || '';
-  
   const brakesText = getFirstText(nestedDivs[31]) || 'BRAKES';
   const brakesIcon = nestedDivs[32]?.querySelector('img')?.src || '';
-  
   const batteriesText = getFirstText(nestedDivs[44]) || 'BATTERIES';
   const batteriesIcon = nestedDivs[45]?.querySelector('img')?.src || '';
-  
   const alignmentText = getFirstText(nestedDivs[57]) || 'ALIGNMENT';
   const alignmentIcon = nestedDivs[58]?.querySelector('img')?.src || '';
-  
-  // Helper function to parse store hours text
+
+  // Helpers
   function parseStoreHours(hoursText) {
     if (!hoursText) return [];
-    
-    // Remove "Store Hours: Day(s) Hours " prefix
     const cleanText = hoursText.replace(/^Store Hours:\s*Day\(s\)\s*Hours\s*/i, '');
-    
     const hours = [];
     const patterns = [
       { match: /MON-FRI:\s*([\d:apm-]+)/i, day: 'MON-FRI:', special: false },
@@ -67,7 +69,6 @@ export default function decorate(block) {
       { match: /Christmas Eve:\s*([\d:apm-]+)/i, day: 'Christmas Eve:', special: true },
       { match: /Christmas:\s*(\w+)/i, day: 'Christmas:', special: true }
     ];
-    
     patterns.forEach((pattern) => {
       const match = cleanText.match(pattern.match);
       if (match) {
@@ -78,23 +79,16 @@ export default function decorate(block) {
         });
       }
     });
-    
     return hours;
   }
-  
-  // Helper function to parse address
+
   function parseAddress(addressText) {
     if (!addressText) return { lines: [], phone: '' };
-    
-    // Expected format: "406 Gallatin Ave Nashville, TN 615.823.6093"
     const phoneMatch = addressText.match(/(\d{3}[.\-]?\d{3}[.\-]?\d{4})/);
     const phone = phoneMatch ? phoneMatch[1] : '';
-    
     let address = addressText.replace(/\d{3}[.\-]?\d{3}[.\-]?\d{4}/, '').trim();
-    
     const parts = address.split(/(?=[A-Z][a-z]+,)/);
     const lines = [];
-    
     if (parts.length > 1) {
       lines.push(parts[0].trim());
       lines.push(parts[1].trim());
@@ -107,13 +101,12 @@ export default function decorate(block) {
         lines.push(address);
       }
     }
-    
     return { lines, phone };
   }
-  
-  // Extract service details data
+
   const serviceData = {
     oilChange: {
+      type: 'details',
       heading: getFirstText(nestedDivs[18]) || 'GET AN OIL CHANGE',
       storeLabel: getFirstText(nestedDivs[20]) || 'YOUR NEAREST STORE:',
       storeAddressRaw: getFirstText(nestedDivs[22]) || '',
@@ -127,6 +120,7 @@ export default function decorate(block) {
       appointmentText: getFirstText(nestedDivs[30]) || 'SCHEDULE AN APPOINTMENT',
     },
     brakes: {
+      type: 'details',
       heading: getFirstText(nestedDivs[33]) || 'SCHEDULE SERVICE',
       storeLabel: getFirstText(nestedDivs[34]) || 'YOUR NEAREST STORE:',
       storeAddressRaw: getFirstText(nestedDivs[35]) || '',
@@ -140,100 +134,83 @@ export default function decorate(block) {
       appointmentText: getFirstText(nestedDivs[43]) || 'SCHEDULE AN APPOINTMENT',
     },
     batteries: {
-      heading: getFirstText(nestedDivs[46]) || 'SCHEDULE SERVICE',
-      storeLabel: getFirstText(nestedDivs[47]) || 'YOUR NEAREST STORE:',
-      storeAddressRaw: getFirstText(nestedDivs[48]) || '',
-      storeMap: nestedDivs[49]?.querySelector('img')?.src || '',
-      storeHoursRaw: getFirstText(nestedDivs[50]) || '',
-      storeDetailsLink: getFirstLink(nestedDivs[51]) || '#',
-      storeDetailsText: getFirstText(nestedDivs[52]) || 'STORE DETAILS',
-      changeStoreLink: getFirstLink(nestedDivs[53]) || '#',
-      changeStoreText: getFirstText(nestedDivs[54]) || 'CHANGE STORE',
-      appointmentLink: getFirstLink(nestedDivs[55]) || '#',
-      appointmentText: getFirstText(nestedDivs[56]) || 'SCHEDULE AN APPOINTMENT',
+      type: 'form',
+      heading: 'SEARCH FOR BATTERIES',
+      buttonText: 'GET BATTERY PRICING',
+      btnId: 'batteries-submit-btn',
+      fourthField: 'Engine'
     },
+    // --- FIX 2: ALIGNMENT DATA MATCHING SCREENSHOT ---
     alignment: {
-      heading: 'ALIGNMENT SERVICE',
-      storeLabel: 'YOUR NEAREST STORE:',
-      storeAddressRaw: '406 Gallatin Ave Nashville, TN 615.823.6093',
-      storeMap: '',
-      storeHoursRaw:
-        'Store Hours: Day(s) Hours MON-FRI: 7:00am-7:00pm SAT: 7:00am-6:00pm SUN: 8:00am-5:00pm Christmas Eve: 8:00am-4:00pm Christmas: Closed',
-      storeDetailsLink: '#',
-      storeDetailsText: 'STORE DETAILS',
-      changeStoreLink: '#',
-      changeStoreText: 'CHANGE STORE',
-      appointmentLink: '#',
-      appointmentText: 'SCHEDULE AN APPOINTMENT',
+      type: 'form',
+      heading: 'ALIGNMENT SERVICE', // Matches red header in screenshot
+      buttonText: 'GET ALIGNMENT PRICING',
+      btnId: 'alignment-submit-btn',
+      fourthField: 'Submodel' // Matches 4th dropdown in screenshot
     },
   };
-  
+
   // Clear block
   block.innerHTML = '';
-  
+
   // Create main container
   const heroSection = document.createElement('section');
   heroSection.className = 'hero-fcac-section';
-  
-  // Create image wrap (background)
+
+  // Create image wrap
   const imageWrap = document.createElement('div');
   imageWrap.className = 'hero-image-wrap';
-  
   if (heroPicture) {
     const clonedPicture = heroPicture.cloneNode(true);
     imageWrap.appendChild(clonedPicture);
   }
-  
-  // Create widget wrap (overlay on left)
+
+  // Create widget wrap
   const widgetWrap = document.createElement('div');
   widgetWrap.className = 'hero-widget-wrap';
-  
-  // Create main tabs (top horizontal)
+
+  // Top Nav
   const topNav = document.createElement('div');
   topNav.className = 'hero-top-nav';
-  
   const topNavList = document.createElement('ul');
-  
+
   const shopTiresLi = document.createElement('li');
   shopTiresLi.className = 'shop-tires active';
   const shopTiresLink = document.createElement('a');
   shopTiresLink.href = '#';
   shopTiresLink.textContent = shopTiresTab;
   shopTiresLi.appendChild(shopTiresLink);
-  
+
   const getServicesLi = document.createElement('li');
   getServicesLi.className = 'get-services';
   const getServicesLink = document.createElement('a');
   getServicesLink.href = '#';
   getServicesLink.textContent = getServicesTab;
   getServicesLi.appendChild(getServicesLink);
-  
+
   topNavList.appendChild(shopTiresLi);
   topNavList.appendChild(getServicesLi);
   topNav.appendChild(topNavList);
-  
-  // Create tab navigation (left vertical - for Get Services)
+
+  // Tab Nav (Side)
   const tabNav = document.createElement('div');
   tabNav.className = 'hero-tab-nav';
   tabNav.style.display = 'none';
-  
   const tabNavList = document.createElement('ul');
-  
+
   const services = [
     { name: oilChangeText, icon: oilChangeIcon, key: 'oilChange', active: true },
     { name: brakesText, icon: brakesIcon, key: 'brakes' },
     { name: batteriesText, icon: batteriesIcon, key: 'batteries' },
     { name: alignmentText, icon: alignmentIcon, key: 'alignment' },
   ];
-  
+
   services.forEach((service) => {
     const serviceLi = document.createElement('li');
     if (service.active) serviceLi.className = 'active';
     serviceLi.dataset.service = service.key;
-    
     const serviceLink = document.createElement('a');
     serviceLink.href = '#';
-    
     if (service.icon) {
       const iconImg = document.createElement('img');
       iconImg.src = service.icon;
@@ -241,151 +218,89 @@ export default function decorate(block) {
       iconImg.alt = service.name;
       serviceLink.appendChild(iconImg);
     }
-    
     const textSpan = document.createElement('span');
     textSpan.textContent = service.name;
-    
     const arrowSpan = document.createElement('span');
     arrowSpan.innerHTML = '›';
     arrowSpan.style.fontSize = '24px';
-    
     serviceLink.appendChild(textSpan);
     serviceLink.appendChild(arrowSpan);
     serviceLi.appendChild(serviceLink);
     tabNavList.appendChild(serviceLi);
   });
-  
   tabNav.appendChild(tabNavList);
-  
-  // Create tab content (forms/content)
+
+  // Tab Content Area
   const tabContent = document.createElement('div');
   tabContent.className = 'hero-tab-content';
-  
-  // Shop Tires Section
+
+  // --- Shop Tires Section ---
   const tireSection = document.createElement('section');
   tireSection.className = 'tire-search-widget active';
-  
-  // Inner tabs for By Vehicle / By Tire Size
+
   const innerTabs = document.createElement('div');
   innerTabs.className = 'hero-inner-tabs';
-  
   const innerTabNav = document.createElement('div');
   innerTabNav.className = 'inner-tab-nav';
-  
   const innerTabList = document.createElement('ul');
-  
+
   const byVehicleLi = document.createElement('li');
   byVehicleLi.className = 'active';
   const byVehicleLink = document.createElement('a');
   byVehicleLink.href = '#';
   byVehicleLink.textContent = byVehicleTab;
   byVehicleLi.appendChild(byVehicleLink);
-  
+
   const byTireSizeLi = document.createElement('li');
   const byTireSizeLink = document.createElement('a');
   byTireSizeLink.href = '#';
   byTireSizeLink.textContent = 'BY TIRE SIZE';
   byTireSizeLi.appendChild(byTireSizeLink);
-  
+
   innerTabList.appendChild(byVehicleLi);
   innerTabList.appendChild(byTireSizeLi);
   innerTabNav.appendChild(innerTabList);
-  
-  // Inner tab content
+
   const innerTabContent = document.createElement('div');
   innerTabContent.className = 'inner-tab-content';
-  
   const requiredText = document.createElement('p');
   requiredText.className = 'required-text';
   requiredText.textContent = 'All fields are required';
-  
+
+  // Helper for Shop Tires selects (with Labels)
+  function createSelectField(id, label, disabled = false) {
+    const field = document.createElement('div');
+    field.className = 'form-field';
+    const lbl = document.createElement('label');
+    lbl.setAttribute('for', id);
+    lbl.textContent = label;
+    const selectDiv = document.createElement('div');
+    selectDiv.className = 'custom-select';
+    const select = document.createElement('select');
+    select.id = id;
+    select.name = id;
+    select.disabled = disabled;
+    const option = document.createElement('option');
+    option.value = '';
+    option.textContent = '--Select--';
+    select.appendChild(option);
+    selectDiv.appendChild(select);
+    field.appendChild(lbl);
+    field.appendChild(selectDiv);
+    return { field, select };
+  }
+
   // By Vehicle Form
   const byVehicleSection = document.createElement('section');
   byVehicleSection.className = 'active';
-  
   const vehicleForm = document.createElement('form');
   vehicleForm.className = 'search-by-vehicle';
-  
-  // Year
-  const yearField = document.createElement('div');
-  yearField.className = 'form-field';
-  const yearLabel = document.createElement('label');
-  yearLabel.setAttribute('for', 'year');
-  yearLabel.textContent = 'Year';
-  const yearSelectDiv = document.createElement('div');
-  yearSelectDiv.className = 'custom-select';
-  const yearSelect = document.createElement('select');
-  yearSelect.id = 'year';
-  yearSelect.name = 'year';
-  const yearOption = document.createElement('option');
-  yearOption.value = '';
-  yearOption.textContent = '--Select--';
-  yearSelect.appendChild(yearOption);
-  yearSelectDiv.appendChild(yearSelect);
-  yearField.appendChild(yearLabel);
-  yearField.appendChild(yearSelectDiv);
-  
-  // Make
-  const makeField = document.createElement('div');
-  makeField.className = 'form-field';
-  const makeLabel = document.createElement('label');
-  makeLabel.setAttribute('for', 'make');
-  makeLabel.textContent = 'Make';
-  const makeSelectDiv = document.createElement('div');
-  makeSelectDiv.className = 'custom-select';
-  const makeSelect = document.createElement('select');
-  makeSelect.id = 'make';
-  makeSelect.name = 'make';
-  makeSelect.disabled = true;
-  const makeOption = document.createElement('option');
-  makeOption.value = '';
-  makeOption.textContent = '--Select--';
-  makeSelect.appendChild(makeOption);
-  makeSelectDiv.appendChild(makeSelect);
-  makeField.appendChild(makeLabel);
-  makeField.appendChild(makeSelectDiv);
-  
-  // Model
-  const modelField = document.createElement('div');
-  modelField.className = 'form-field';
-  const modelLabel = document.createElement('label');
-  modelLabel.setAttribute('for', 'model');
-  modelLabel.textContent = 'Model';
-  const modelSelectDiv = document.createElement('div');
-  modelSelectDiv.className = 'custom-select';
-  const modelSelect = document.createElement('select');
-  modelSelect.id = 'model';
-  modelSelect.name = 'model';
-  modelSelect.disabled = true;
-  const modelOption = document.createElement('option');
-  modelOption.value = '';
-  modelOption.textContent = '--Select--';
-  modelSelect.appendChild(modelOption);
-  modelSelectDiv.appendChild(modelSelect);
-  modelField.appendChild(modelLabel);
-  modelField.appendChild(modelSelectDiv);
-  
-  // Submodel
-  const submodelField = document.createElement('div');
-  submodelField.className = 'form-field';
-  const submodelLabel = document.createElement('label');
-  submodelLabel.setAttribute('for', 'submodel');
-  submodelLabel.textContent = 'Submodel';
-  const submodelSelectDiv = document.createElement('div');
-  submodelSelectDiv.className = 'custom-select';
-  const submodelSelect = document.createElement('select');
-  submodelSelect.id = 'submodel';
-  submodelSelect.name = 'submodel';
-  submodelSelect.disabled = true;
-  const submodelOption = document.createElement('option');
-  submodelOption.value = '';
-  submodelOption.textContent = '--Select--';
-  submodelSelect.appendChild(submodelOption);
-  submodelSelectDiv.appendChild(submodelSelect);
-  submodelField.appendChild(submodelLabel);
-  submodelField.appendChild(submodelSelectDiv);
-  
-  // Zip Code
+
+  const { field: yearField, select: yearSelect } = createSelectField('year', 'Year', false);
+  const { field: makeField, select: makeSelect } = createSelectField('make', 'Make', true);
+  const { field: modelField, select: modelSelect } = createSelectField('model', 'Model', true);
+  const { field: submodelField, select: submodelSelect } = createSelectField('submodel', 'Submodel', true);
+
   const zipField = document.createElement('div');
   zipField.className = 'form-field';
   const zipLabel = document.createElement('label');
@@ -399,7 +314,6 @@ export default function decorate(block) {
   zipInput.name = 'zip';
   zipInput.value = zipCode;
   zipInput.className = 'zip-input';
-  zipInput.disabled = true;
   const whyLink = document.createElement('a');
   whyLink.href = '#';
   whyLink.className = 'why-link';
@@ -408,342 +322,305 @@ export default function decorate(block) {
   zipWrapper.appendChild(whyLink);
   zipField.appendChild(zipLabel);
   zipField.appendChild(zipWrapper);
-  
-  // Submit Button
+
   const submitBtn = document.createElement('button');
   submitBtn.type = 'submit';
   submitBtn.className = 'btn-submit';
   submitBtn.textContent = getTirePricingBtn;
   submitBtn.disabled = true;
-  
-  vehicleForm.appendChild(yearField);
-  vehicleForm.appendChild(makeField);
-  vehicleForm.appendChild(modelField);
-  vehicleForm.appendChild(submodelField);
-  vehicleForm.appendChild(zipField);
-  vehicleForm.appendChild(submitBtn);
-  
+
+  vehicleForm.append(yearField, makeField, modelField, submodelField, zipField, submitBtn);
   byVehicleSection.appendChild(vehicleForm);
-  
+
   // By Tire Size Form
   const byTireSizeSection = document.createElement('section');
-  
   const tireSizeForm = document.createElement('form');
   tireSizeForm.className = 'search-by-vehicle';
-  
-  // Cross Section
-  const crossSectionField = document.createElement('div');
-  crossSectionField.className = 'form-field';
-  const crossSectionLabel = document.createElement('label');
-  crossSectionLabel.setAttribute('for', 'cross-section');
-  crossSectionLabel.textContent = 'Cross Section';
-  const crossSectionSelectDiv = document.createElement('div');
-  crossSectionSelectDiv.className = 'custom-select';
-  const crossSectionSelect = document.createElement('select');
-  crossSectionSelect.id = 'cross-section';
-  crossSectionSelect.name = 'cross-section';
-  const crossSectionOption = document.createElement('option');
-  crossSectionOption.value = '';
-  crossSectionOption.textContent = '--Select--';
-  crossSectionSelect.appendChild(crossSectionOption);
-  crossSectionSelectDiv.appendChild(crossSectionSelect);
-  crossSectionField.appendChild(crossSectionLabel);
-  crossSectionField.appendChild(crossSectionSelectDiv);
-  
-  // Aspect Ratio
-  const aspectRatioField = document.createElement('div');
-  aspectRatioField.className = 'form-field';
-  const aspectRatioLabel = document.createElement('label');
-  aspectRatioLabel.setAttribute('for', 'aspect-ratio');
-  aspectRatioLabel.textContent = 'Aspect Ratio';
-  const aspectRatioSelectDiv = document.createElement('div');
-  aspectRatioSelectDiv.className = 'custom-select';
-  const aspectRatioSelect = document.createElement('select');
-  aspectRatioSelect.id = 'aspect-ratio';
-  aspectRatioSelect.name = 'aspect-ratio';
-  aspectRatioSelect.disabled = true;
-  const aspectRatioOption = document.createElement('option');
-  aspectRatioOption.value = '';
-  aspectRatioOption.textContent = '--Select--';
-  aspectRatioSelect.appendChild(aspectRatioOption);
-  aspectRatioSelectDiv.appendChild(aspectRatioSelect);
-  aspectRatioField.appendChild(aspectRatioLabel);
-  aspectRatioField.appendChild(aspectRatioSelectDiv);
-  
-  // Rim Diameter
-  const rimDiameterField = document.createElement('div');
-  rimDiameterField.className = 'form-field';
-  const rimDiameterLabel = document.createElement('label');
-  rimDiameterLabel.setAttribute('for', 'rim-diameter');
-  rimDiameterLabel.textContent = 'Rim Diameter';
-  const rimDiameterSelectDiv = document.createElement('div');
-  rimDiameterSelectDiv.className = 'custom-select';
-  const rimDiameterSelect = document.createElement('select');
-  rimDiameterSelect.id = 'rim-diameter';
-  rimDiameterSelect.name = 'rim-diameter';
-  rimDiameterSelect.disabled = true;
-  const rimDiameterOption = document.createElement('option');
-  rimDiameterOption.value = '';
-  rimDiameterOption.textContent = '--Select--';
-  rimDiameterSelect.appendChild(rimDiameterOption);
-  rimDiameterSelectDiv.appendChild(rimDiameterSelect);
-  rimDiameterField.appendChild(rimDiameterLabel);
-  rimDiameterField.appendChild(rimDiameterSelectDiv);
-  
-  // Zip Code for Tire Size
-  const zipFieldTireSize = document.createElement('div');
-  zipFieldTireSize.className = 'form-field';
-  const zipLabelTireSize = document.createElement('label');
-  zipLabelTireSize.setAttribute('for', 'zipcode-tire-size');
-  zipLabelTireSize.textContent = 'Zip Code';
-  const zipWrapperTireSize = document.createElement('div');
-  zipWrapperTireSize.className = 'zip-wrapper';
-  const zipInputTireSize = document.createElement('input');
-  zipInputTireSize.type = 'text';
+
+  const { field: crossSectionField, select: crossSectionSelect } = createSelectField('cross-section', 'Cross Section', false);
+  const { field: aspectRatioField, select: aspectRatioSelect } = createSelectField('aspect-ratio', 'Aspect Ratio', true);
+  const { field: rimDiameterField, select: rimDiameterSelect } = createSelectField('rim-diameter', 'Rim Diameter', true);
+
+  const zipFieldTireSize = zipField.cloneNode(true);
+  const zipInputTireSize = zipFieldTireSize.querySelector('input');
   zipInputTireSize.id = 'zipcode-tire-size';
-  zipInputTireSize.name = 'zip-tire-size';
-  zipInputTireSize.value = zipCode;
-  zipInputTireSize.className = 'zip-input';
-  zipInputTireSize.disabled = true;
-  const whyLinkTireSize = document.createElement('a');
-  whyLinkTireSize.href = '#';
-  whyLinkTireSize.className = 'why-link';
-  whyLinkTireSize.textContent = 'Why?';
-  zipWrapperTireSize.appendChild(zipInputTireSize);
-  zipWrapperTireSize.appendChild(whyLinkTireSize);
-  zipFieldTireSize.appendChild(zipLabelTireSize);
-  zipFieldTireSize.appendChild(zipWrapperTireSize);
-  
-  // Submit Button for Tire Size
-  const submitBtnTireSize = document.createElement('button');
-  submitBtnTireSize.type = 'submit';
-  submitBtnTireSize.className = 'btn-submit';
-  submitBtnTireSize.textContent = getTirePricingBtn;
-  submitBtnTireSize.disabled = true;
-  
-  tireSizeForm.appendChild(crossSectionField);
-  tireSizeForm.appendChild(aspectRatioField);
-  tireSizeForm.appendChild(rimDiameterField);
-  tireSizeForm.appendChild(zipFieldTireSize);
-  tireSizeForm.appendChild(submitBtnTireSize);
-  
+  const submitBtnTireSize = submitBtn.cloneNode(true);
+
+  tireSizeForm.append(crossSectionField, aspectRatioField, rimDiameterField, zipFieldTireSize, submitBtnTireSize);
   byTireSizeSection.appendChild(tireSizeForm);
-  
-  innerTabContent.appendChild(requiredText);
-  innerTabContent.appendChild(byVehicleSection);
-  innerTabContent.appendChild(byTireSizeSection);
-  
-  innerTabs.appendChild(innerTabNav);
-  innerTabs.appendChild(innerTabContent);
-  
+
+  innerTabContent.append(requiredText, byVehicleSection, byTireSizeSection);
+  innerTabs.append(innerTabNav, innerTabContent);
   tireSection.appendChild(innerTabs);
-  
   tabContent.appendChild(tireSection);
-  
-  // Create Service Detail View (hidden initially)
+
+  // Service Detail View
   const serviceDetailView = document.createElement('section');
   serviceDetailView.className = 'service-detail-view';
   serviceDetailView.style.display = 'none';
-  
   tabContent.appendChild(serviceDetailView);
-  
+
   // Function to create service detail content
   function createServiceDetail(serviceName, data) {
     serviceDetailView.innerHTML = '';
-    
-    const addressData = parseAddress(data.storeAddressRaw);
-    const hoursData = parseStoreHours(data.storeHoursRaw);
-    
+
     const header = document.createElement('div');
     header.className = 'service-detail-header';
-    
     const title = document.createElement('h2');
     title.textContent = data.heading;
-    
     const closeBtn = document.createElement('button');
     closeBtn.className = 'service-close-btn';
     closeBtn.innerHTML = '×';
-    closeBtn.setAttribute('aria-label', 'Close');
-    
-    header.appendChild(title);
-    header.appendChild(closeBtn);
-    
-    const storeInfo = document.createElement('div');
-    storeInfo.className = 'service-store-info';
-    
-    const storeLabel = document.createElement('h3');
-    storeLabel.textContent = data.storeLabel;
-    storeInfo.appendChild(storeLabel);
-    
-    const storeDetailsWrapper = document.createElement('div');
-    storeDetailsWrapper.className = 'store-details-wrapper';
-    
-    const addressDiv = document.createElement('div');
-    addressDiv.className = 'store-address-info';
-    
-    addressData.lines.forEach((line) => {
-      const p = document.createElement('p');
-      p.textContent = line;
-      addressDiv.appendChild(p);
-    });
-    
-    storeDetailsWrapper.appendChild(addressDiv);
-    
-    if (data.storeMap) {
-      const mapWrapper = document.createElement('div');
-      mapWrapper.className = 'store-map-wrapper';
-      
-      const mapImg = document.createElement('img');
-      mapImg.src = data.storeMap;
-      mapImg.alt = 'Store location map';
-      
-      mapWrapper.appendChild(mapImg);
-      storeDetailsWrapper.appendChild(mapWrapper);
-    }
-    
-    storeInfo.appendChild(storeDetailsWrapper);
-    
-    const contactRow = document.createElement('div');
-    contactRow.className = 'store-contact-row';
-    
-    if (addressData.phone) {
-      const phoneLink = document.createElement('a');
-      phoneLink.href = `tel:${addressData.phone.replace(/[^\d]/g, '')}`;
-      phoneLink.className = 'store-phone';
-      phoneLink.textContent = addressData.phone;
-      contactRow.appendChild(phoneLink);
-    }
-    
-    const directionsLink = document.createElement('a');
-    directionsLink.href = '#';
-    directionsLink.className = 'directions-link';
-    directionsLink.textContent = 'DIRECTIONS';
-    contactRow.appendChild(directionsLink);
-    
-    storeInfo.appendChild(contactRow);
-    
-    if (hoursData.length > 0) {
-      const hoursDiv = document.createElement('div');
-      hoursDiv.className = 'store-hours';
-      
-      const hoursTitle = document.createElement('h4');
-      hoursTitle.textContent = 'Store Hours:';
-      hoursDiv.appendChild(hoursTitle);
-      
-      const hoursList = document.createElement('div');
-      hoursList.className = 'hours-list';
-      
-      hoursData.forEach((hour) => {
-        const hourRow = document.createElement('div');
-        
-        const daySpan = document.createElement('span');
-        daySpan.className = hour.special ? 'day special' : 'day';
-        daySpan.textContent = hour.day;
-        
-        const timeSpan = document.createElement('span');
-        timeSpan.className = hour.special ? 'time special' : 'time';
-        timeSpan.textContent = hour.time;
-        
-        hourRow.appendChild(daySpan);
-        hourRow.appendChild(timeSpan);
-        hoursList.appendChild(hourRow);
-      });
-      
-      hoursDiv.appendChild(hoursList);
-      storeInfo.appendChild(hoursDiv);
-    }
-    
-    const buttonsDiv = document.createElement('div');
-    buttonsDiv.className = 'service-buttons';
-    
-    const storeDetailsBtn = document.createElement('a');
-    storeDetailsBtn.href = data.storeDetailsLink;
-    storeDetailsBtn.className = 'btn-outline';
-    storeDetailsBtn.textContent = data.storeDetailsText;
-    
-    const changeStoreBtn = document.createElement('a');
-    changeStoreBtn.href = data.changeStoreLink;
-    changeStoreBtn.className = 'btn-outline';
-    changeStoreBtn.textContent = data.changeStoreText;
-    
-    buttonsDiv.appendChild(storeDetailsBtn);
-    buttonsDiv.appendChild(changeStoreBtn);
-    
-    const appointmentDiv = document.createElement('div');
-    appointmentDiv.className = 'service-appointment';
-    
-    const appointmentBtn = document.createElement('a');
-    appointmentBtn.href = data.appointmentLink;
-    appointmentBtn.className = 'btn-primary';
-    appointmentBtn.textContent = data.appointmentText;
-    
-    appointmentDiv.appendChild(appointmentBtn);
-    
+    header.append(title, closeBtn);
+
     closeBtn.addEventListener('click', () => {
       serviceDetailView.style.display = 'none';
       topNav.style.display = 'block';
       tabNav.style.display = 'block';
     });
-    
+
     serviceDetailView.appendChild(header);
-    serviceDetailView.appendChild(storeInfo);
-    serviceDetailView.appendChild(buttonsDiv);
-    serviceDetailView.appendChild(appointmentDiv);
+
+    if (data.type === 'form') {
+      // --- Render Form (Batteries & Alignment) ---
+      const contentContainer = document.createElement('div');
+      contentContainer.style.padding = '0'; 
+
+      const reqText = document.createElement('p');
+      reqText.className = 'required-text';
+      reqText.textContent = 'All fields are required';
+      
+      // Exact Computed Style for "All fields required"
+      reqText.style.boxSizing = 'border-box';
+      reqText.style.color = 'rgb(51, 51, 51)';
+      reqText.style.display = 'block';
+      reqText.style.fontFamily = "'Avenir', Arial, sans-serif";
+      reqText.style.fontSize = '14px';
+      reqText.style.fontWeight = '400';
+      reqText.style.height = '19.9896px';
+      reqText.style.lineHeight = '20px';
+      reqText.style.marginBlockEnd = '14px';
+      reqText.style.marginBlockStart = '14px';
+      reqText.style.marginInlineEnd = '0px';
+      reqText.style.marginInlineStart = '0px';
+      reqText.style.width = '345px';
+
+      const formDiv = document.createElement('div');
+      formDiv.className = 'search-by-vehicle';
+      formDiv.style.gap = '10px';
+
+      // No Label Dropdowns
+      function createNoLabelSelect(id, placeholder, disabled=false) {
+        const field = document.createElement('div');
+        field.className = 'form-field';
+        field.style.height = 'auto'; 
+        
+        const selectDiv = document.createElement('div');
+        selectDiv.className = 'custom-select';
+        
+        const select = document.createElement('select');
+        select.id = `${serviceName}-${id}`;
+        select.name = `${serviceName}-${id}`;
+        select.disabled = disabled;
+        
+        const option = document.createElement('option');
+        option.value = '';
+        option.textContent = placeholder; 
+        
+        select.appendChild(option);
+        selectDiv.appendChild(select);
+        field.appendChild(selectDiv);
+        return { field, select };
+      }
+
+      const { field: yearF, select: yearS } = createNoLabelSelect('year', 'Year', false);
+      const { field: makeF, select: makeS } = createNoLabelSelect('make', 'Make', true);
+      const { field: modelF, select: modelS } = createNoLabelSelect('model', 'Model', true);
+      const { field: fourthF, select: fourthS } = createNoLabelSelect(data.fourthField.toLowerCase(), data.fourthField, true);
+
+      yearS.addEventListener('change', () => { makeS.disabled = !yearS.value; if(!yearS.value) makeS.value = ''; });
+      makeS.addEventListener('change', () => { modelS.disabled = !makeS.value; if(!makeS.value) modelS.value = ''; });
+      modelS.addEventListener('change', () => { fourthS.disabled = !modelS.value; if(!modelS.value) fourthS.value = ''; });
+
+      // Zip Code (No label, just input)
+      const zipWrapper = document.createElement('div');
+      zipWrapper.className = 'zip-wrapper';
+      zipWrapper.style.marginTop = '5px'; 
+      
+      const zipInput = document.createElement('input');
+      zipInput.type = 'text';
+      zipInput.className = 'zip-input';
+      zipInput.value = '37206';
+      // FIX: Grey out zip code for Batteries/Alignment
+      zipInput.disabled = true;
+      
+      const whyLink = document.createElement('a');
+      whyLink.href = '#';
+      whyLink.className = 'why-link';
+      whyLink.textContent = 'Why?';
+      
+      zipWrapper.appendChild(zipInput);
+      zipWrapper.appendChild(whyLink);
+
+      const formSubmit = document.createElement('button');
+      formSubmit.className = 'btn-submit';
+      // Specific ID for Grey button styling
+      formSubmit.id = data.btnId;
+      formSubmit.textContent = data.buttonText;
+      formSubmit.style.marginTop = '20px';
+      
+      // Default Disabled State
+      formSubmit.disabled = true;
+
+      fourthS.addEventListener('change', () => {
+        if(fourthS.value) {
+           formSubmit.disabled = false;
+           formSubmit.style.backgroundColor = '#d81e05';
+           formSubmit.style.color = '#fff';
+           formSubmit.style.border = '2px solid #6f3f3f';
+           formSubmit.style.cursor = 'pointer';
+           formSubmit.style.opacity = '1';
+        }
+      });
+
+      formDiv.append(yearF, makeF, modelF, fourthF, zipWrapper, formSubmit);
+      contentContainer.append(reqText, formDiv);
+      serviceDetailView.appendChild(contentContainer);
+
+    } else {
+      // --- Render Details ---
+      const addressData = parseAddress(data.storeAddressRaw);
+      const hoursData = parseStoreHours(data.storeHoursRaw);
+
+      const storeInfo = document.createElement('div');
+      storeInfo.className = 'service-store-info';
+
+      const storeLabel = document.createElement('h3');
+      storeLabel.textContent = data.storeLabel;
+      storeInfo.appendChild(storeLabel);
+
+      const storeDetailsWrapper = document.createElement('div');
+      storeDetailsWrapper.className = 'store-details-wrapper';
+
+      const addressDiv = document.createElement('div');
+      addressDiv.className = 'store-address-info';
+      addressData.lines.forEach((line) => {
+        const p = document.createElement('p');
+        p.textContent = line;
+        addressDiv.appendChild(p);
+      });
+      storeDetailsWrapper.appendChild(addressDiv);
+
+      if (data.storeMap) {
+        const mapWrapper = document.createElement('div');
+        mapWrapper.className = 'store-map-wrapper';
+        const mapImg = document.createElement('img');
+        mapImg.src = data.storeMap;
+        mapWrapper.appendChild(mapImg);
+        storeDetailsWrapper.appendChild(mapWrapper);
+      }
+      storeInfo.appendChild(storeDetailsWrapper);
+
+      const contactRow = document.createElement('div');
+      contactRow.className = 'store-contact-row';
+      if (addressData.phone) {
+        const phoneLink = document.createElement('a');
+        phoneLink.href = `tel:${addressData.phone.replace(/[^\d]/g, '')}`;
+        phoneLink.className = 'store-phone';
+        phoneLink.textContent = addressData.phone;
+        contactRow.appendChild(phoneLink);
+      }
+      const directionsLink = document.createElement('a');
+      directionsLink.href = '#';
+      directionsLink.className = 'directions-link';
+      directionsLink.textContent = 'DIRECTIONS';
+      contactRow.appendChild(directionsLink);
+      storeInfo.appendChild(contactRow);
+
+      if (hoursData.length > 0) {
+        const hoursDiv = document.createElement('div');
+        hoursDiv.className = 'store-hours';
+        const hoursTitle = document.createElement('h4');
+        hoursTitle.textContent = 'Store Hours:';
+        hoursDiv.appendChild(hoursTitle);
+        const hoursList = document.createElement('div');
+        hoursList.className = 'hours-list';
+        hoursData.forEach((hour) => {
+          const hourRow = document.createElement('div');
+          const daySpan = document.createElement('span');
+          daySpan.className = hour.special ? 'day special' : 'day';
+          daySpan.textContent = hour.day;
+          const timeSpan = document.createElement('span');
+          timeSpan.className = hour.special ? 'time special' : 'time';
+          timeSpan.textContent = hour.time;
+          hourRow.append(daySpan, timeSpan);
+          hoursList.appendChild(hourRow);
+        });
+        hoursDiv.appendChild(hoursList);
+        storeInfo.appendChild(hoursDiv);
+      }
+
+      const buttonsDiv = document.createElement('div');
+      buttonsDiv.className = 'service-buttons';
+      const storeDetailsBtn = document.createElement('a');
+      storeDetailsBtn.href = data.storeDetailsLink;
+      storeDetailsBtn.className = 'btn-outline';
+      storeDetailsBtn.textContent = data.storeDetailsText;
+      const changeStoreBtn = document.createElement('a');
+      changeStoreBtn.href = data.changeStoreLink;
+      changeStoreBtn.className = 'btn-outline';
+      changeStoreBtn.textContent = data.changeStoreText;
+      buttonsDiv.append(storeDetailsBtn, changeStoreBtn);
+
+      const appointmentDiv = document.createElement('div');
+      appointmentDiv.className = 'service-appointment';
+      const appointmentBtn = document.createElement('a');
+      appointmentBtn.href = data.appointmentLink;
+      appointmentBtn.className = 'btn-primary';
+      appointmentBtn.textContent = data.appointmentText;
+      appointmentDiv.appendChild(appointmentBtn);
+
+      serviceDetailView.append(storeInfo, buttonsDiv, appointmentDiv);
+    }
   }
-  
+
   // Assemble widget
-  widgetWrap.appendChild(topNav);
-  widgetWrap.appendChild(tabNav);
-  widgetWrap.appendChild(tabContent);
-  
-  // Create copy overlay (right side)
+  widgetWrap.append(topNav, tabNav, tabContent);
+
+  // Copy Overlay
   const copyOverlay = document.createElement('div');
   copyOverlay.className = 'hero-copy-overlay';
-  
   const mainHeading = document.createElement('h1');
   mainHeading.textContent = `${heading} `;
   const subheadSpan = document.createElement('span');
   subheadSpan.className = 'subhead';
   subheadSpan.textContent = subheading;
   mainHeading.appendChild(subheadSpan);
-  
   const descriptionDiv = document.createElement('div');
   descriptionDiv.className = 'description';
-  
   const descriptionContent = document.createElement('div');
   descriptionContent.className = 'description-content';
   const descP = document.createElement('p');
   descP.textContent = description;
   descriptionContent.appendChild(descP);
-  
   const ctaButton = document.createElement('a');
   ctaButton.href = ctaLink;
   ctaButton.className = 'btn-cta';
   ctaButton.textContent = ctaText;
-  
-  descriptionDiv.appendChild(descriptionContent);
-  descriptionDiv.appendChild(ctaButton);
-  
-  copyOverlay.appendChild(mainHeading);
-  copyOverlay.appendChild(descriptionDiv);
-  
-  // Assemble everything
-  heroSection.appendChild(imageWrap);
-  heroSection.appendChild(widgetWrap);
-  heroSection.appendChild(copyOverlay);
-  
+  descriptionDiv.append(descriptionContent, ctaButton);
+  copyOverlay.append(mainHeading, descriptionDiv);
+
+  heroSection.append(imageWrap, widgetWrap, copyOverlay);
   block.appendChild(heroSection);
-  
-  // Tab switching logic
-  const topNavItems = topNavList.querySelectorAll('li');
-  
-  topNavItems.forEach((item, index) => {
+
+  // --- EVENT LISTENERS ---
+
+  // Top Nav Switching
+  topNavList.querySelectorAll('li').forEach((item, index) => {
     item.addEventListener('click', (e) => {
       e.preventDefault();
-      
-      topNavItems.forEach((li) => li.classList.remove('active'));
+      topNavList.querySelectorAll('li').forEach((li) => li.classList.remove('active'));
       item.classList.add('active');
-      
       if (index === 0) {
         tabNav.style.display = 'none';
         serviceDetailView.style.display = 'none';
@@ -755,16 +632,13 @@ export default function decorate(block) {
       }
     });
   });
-  
-  // Service item click handler
-  const serviceItems = tabNavList.querySelectorAll('li');
-  serviceItems.forEach((item) => {
+
+  // Services Menu Switching
+  tabNavList.querySelectorAll('li').forEach((item) => {
     item.addEventListener('click', (e) => {
       e.preventDefault();
-      
       const serviceKey = item.dataset.service;
       const data = serviceData[serviceKey];
-      
       if (data) {
         createServiceDetail(serviceKey, data);
         topNav.style.display = 'none';
@@ -773,105 +647,69 @@ export default function decorate(block) {
       }
     });
   });
-  
-  // Inner tab switching
-  const innerTabItems = innerTabList.querySelectorAll('li');
-  const innerTabSections = innerTabContent.querySelectorAll('section');
-  
-  innerTabItems.forEach((item, index) => {
-    item.addEventListener('click', (e) => {
-      e.preventDefault();
-      
-      innerTabItems.forEach((li) => li.classList.remove('active'));
-      item.classList.add('active');
-      
-      innerTabSections.forEach((section, sIndex) => {
-        section.classList.toggle('active', sIndex === index);
-      });
+
+  // Inner Tabs (Shop Tires) - Use delegation
+  innerTabList.addEventListener('click', (e) => {
+    const li = e.target.closest('li');
+    if (!li) return;
+    e.preventDefault();
+    
+    // Switch Active State
+    [...innerTabList.children].forEach(child => child.classList.remove('active'));
+    li.classList.add('active');
+
+    // Switch Sections
+    const index = [...innerTabList.children].indexOf(li);
+    const sections = innerTabContent.querySelectorAll('section');
+    sections.forEach((sec, i) => {
+      if (i === index) sec.classList.add('active');
+      else sec.classList.remove('active');
     });
   });
-  
-  // By Vehicle Form Logic
-  yearSelect.addEventListener('change', function onYearChange() {
-    makeSelect.disabled = this.value === '';
-    if (this.value === '') {
-      makeSelect.value = '';
-      modelSelect.value = '';
-      submodelSelect.value = '';
-      modelSelect.disabled = true;
-      submodelSelect.disabled = true;
-    }
+
+  // Shop Tires - By Vehicle Form Logic
+  yearSelect.addEventListener('change', () => {
+    makeSelect.disabled = !yearSelect.value;
+    if(!yearSelect.value) { makeSelect.value = ''; modelSelect.value = ''; submodelSelect.value = ''; modelSelect.disabled = true; submodelSelect.disabled = true; }
     checkVehicleForm();
   });
-  
-  makeSelect.addEventListener('change', function onMakeChange() {
-    modelSelect.disabled = this.value === '';
-    if (this.value === '') {
-      modelSelect.value = '';
-      submodelSelect.value = '';
-      submodelSelect.disabled = true;
-    }
+  makeSelect.addEventListener('change', () => {
+    modelSelect.disabled = !makeSelect.value;
+    if(!makeSelect.value) { modelSelect.value = ''; submodelSelect.value = ''; submodelSelect.disabled = true; }
     checkVehicleForm();
   });
-  
-  modelSelect.addEventListener('change', function onModelChange() {
-    submodelSelect.disabled = this.value === '';
-    if (this.value === '') {
-      submodelSelect.value = '';
-    }
+  modelSelect.addEventListener('change', () => {
+    submodelSelect.disabled = !modelSelect.value;
+    if(!modelSelect.value) { submodelSelect.value = ''; }
     checkVehicleForm();
   });
-  
   submodelSelect.addEventListener('change', checkVehicleForm);
   zipInput.addEventListener('input', checkVehicleForm);
-  
+
   function checkVehicleForm() {
-    const allFilled =
-      yearSelect.value !== '' &&
-      makeSelect.value !== '' &&
-      modelSelect.value !== '' &&
-      submodelSelect.value !== '' &&
-      zipInput.value.trim() !== '';
+    const allFilled = yearSelect.value && makeSelect.value && modelSelect.value && submodelSelect.value && zipInput.value.trim();
     submitBtn.disabled = !allFilled;
   }
-  
-  // By Tire Size Form Logic
-  crossSectionSelect.addEventListener('change', function onCrossSectionChange() {
-    aspectRatioSelect.disabled = this.value === '';
-    if (this.value === '') {
-      aspectRatioSelect.value = '';
-      rimDiameterSelect.value = '';
-      rimDiameterSelect.disabled = true;
-    }
+
+  // Shop Tires - By Tire Size Form Logic
+  crossSectionSelect.addEventListener('change', () => {
+    aspectRatioSelect.disabled = !crossSectionSelect.value;
+    if(!crossSectionSelect.value) { aspectRatioSelect.value = ''; rimDiameterSelect.value = ''; rimDiameterSelect.disabled = true; }
     checkTireSizeForm();
   });
-  
-  aspectRatioSelect.addEventListener('change', function onAspectRatioChange() {
-    rimDiameterSelect.disabled = this.value === '';
-    if (this.value === '') {
-      rimDiameterSelect.value = '';
-    }
+  aspectRatioSelect.addEventListener('change', () => {
+    rimDiameterSelect.disabled = !aspectRatioSelect.value;
+    if(!aspectRatioSelect.value) { rimDiameterSelect.value = ''; }
     checkTireSizeForm();
   });
-  
   rimDiameterSelect.addEventListener('change', checkTireSizeForm);
   zipInputTireSize.addEventListener('input', checkTireSizeForm);
-  
+
   function checkTireSizeForm() {
-    const allFilled =
-      crossSectionSelect.value !== '' &&
-      aspectRatioSelect.value !== '' &&
-      rimDiameterSelect.value !== '' &&
-      zipInputTireSize.value.trim() !== '';
+    const allFilled = crossSectionSelect.value && aspectRatioSelect.value && rimDiameterSelect.value && zipInputTireSize.value.trim();
     submitBtnTireSize.disabled = !allFilled;
   }
-  
-  // Prevent form submissions
-  vehicleForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-  });
-  
-  tireSizeForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-  });
+
+  vehicleForm.addEventListener('submit', (e) => e.preventDefault());
+  tireSizeForm.addEventListener('submit', (e) => e.preventDefault());
 }

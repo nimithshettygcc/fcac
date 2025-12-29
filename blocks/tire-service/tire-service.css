@@ -14,6 +14,7 @@
   .tire-service-container {
     padding: 10px 20px 40px 20px;
     background-color: #fff;
+    box-sizing: border-box;
   }
   
   .tire-service {
@@ -22,7 +23,7 @@
   }
   
   /* ============================================
-     HEADER SECTION
+      HEADER SECTION
      ============================================ */
   .ts-header {
     text-align: center;
@@ -30,19 +31,19 @@
   }
   
   .ts-title {
+    box-sizing: border-box;
+    display: block;
     font-family: var(--ts-font-title);
     font-size: 32px;
-    font-weight: 700;
+    font-weight: 400;
+    line-height: 35.2px;
+    margin: 26.56px 0;
     text-transform: uppercase;
+    text-align: center;
     color: var(--ts-black);
-    margin: 0 0 40px 0;
   }
   
   .ts-nav {
-    font-family: var(--ts-font-title);
-    font-size: 14px;
-    font-weight: 700;
-    text-transform: uppercase;
     display: flex;
     justify-content: center;
     gap: 10px;
@@ -50,22 +51,37 @@
   }
   
   .ts-nav a {
+    box-sizing: border-box;
+    display: inline;
+    font-family: var(--ts-font-title);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 25.7143px;
     color: var(--ts-black);
     text-decoration: none;
+    cursor: pointer;
+    background: transparent;
+    border: none;
   }
-  .ts-nav a:hover { text-decoration: underline; }
   
-  .ts-sep { color: var(--ts-red); }
+  .ts-nav a:hover { 
+    text-decoration: none; 
+  }
+  
+  .ts-sep { 
+    color: var(--ts-red); 
+    font-size: 18px; 
+    font-weight: 400;
+  }
   
   .ts-nav a::after {
     content: ' \203A';
     color: var(--ts-red);
     font-size: 1.2em;
-    font-weight: bold;
   }
   
   /* ============================================
-     SERVICE GRID (Top 4 Cards)
+      SERVICE GRID (Top 4 Cards)
      ============================================ */
   .ts-service-grid {
     display: flex;
@@ -82,6 +98,7 @@
     border: 1px solid #cccccc;
     text-align: left;
     color: #333333;
+    box-sizing: border-box;
   }
   
   .ts-card-image img {
@@ -100,41 +117,45 @@
   }
   
   .ts-card-content h3 {
-    font-family: var(--ts-font-title);
+    box-sizing: border-box;
     display: block;
-    font-size: 22px; 
-    font-weight: 700; 
-    line-height: 1.2;
+    font-family: var(--ts-font-title);
+    font-size: 25.6px;
+    font-weight: 400;
+    line-height: 28.16px;
+    margin: 25.6px 0; 
     text-align: center;
-    margin: 10px 0 15px 0;
     text-transform: uppercase;
     color: var(--ts-black);
     width: 100%;
   }
   
   .ts-card-desc {
-    font-family: var(--ts-font-body);
     display: block;
+    font-family: var(--ts-font-body);
     font-size: 16px;
     font-weight: 400;
-    line-height: 22.86px;
+    line-height: 22.8571px;
+    color: rgb(51, 51, 51);
     text-align: center;
-    color: #333; 
     margin: 16px 0;
     padding: 0 10px;
     flex-grow: 1;
   }
   
   .ts-card-link {
+    box-sizing: border-box;
+    display: inline;
     font-family: var(--ts-font-title);
     font-size: 18px;
-    font-weight: 700; 
-    line-height: 25.7px;
+    font-weight: 400;
+    line-height: 25.7143px;
     color: #000000 !important; 
     text-decoration: none;
     text-transform: capitalize;
-    display: inline;
     cursor: pointer;
+    background: transparent;
+    border: none;
   }
   
   .ts-card-link:hover { 
@@ -144,12 +165,12 @@
   .ts-card-link::after {
     content: ' \203A';
     color: inherit; 
-    font-weight: bold;
+    font-weight: 400;
     font-size: 1.2em;
   }
   
   /* ============================================
-     FEATURE GRID (Bottom 2 Cards)
+      FEATURE GRID (Bottom 2 Cards)
      ============================================ */
   .ts-feature-grid {
     display: flex;
@@ -163,9 +184,7 @@
     color: #fff;
     min-height: 350px;
     display: flex;
-    
-    /* FIX: Ensure overflow is hidden so image stays inside */
-    overflow: hidden; 
+    overflow: visible; 
   }
   
   /* TEXT WRAPPER */
@@ -180,63 +199,66 @@
     box-sizing: border-box;
   }
   
-  /* TITLE STYLES */
+  /* --- TITLE STYLES --- */
   .ts-feature-text h3 {
+    box-sizing: border-box;
+    display: block;
     font-family: var(--ts-font-title);
-    display: block;
-    font-size: 26px; 
-    font-weight: 700;
-    line-height: 1.1;
-    margin: 0 0 15px 0;
+    font-size: 25.6px;
+    font-weight: 400;
+    line-height: 28.16px;
+    margin: 0; 
     text-transform: uppercase;
-    color: #fff;
+    color: #ffffff;
     text-align: left;
+    overflow-wrap: break-word;
   }
   
-  /* CARD 1 BREAK */
-  .feature-0 .ts-feature-text h3 {
-      max-width: 480px; 
-  }
+  .feature-0 .ts-feature-text h3 { max-width: 480px; }
+  .feature-1 .ts-feature-text h3 { max-width: 580px; }
   
-  /* CARD 2 BREAK */
-  .feature-1 .ts-feature-text h3 {
-      max-width: 580px; 
-  }
-  
-  /* DESCRIPTION STYLES */
+  /* --- DESCRIPTION STYLES --- */
   .ts-feature-text p {
-    font-family: var(--ts-font-body);
+    box-sizing: border-box;
     display: block;
+    font-family: var(--ts-font-body);
     font-size: 14px;
     font-weight: 400;
-    line-height: 1.5;
+    line-height: 20px;
+    margin: 14px 0;
     color: #ffffff;
-    width: 100%;
-    max-width: 320px; 
-    margin: 0 0 25px 0;
+    text-align: left;
+    width: 242px;
+    max-width: none;
+    overflow-wrap: break-word;
   }
   
-  /* BUTTON STYLES */
+  /* --- BUTTON STYLES --- */
   .ts-btn-red, 
   .ts-btn-red:visited, 
   .ts-btn-red:hover, 
   .ts-btn-red:active {
+    box-sizing: border-box;
     display: inline-block;
     background-color: var(--ts-red);
     color: #ffffff !important; 
-    padding: 12px 24px;
-    text-decoration: none;
+    border: 2px solid var(--ts-red);
     font-family: var(--ts-font-title);
-    font-weight: 700;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 20.9px;
     text-transform: uppercase;
-    font-size: 14px;
-    border: none;
+    text-align: center;
+    text-decoration: none;
+    padding: 8px 11px;
     width: fit-content;
-    transition: background 0.3s;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, border 0.3s ease-in-out;
   }
   
   .ts-btn-red:hover {
     background-color: var(--ts-red-hover);
+    border-color: var(--ts-red-hover);
   }
   
   /* IMAGE & OVERLAY STYLES */
@@ -247,6 +269,7 @@
     right: 0;
     height: 100%;
     z-index: 1;
+    overflow: visible;
   }
   
   .ts-bg-img img {
@@ -256,49 +279,52 @@
     opacity: 1; 
   }
   
-  /* CARD 1: Tire Advisor */
-  .feature-0 .ts-feature-image {
-      width: 65%;
-  }
+/* CARD 1: Tire Advisor */
+/* CARD 1: Tire Advisor */
+.feature-0 .ts-feature-image { 
+  width: 100%;
   
-  .feature-0 .ts-bg-img img {
-    object-position: center right;
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 60%);
-    mask-image: linear-gradient(to right, transparent 0%, black 60%);
-    opacity: 1; 
-  }
+  /* UPDATED: Moves the image container down by 30px */
+  top: 30px; 
+  height: calc(100% - 30px);
+}
+
+.feature-0 .ts-bg-img img {
+  object-position: center right;
+  -webkit-mask-image: none; 
+  mask-image: none;
+  opacity: 1; 
+}
   
   /* CARD 2: Financing */
-  .feature-1 .ts-feature-image {
-      width: 100%;
-  }
+  /* CARD 2: Financing */
+.feature-1 .ts-feature-image { width: 100%; }
+
+/* UPDATED: Increased opacity from 0.3 to 0.85 so the image texture is visible */
+.feature-1 .ts-bg-img img { opacity: 0.85; }
   
-  .feature-1 .ts-bg-img img {
-    opacity: 0.3; 
-  }
-  
-  /* Credit Card Overlay - FIXED POSITIONING INSIDE */
+  /* UPDATED: Credit Card Overlay - Specific Positioning */
   .ts-overlay-img {
     position: absolute;
-    
-    /* FIX: Positive values to place it inside the container */
-    bottom: 20px; 
-    right: 20px; 
-    
-    width: 45%;
+    bottom: 3px;    /* Matches provided style */
+    right: -30px;   /* Matches provided style */
+    width: 60%;     /* Matches provided style */
     z-index: 5;
   }
   
   .ts-overlay-img img {
     width: 100%;
     height: auto;
-    transform: rotate(-15deg);
+    
+    /* UPDATED: Matches provided style */
+    transform: rotate(-2deg);
+    
     display: block;
     filter: drop-shadow(0 10px 15px rgba(0,0,0,0.4));
   }
   
   /* ============================================
-     RESPONSIVE
+      RESPONSIVE
      ============================================ */
   @media (max-width: 1024px) {
     .ts-service-grid { flex-wrap: wrap; }
@@ -318,13 +344,15 @@
         mask-image: linear-gradient(to bottom, transparent 0%, black 80%);
     }
     
-    .ts-overlay-img { bottom: 10px; right: 10px; }
+    /* On smaller screens, bring it back in or adjust as needed */
+    .ts-overlay-img { bottom: 0px; right: 0px; width: 40%; }
   }
   
   @media (max-width: 767px) {
     .ts-card { flex: 0 0 100%; margin-bottom: 20px; }
     .ts-nav { flex-direction: column; gap: 5px; }
     .ts-sep { display: none; }
+    
+    /* Further adjustment for mobile */
+    .ts-overlay-img { bottom: -20px; right: -10px; width: 50%; }
   }
-
-  /* Update styles: cache reset */
