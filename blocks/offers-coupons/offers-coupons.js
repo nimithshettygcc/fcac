@@ -3,8 +3,11 @@ export default async function decorate(block) {
   const rows = [...block.children];
   const titleText = rows[0]?.textContent.trim();
   
-  // Force MockAPI URL (Prevents CORS errors)
-  const apiUrl = 'https://674422deb4e2e04abea0f2ee.mockapi.io/api/v1/offers-coupons';
+  // --- UPDATED API URL HERE ---
+  const apiUrl = 'https://mocki.io/v1/1dd0c166-c8dc-436a-968c-57d806bb339c';
+  
+  // Path to local fallback file (Ensure this file exists in your project)
+  const localFallbackUrl = '/blocks/offers-coupons/offers-fallback.json'; 
 
   const categories = [
     { label: 'All Offers', filter: 'all' },
@@ -72,21 +75,8 @@ export default async function decorate(block) {
   container.append(footer);
   block.append(container);
 
-  // --- HELPER: ICON LOGIC (FIXED) ---
+  // --- HELPER: ICON LOGIC ---
   const getIconName = (tags = [], category = '') => {
-    // To fix console 404 errors, we default to the Tire icon for now.
-    // Uncomment the specific lines below only when those files exist in your /icons/ folder.
-    
-    // const t = (tags || []).join(' ').toLowerCase();
-    // const c = (category || '').toLowerCase();
-    
-    // if (t.includes('oil') || c.includes('oil')) return 'oil-icon-offers-bsro-global.svg';
-    // if (t.includes('brake')) return 'brake-icon-offers-bsro-global.svg';
-    // if (t.includes('battery')) return 'battery-icon-offers-bsro-global.svg';
-    // if (t.includes('alignment')) return 'alignment-icon-offers-bsro-global.svg';
-    // if (t.includes('cfna') || t.includes('credit')) return 'card-icon-offers-bsro-global.svg';
-    
-    // Default to the one file we know exists to stop 404 errors
     return 'tire-icon-offers-bsro-global.svg';
   };
 
@@ -166,11 +156,31 @@ export default async function decorate(block) {
 
   // --- FETCH & RENDER ---
   try {
-    const resp = await fetch(apiUrl);
-    const json = await resp.json();
+    let json;
+    
+    // 1. Attempt API Fetch (New URL)
+    try {
+        const resp = await fetch(apiUrl);
+        if (!resp.ok) throw new Error(`API HTTP error! status: ${resp.status}`);
+        json = await resp.json();
+    } catch (apiError) {
+        console.warn(`Primary API (${apiUrl}) failed. Attempting fallback...`, apiError);
+        
+        // 2. Attempt Local Fallback Fetch
+        try {
+            const fallbackResp = await fetch(localFallbackUrl);
+            if (!fallbackResp.ok) throw new Error(`Fallback HTTP error! status: ${fallbackResp.status}`);
+            json = await fallbackResp.json();
+        } catch (fallbackError) {
+            console.error('Both API and fallback failed.', fallbackError);
+            track.innerHTML = '<p style="padding:20px; text-align:center; width:100%;">Unable to load offers at this time.</p>';
+            return;
+        }
+    }
+
     let allOffers = [];
 
-    // Parse Data
+    // Parse Data (Handle different JSON structures)
     if (Array.isArray(json) && json.length > 0 && json[0].data) {
         const data = json[0].data;
         allOffers = [...(data.coupons || []), ...(data.tirePromotions || [])];
@@ -265,9 +275,7 @@ export default async function decorate(block) {
     nextBtn.onclick = () => track.scrollBy({ left: scrollVal, behavior: 'smooth' });
 
   } catch (e) {
-    console.error('Failed to load offers', e);
+    console.error('Critical error in Offers block:', e);
     track.innerHTML = '<p style="padding:20px; text-align:center;">Unable to load offers.</p>';
   }
 }
-
-  /* Cache busting update */

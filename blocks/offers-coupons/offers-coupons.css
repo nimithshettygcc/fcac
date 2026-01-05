@@ -19,25 +19,39 @@
   
   .offers-coupons-container {
     background-color: #fff;
-    padding-bottom: 60px;
+    
+    /* UPDATED: Added 20px padding at the bottom */
+    padding-bottom: 20px !important;
+    
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
     font-family: var(--oc-font-body);
     position: relative;
-    /* Prevent horizontal scrollbar if arrows push bounds slightly */
     overflow-x: clip; 
   }
   
+  /* Title Styles */
   .oc-title {
-    text-align: center;
-    font-family: var(--oc-font-title);
-    font-size: 36px;
-    text-transform: uppercase;
-    font-weight: 700;
-    margin: 40px 0 15px 0;
+    box-sizing: border-box !important;
+    color: rgb(0, 0, 0) !important;
+    display: block !important;
+    font-family: 'Ultramagnetic', Arial, sans-serif !important;
+    font-size: 32px !important;
+    font-weight: 400 !important;
+    line-height: 35.2px !important;
+    margin-top: 10px !important;
+    margin-bottom: 25px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
+    width: 100% !important;
+    -webkit-font-smoothing: antialiased !important;
   }
   
   /* =========================================
-     NAVBAR
-     ========================================= */
+      NAVBAR
+      ========================================= */
   .oc-navbar {
     background-color: var(--oc-red);
     height: 60px;
@@ -71,6 +85,7 @@
   
   .oc-nav-list::-webkit-scrollbar { display: none; }
   
+  /* Base Tab Styles */
   .oc-tab {
     background: none;
     border: none;
@@ -80,26 +95,60 @@
     font-weight: 400; 
     white-space: nowrap;
     cursor: pointer;
-    padding: 5px 12px;
     border-radius: 20px;
     transition: all 0.2s;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    padding: 5px 12px;
+    line-height: 17.5px;
   }
   
   .oc-tab span { font-weight: inherit; }
+
+  /* Hover Effect */
+  .oc-tab:not(.active):hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    color: #fff !important;
+    transition: background-color 0.2s ease;
+  }
   
+  /* Active Tab Styles */
   .oc-tab.active {
-    background-color: #fff;
-    color: #000;
-    font-weight: 700;
+    background-color: rgb(255, 255, 255) !important;
+    background-clip: border-box !important;
+    border: none !important;
+    border-radius: 20px !important;
+    color: rgb(0, 0, 0) !important;
+    font-family: 'Avenir', Arial, sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    line-height: 17.5px !important;
+    text-align: center !important;
+    text-transform: none !important;
+    white-space: nowrap !important;
+    box-sizing: border-box !important;
+    display: block !important;
+    height: 27.5px !important;
+    margin-top: 12px !important;
+    margin-bottom: 12px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 5px 12px !important;
+    cursor: pointer !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    -webkit-font-smoothing: antialiased !important;
+    transition: all 0.2s ease !important;
   }
   
   /* =========================================
-     CAROUSEL WRAPPER
-     ========================================= */
+      CAROUSEL WRAPPER
+      ========================================= */
   .oc-carousel-wrapper {
     position: relative;
     max-width: 1264px;
     margin: 40px auto;
+    margin-bottom: 0 !important;
     padding: 0 20px;
     padding-bottom: 0; 
   }
@@ -108,7 +157,7 @@
     display: flex;
     gap: 20px; 
     overflow-x: auto;
-    padding: 30px 10px 40px 10px; 
+    padding: 30px 10px 10px 10px !important;
     scroll-behavior: smooth;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -122,7 +171,7 @@
     background-color: rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     position: relative; 
-    margin: -15px auto 40px auto;
+    margin: 0 auto 40px auto !important;
     z-index: 50;
     overflow: hidden;
     cursor: pointer;
@@ -161,9 +210,6 @@
   }
   .oc-arrow:hover { background: #ccc; }
   
-  /* FIX: Push arrows to the absolute edge of the SCREEN 
-     Calculation: Center of wrapper (50%) minus Center of Screen (50vw) plus padding (10px)
-  */
   .oc-prev {
     left: calc(50% - 50vw + 10px); 
   }
@@ -179,18 +225,17 @@
   }
   
   /* =========================================
-     CARD DESIGN - Matching Main Site
-     ========================================= */
+      CARD DESIGN
+      ========================================= */
   .oc-card {
     position: relative;
     flex: 0 0 272.5px;
-    margin: 35px auto;
     min-width: 270px;
     max-width: 395px;
     cursor: pointer;
+    margin: 35px auto 5px auto !important;
   }
 
-  /* Icon Ribbon - red horizontal bar at top */
   .oc-icon-ribbon {
     background-color: var(--oc-red);
     position: absolute;
@@ -198,19 +243,17 @@
     transform: scale(0.85);
     height: 70px;
     z-index: 0;
-    top: -34px;
+    top: -45px !important;
     left: 0;
     text-align: center;
     border-radius: 10px;
   }
 
-  /* Inner Container */
   .oc-container-inner {
     position: relative;
     z-index: 0;
   }
 
-  /* Icon Arc - semi-circular red element overlapping ribbon */
   .oc-icon-arc {
     position: absolute;
     width: 80px;
@@ -224,7 +267,6 @@
     overflow: visible;
   }
 
-  /* Icon - positioned inside the arc */
   .oc-icon {
     position: absolute;
     left: 50%;
@@ -237,7 +279,6 @@
     z-index: 2;
   }
 
-  /* Body Wrap - white card body */
   .oc-body-wrap {
     background-color: #fff;
     border-radius: 7px;
@@ -257,72 +298,77 @@
     overflow: visible;
   }
 
-  /* Body Copy */
   .oc-body-copy {
     padding-top: 40px;
     position: relative;
     z-index: 0;
   }
 
-  /* Title */
-  .oc-title {
-    margin: 0;
-    font-size: 14px;
-    margin-bottom: 5px;
-    text-align: center;
-    line-height: 20px;
-    padding: 0 10px;
-    font-family: var(--oc-font-body);
-    font-weight: 400;
-    text-transform: none;
-    color: #000;
+  /* Card Title */
+  .oc-body-copy .oc-title {
+    font-family: 'Ultramagnetic', Arial, sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    line-height: 20px !important;
+    text-transform: uppercase !important;
+    color: rgb(0, 0, 0) !important;
+    margin: 0 0 5px 0 !important;
+    padding: 0 10px !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+    display: block !important;
   }
 
-  /* Discount Copy - large red price */
+  /* Price/Discount */
   .oc-discount-copy {
-    color: var(--oc-red);
-    margin: 0;
-    margin-bottom: 5px;
-    font-size: 30px;
-    padding: 0 10px;
-    overflow: hidden;
-    word-break: break-word;
-    display: -webkit-box;
-    text-overflow: ellipsis;
-    max-width: 100%;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    font-family: var(--oc-font-title);
-    font-weight: 700;
-    text-transform: uppercase;
+    font-family: 'Ultramagnetic', Arial, sans-serif !important;
+    color: rgb(216, 30, 5) !important;
+    font-size: 30px !important;
+    font-weight: 400 !important;
+    line-height: 33px !important;
+    text-transform: uppercase !important;
+    margin: 0 0 5px 0 !important;
+    padding: 0 10px !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
   }
 
   /* Subtitle */
   .oc-subtitle {
-    margin: 0;
-    font-size: 14px;
-    margin-bottom: 5px;
-    text-align: center;
-    line-height: 20px;
-    padding: 0 10px;
-    font-family: var(--oc-font-title);
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #000;
+    font-family: 'Ultramagnetic', Arial, sans-serif !important;
+    color: rgb(0, 0, 0) !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    line-height: 20px !important;
+    text-transform: uppercase !important;
+    margin: 0 0 5px 0 !important;
+    padding: 0 10px !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+    display: block !important;
   }
 
   /* Summary */
   .oc-summary {
-    margin: 0;
-    padding-bottom: 20px;
-    font-size: 14px;
-    text-transform: none;
-    font-family: var(--oc-font-body);
-    margin-top: 10px;
-    color: #000;
+    font-family: 'Avenir', Arial, sans-serif !important;
+    color: rgb(0, 0, 0) !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    line-height: 15.4px !important;
+    text-transform: none !important;
+    margin-top: 10px !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 20px !important;
+    padding-top: 0 !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+    display: block !important;
   }
 
-  /* Separator - dashed line with cutouts */
   .oc-separator {
     margin: -1px 10px;
     height: 20px;
@@ -361,7 +407,6 @@
     transform: rotate(90deg);
   }
 
-  /* Footer Wrap */
   .oc-footer-wrap {
     background-color: #fff;
     border-radius: 7px;
@@ -375,7 +420,6 @@
     border-top-right-radius: 0;
   }
 
-  /* CTAs Container */
   .oc-ctas {
     display: flex;
     justify-content: center;
@@ -383,7 +427,6 @@
     margin-top: 10px;
   }
 
-  /* Phone CTA and Print CTA - Base Styles */
   .oc-phone-cta,
   .oc-print-cta {
     text-decoration: none;
@@ -399,7 +442,6 @@
     min-width: 0;
   }
 
-  /* Phone CTA - Red button with white text */
   .oc-phone-cta {
     background: var(--oc-red);
     color: #fff !important;
@@ -421,7 +463,6 @@
     }
   }
 
-  /* Phone CTA Hover */
   .oc-phone-cta:hover,
   .oc-phone-cta:active {
     background-color: #b81a05;
@@ -430,7 +471,6 @@
     text-decoration: none !important;
   }
 
-  /* Print CTA - White button with black text */
   .oc-print-cta {
     border: 2px solid #d6d6d6;
     background: #fff;
@@ -446,27 +486,32 @@
     text-decoration: none !important;
   }
   
-  /* Footer Copy */
-  .oc-footer-copy {
-    /* Additional styles if needed */
-  }
-
-  /* Details CTA */
+  /* Details Link */
   .oc-details-cta,
   .oc-details-cta:link,
   .oc-details-cta:visited,
   .oc-details-cta:active {
-    text-transform: uppercase;
-    color: #000 !important;
-    font-size: 12px;
-    font-family: 'AvenirHeavy', Arial, sans-serif;
-    margin-top: 10px;
-    display: inline-block;
-    margin-bottom: 13px;
-    text-decoration: underline;
-    text-decoration-color: #000 !important;
-    cursor: pointer;
-    font-weight: 600;
+    box-sizing: border-box !important;
+    display: inline-block !important;
+    width: auto !important;
+    min-height: 17.1354px !important;
+    font-family: 'AvenirHeavy', Arial, sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    line-height: 17.1428px !important;
+    text-transform: uppercase !important;
+    text-align: center !important;
+    color: rgb(0, 0, 0) !important;
+    text-decoration: underline !important;
+    text-decoration-color: rgb(0, 0, 0) !important;
+    text-decoration-style: solid !important;
+    margin-top: 10px !important;
+    margin-bottom: 13px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 0 !important;
+    cursor: pointer !important;
+    -webkit-font-smoothing: antialiased !important;
   }
 
   .oc-details-cta:hover {
@@ -474,7 +519,6 @@
     text-decoration-color: var(--oc-red) !important;
   }
 
-  /* Expiry Wrap */
   .oc-expiry-wrap {
     font-size: 12px;
     font-style: italic;
@@ -493,18 +537,33 @@
   }
 
   .oc-expiry-date {
-    font-style: italic;
-    color: #000;
+    font-family: 'Avenir', Arial, sans-serif !important;
+    font-size: 12px !important;
+    font-style: italic !important;
+    font-weight: 400 !important;
+    line-height: 17.1428px !important;
+    color: rgb(0, 0, 0) !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+    display: block !important;
+    width: auto !important;
+    -webkit-font-smoothing: antialiased !important;
   }
 
   .oc-expiry-date span {
-    font-family: 'AvenirHeavy', Arial, sans-serif;
-    font-weight: 600;
+    font-family: 'AvenirHeavy', Arial, sans-serif !important;
+    font-size: 12px !important;
+    font-style: italic !important;
+    font-weight: 400 !important;
+    line-height: 17.1428px !important;
+    color: rgb(0, 0, 0) !important;
+    display: inline !important;
+    -webkit-font-smoothing: antialiased !important;
   }
   
   /* =========================================
-     FOOTER
-     ========================================= */
+      FOOTER
+      ========================================= */
   .oc-footer {
     text-align: center;
     margin-top: 0;
@@ -519,35 +578,37 @@
     content: none;
   }
   
+  /* See All Offers Button */
   .oc-btn-see-all,
   .oc-btn-see-all:link,
   .oc-btn-see-all:visited,
   .oc-btn-see-all:active,
   .oc-btn-see-all:focus {
-    position: relative;
-    z-index: 2;
-    display: inline-block;
-    
-    font-family: var(--oc-font-title);
-    font-size: 19px;
-    
-    /* FORCE BOLD WHITE */
-    font-weight: 700 !important;
-    color: #fff !important;
-    
-    line-height: 20.9px;
-    text-transform: uppercase;
+    box-sizing: border-box !important;
+    display: inline-block !important;
+    width: auto !important;
+    height: 40.8958px !important;
+    font-family: 'Ultramagnetic', Arial, sans-serif !important;
+    font-size: 19px !important;
+    font-weight: 400 !important;
+    line-height: 20.9px !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
+    color: rgb(255, 255, 255) !important;
     text-decoration: none !important;
-    
-    background-color: rgb(216, 30, 5);
-    border: 2px solid rgb(216, 30, 5);
-    border-radius: 4px;
-    padding: 8px 11px;
-    margin-bottom: 60px;
-    
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
-    outline: none;
+    background-color: rgb(216, 30, 5) !important;
+    border: 2px solid rgb(216, 30, 5) !important;
+    border-radius: 4px !important;
+    padding: 8px 11px !important;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    position: relative !important;
+    cursor: pointer !important;
+    -webkit-font-smoothing: antialiased !important;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+    transition: background-color 0.3s ease-in-out, border 0.3s ease-in-out !important;
   }
   
   .oc-btn-see-all:hover {
@@ -563,9 +624,6 @@
     .oc-card { flex: 0 0 272.5px; }
     .oc-scrollbar-track { width: 80%; }
     
-    /* On mobile, bring arrows back inside slightly to avoid being off-screen if no margin */
     .oc-prev { left: 0; }
     .oc-next { right: 0; }
   }
-
-  /* Cache busting update */
