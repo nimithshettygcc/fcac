@@ -67,7 +67,7 @@ export default function decorate(block) {
       { match: /SAT:\s*([\d:apm-]+)/i, day: 'SAT:', special: false },
       { match: /SUN:\s*([\d:apm-]+)/i, day: 'SUN:', special: false },
       { match: /Christmas Eve:\s*([\d:apm-]+)/i, day: 'Christmas Eve:', special: true },
-      { match: /Christmas:\s*(\w+)/i, day: 'Christmas:', special: true }
+      { match: /Christmas:\s*(\w+)/i, day: 'Christmas:', special: true },
     ];
     patterns.forEach((pattern) => {
       const match = cleanText.match(pattern.match);
@@ -84,9 +84,9 @@ export default function decorate(block) {
 
   function parseAddress(addressText) {
     if (!addressText) return { lines: [], phone: '' };
-    const phoneMatch = addressText.match(/(\d{3}[.\-]?\d{3}[.\-]?\d{4})/);
+    const phoneMatch = addressText.match(/(\d{3}[.-]?\d{3}[.-]?\d{4})/);
     const phone = phoneMatch ? phoneMatch[1] : '';
-    let address = addressText.replace(/\d{3}[.\-]?\d{3}[.\-]?\d{4}/, '').trim();
+    const address = addressText.replace(/\d{3}[.-]?\d{3}[.-]?\d{4}/, '').trim();
     const parts = address.split(/(?=[A-Z][a-z]+,)/);
     const lines = [];
     if (parts.length > 1) {
@@ -138,7 +138,7 @@ export default function decorate(block) {
       heading: 'SEARCH FOR BATTERIES',
       buttonText: 'GET BATTERY PRICING',
       btnId: 'batteries-submit-btn',
-      fourthField: 'Engine'
+      fourthField: 'Engine',
     },
     // --- FIX 2: ALIGNMENT DATA MATCHING SCREENSHOT ---
     alignment: {
@@ -146,7 +146,7 @@ export default function decorate(block) {
       heading: 'ALIGNMENT SERVICE', // Matches red header in screenshot
       buttonText: 'GET ALIGNMENT PRICING',
       btnId: 'alignment-submit-btn',
-      fourthField: 'Submodel' // Matches 4th dropdown in screenshot
+      fourthField: 'Submodel', // Matches 4th dropdown in screenshot
     },
   };
 
@@ -199,7 +199,9 @@ export default function decorate(block) {
   const tabNavList = document.createElement('ul');
 
   const services = [
-    { name: oilChangeText, icon: oilChangeIcon, key: 'oilChange', active: true },
+    {
+      name: oilChangeText, icon: oilChangeIcon, key: 'oilChange', active: true,
+    },
     { name: brakesText, icon: brakesIcon, key: 'brakes' },
     { name: batteriesText, icon: batteriesIcon, key: 'batteries' },
     { name: alignmentText, icon: alignmentIcon, key: 'alignment' },
@@ -346,7 +348,13 @@ export default function decorate(block) {
   zipInputTireSize.id = 'zipcode-tire-size';
   const submitBtnTireSize = submitBtn.cloneNode(true);
 
-  tireSizeForm.append(crossSectionField, aspectRatioField, rimDiameterField, zipFieldTireSize, submitBtnTireSize);
+  tireSizeForm.append(
+    crossSectionField,
+    aspectRatioField,
+    rimDiameterField,
+    zipFieldTireSize,
+    submitBtnTireSize,
+  );
   byTireSizeSection.appendChild(tireSizeForm);
 
   innerTabContent.append(requiredText, byVehicleSection, byTireSizeSection);
@@ -362,6 +370,30 @@ export default function decorate(block) {
 
   // Function to create service detail content
   function createServiceDetail(serviceName, data) {
+    // No Label Dropdowns helper function
+    function createNoLabelSelect(id, placeholder, disabled = false) {
+      const field = document.createElement('div');
+      field.className = 'form-field';
+      field.style.height = 'auto';
+
+      const selectDiv = document.createElement('div');
+      selectDiv.className = 'custom-select';
+
+      const select = document.createElement('select');
+      select.id = `${serviceName}-${id}`;
+      select.name = `${serviceName}-${id}`;
+      select.disabled = disabled;
+
+      const option = document.createElement('option');
+      option.value = '';
+      option.textContent = placeholder;
+
+      select.appendChild(option);
+      selectDiv.appendChild(select);
+      field.appendChild(selectDiv);
+      return { field, select };
+    }
+
     serviceDetailView.innerHTML = '';
 
     const header = document.createElement('div');
@@ -384,12 +416,12 @@ export default function decorate(block) {
     if (data.type === 'form') {
       // --- Render Form (Batteries & Alignment) ---
       const contentContainer = document.createElement('div');
-      contentContainer.style.padding = '0'; 
+      contentContainer.style.padding = '0';
 
       const reqText = document.createElement('p');
       reqText.className = 'required-text';
       reqText.textContent = 'All fields are required';
-      
+
       // Exact Computed Style for "All fields required"
       reqText.style.boxSizing = 'border-box';
       reqText.style.color = 'rgb(51, 51, 51)';
@@ -409,58 +441,38 @@ export default function decorate(block) {
       formDiv.className = 'search-by-vehicle';
       formDiv.style.gap = '10px';
 
-      // No Label Dropdowns
-      function createNoLabelSelect(id, placeholder, disabled=false) {
-        const field = document.createElement('div');
-        field.className = 'form-field';
-        field.style.height = 'auto'; 
-        
-        const selectDiv = document.createElement('div');
-        selectDiv.className = 'custom-select';
-        
-        const select = document.createElement('select');
-        select.id = `${serviceName}-${id}`;
-        select.name = `${serviceName}-${id}`;
-        select.disabled = disabled;
-        
-        const option = document.createElement('option');
-        option.value = '';
-        option.textContent = placeholder; 
-        
-        select.appendChild(option);
-        selectDiv.appendChild(select);
-        field.appendChild(selectDiv);
-        return { field, select };
-      }
-
       const { field: yearF, select: yearS } = createNoLabelSelect('year', 'Year', false);
       const { field: makeF, select: makeS } = createNoLabelSelect('make', 'Make', true);
       const { field: modelF, select: modelS } = createNoLabelSelect('model', 'Model', true);
-      const { field: fourthF, select: fourthS } = createNoLabelSelect(data.fourthField.toLowerCase(), data.fourthField, true);
+      const { field: fourthF, select: fourthS } = createNoLabelSelect(
+        data.fourthField.toLowerCase(),
+        data.fourthField,
+        true,
+      );
 
-      yearS.addEventListener('change', () => { makeS.disabled = !yearS.value; if(!yearS.value) makeS.value = ''; });
-      makeS.addEventListener('change', () => { modelS.disabled = !makeS.value; if(!makeS.value) modelS.value = ''; });
-      modelS.addEventListener('change', () => { fourthS.disabled = !modelS.value; if(!modelS.value) fourthS.value = ''; });
+      yearS.addEventListener('change', () => { makeS.disabled = !yearS.value; if (!yearS.value) makeS.value = ''; });
+      makeS.addEventListener('change', () => { modelS.disabled = !makeS.value; if (!makeS.value) modelS.value = ''; });
+      modelS.addEventListener('change', () => { fourthS.disabled = !modelS.value; if (!modelS.value) fourthS.value = ''; });
 
       // Zip Code (No label, just input)
-      const zipWrapper = document.createElement('div');
-      zipWrapper.className = 'zip-wrapper';
-      zipWrapper.style.marginTop = '5px'; 
-      
-      const zipInput = document.createElement('input');
-      zipInput.type = 'text';
-      zipInput.className = 'zip-input';
-      zipInput.value = '37206';
+      const zipWrapperInner = document.createElement('div');
+      zipWrapperInner.className = 'zip-wrapper';
+      zipWrapperInner.style.marginTop = '5px';
+
+      const zipInputInner = document.createElement('input');
+      zipInputInner.type = 'text';
+      zipInputInner.className = 'zip-input';
+      zipInputInner.value = '37206';
       // FIX: Grey out zip code for Batteries/Alignment
-      zipInput.disabled = true;
-      
-      const whyLink = document.createElement('a');
-      whyLink.href = '#';
-      whyLink.className = 'why-link';
-      whyLink.textContent = 'Why?';
-      
-      zipWrapper.appendChild(zipInput);
-      zipWrapper.appendChild(whyLink);
+      zipInputInner.disabled = true;
+
+      const whyLinkInner = document.createElement('a');
+      whyLinkInner.href = '#';
+      whyLinkInner.className = 'why-link';
+      whyLinkInner.textContent = 'Why?';
+
+      zipWrapperInner.appendChild(zipInputInner);
+      zipWrapperInner.appendChild(whyLinkInner);
 
       const formSubmit = document.createElement('button');
       formSubmit.className = 'btn-submit';
@@ -468,25 +480,24 @@ export default function decorate(block) {
       formSubmit.id = data.btnId;
       formSubmit.textContent = data.buttonText;
       formSubmit.style.marginTop = '20px';
-      
+
       // Default Disabled State
       formSubmit.disabled = true;
 
       fourthS.addEventListener('change', () => {
-        if(fourthS.value) {
-           formSubmit.disabled = false;
-           formSubmit.style.backgroundColor = '#d81e05';
-           formSubmit.style.color = '#fff';
-           formSubmit.style.border = '2px solid #6f3f3f';
-           formSubmit.style.cursor = 'pointer';
-           formSubmit.style.opacity = '1';
+        if (fourthS.value) {
+          formSubmit.disabled = false;
+          formSubmit.style.backgroundColor = '#d81e05';
+          formSubmit.style.color = '#fff';
+          formSubmit.style.border = '2px solid #6f3f3f';
+          formSubmit.style.cursor = 'pointer';
+          formSubmit.style.opacity = '1';
         }
       });
 
-      formDiv.append(yearF, makeF, modelF, fourthF, zipWrapper, formSubmit);
+      formDiv.append(yearF, makeF, modelF, fourthF, zipWrapperInner, formSubmit);
       contentContainer.append(reqText, formDiv);
       serviceDetailView.appendChild(contentContainer);
-
     } else {
       // --- Render Details ---
       const addressData = parseAddress(data.storeAddressRaw);
@@ -653,9 +664,9 @@ export default function decorate(block) {
     const li = e.target.closest('li');
     if (!li) return;
     e.preventDefault();
-    
+
     // Switch Active State
-    [...innerTabList.children].forEach(child => child.classList.remove('active'));
+    [...innerTabList.children].forEach((child) => child.classList.remove('active'));
     li.classList.add('active');
 
     // Switch Sections
@@ -668,47 +679,54 @@ export default function decorate(block) {
   });
 
   // Shop Tires - By Vehicle Form Logic
+  function checkVehicleForm() {
+    const allFilled = yearSelect.value
+      && makeSelect.value
+      && modelSelect.value
+      && submodelSelect.value
+      && zipInput.value.trim();
+    submitBtn.disabled = !allFilled;
+  }
+
   yearSelect.addEventListener('change', () => {
     makeSelect.disabled = !yearSelect.value;
-    if(!yearSelect.value) { makeSelect.value = ''; modelSelect.value = ''; submodelSelect.value = ''; modelSelect.disabled = true; submodelSelect.disabled = true; }
+    if (!yearSelect.value) { makeSelect.value = ''; modelSelect.value = ''; submodelSelect.value = ''; modelSelect.disabled = true; submodelSelect.disabled = true; }
     checkVehicleForm();
   });
   makeSelect.addEventListener('change', () => {
     modelSelect.disabled = !makeSelect.value;
-    if(!makeSelect.value) { modelSelect.value = ''; submodelSelect.value = ''; submodelSelect.disabled = true; }
+    if (!makeSelect.value) { modelSelect.value = ''; submodelSelect.value = ''; submodelSelect.disabled = true; }
     checkVehicleForm();
   });
   modelSelect.addEventListener('change', () => {
     submodelSelect.disabled = !modelSelect.value;
-    if(!modelSelect.value) { submodelSelect.value = ''; }
+    if (!modelSelect.value) { submodelSelect.value = ''; }
     checkVehicleForm();
   });
   submodelSelect.addEventListener('change', checkVehicleForm);
   zipInput.addEventListener('input', checkVehicleForm);
 
-  function checkVehicleForm() {
-    const allFilled = yearSelect.value && makeSelect.value && modelSelect.value && submodelSelect.value && zipInput.value.trim();
-    submitBtn.disabled = !allFilled;
+  // Shop Tires - By Tire Size Form Logic
+  function checkTireSizeForm() {
+    const allFilled = crossSectionSelect.value
+      && aspectRatioSelect.value
+      && rimDiameterSelect.value
+      && zipInputTireSize.value.trim();
+    submitBtnTireSize.disabled = !allFilled;
   }
 
-  // Shop Tires - By Tire Size Form Logic
   crossSectionSelect.addEventListener('change', () => {
     aspectRatioSelect.disabled = !crossSectionSelect.value;
-    if(!crossSectionSelect.value) { aspectRatioSelect.value = ''; rimDiameterSelect.value = ''; rimDiameterSelect.disabled = true; }
+    if (!crossSectionSelect.value) { aspectRatioSelect.value = ''; rimDiameterSelect.value = ''; rimDiameterSelect.disabled = true; }
     checkTireSizeForm();
   });
   aspectRatioSelect.addEventListener('change', () => {
     rimDiameterSelect.disabled = !aspectRatioSelect.value;
-    if(!aspectRatioSelect.value) { rimDiameterSelect.value = ''; }
+    if (!aspectRatioSelect.value) { rimDiameterSelect.value = ''; }
     checkTireSizeForm();
   });
   rimDiameterSelect.addEventListener('change', checkTireSizeForm);
   zipInputTireSize.addEventListener('input', checkTireSizeForm);
-
-  function checkTireSizeForm() {
-    const allFilled = crossSectionSelect.value && aspectRatioSelect.value && rimDiameterSelect.value && zipInputTireSize.value.trim();
-    submitBtnTireSize.disabled = !allFilled;
-  }
 
   vehicleForm.addEventListener('submit', (e) => e.preventDefault());
   tireSizeForm.addEventListener('submit', (e) => e.preventDefault());

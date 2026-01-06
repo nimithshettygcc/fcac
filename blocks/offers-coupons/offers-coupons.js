@@ -2,12 +2,12 @@ export default async function decorate(block) {
   // 1. SETUP
   const rows = [...block.children];
   const titleText = rows[0]?.textContent.trim();
-  
+
   // --- UPDATED API URL HERE ---
   const apiUrl = 'https://mocki.io/v1/1dd0c166-c8dc-436a-968c-57d806bb339c';
-  
+
   // Path to local fallback file (Ensure this file exists in your project)
-  const localFallbackUrl = '/blocks/offers-coupons/offers-fallback.json'; 
+  const localFallbackUrl = '/blocks/offers-coupons/offers-fallback.json';
 
   const categories = [
     { label: 'All Offers', filter: 'all' },
@@ -41,18 +41,18 @@ export default async function decorate(block) {
   // Carousel
   const carouselWrapper = document.createElement('div');
   carouselWrapper.className = 'oc-carousel-wrapper';
-  
+
   const prevBtn = document.createElement('button');
   prevBtn.className = 'oc-arrow oc-prev';
   prevBtn.innerHTML = '&#10094;';
-  
+
   const nextBtn = document.createElement('button');
   nextBtn.className = 'oc-arrow oc-next';
   nextBtn.innerHTML = '&#10095;';
-  
+
   const track = document.createElement('div');
   track.className = 'oc-track';
-  
+
   carouselWrapper.append(prevBtn, track, nextBtn);
   container.append(carouselWrapper);
 
@@ -76,9 +76,7 @@ export default async function decorate(block) {
   block.append(container);
 
   // --- HELPER: ICON LOGIC ---
-  const getIconName = (tags = [], category = '') => {
-    return 'tire-icon-offers-bsro-global.svg';
-  };
+  const getIconName = () => 'tire-icon-offers-bsro-global.svg';
 
   const matchCategory = (offer, filter) => {
     const tags = (offer.tags || []).join(' ').toLowerCase();
@@ -146,8 +144,8 @@ export default async function decorate(block) {
     const availableTrack = trackWidth - thumbWidth;
     const maxScroll = track.scrollWidth - track.clientWidth;
     if (availableTrack > 0) {
-        const walk = (x / availableTrack) * maxScroll;
-        track.scrollLeft = startScrollLeft + walk;
+      const walk = (x / availableTrack) * maxScroll;
+      track.scrollLeft = startScrollLeft + walk;
     }
   });
 
@@ -157,38 +155,38 @@ export default async function decorate(block) {
   // --- FETCH & RENDER ---
   try {
     let json;
-    
+
     // 1. Attempt API Fetch (New URL)
     try {
-        const resp = await fetch(apiUrl);
-        if (!resp.ok) throw new Error(`API HTTP error! status: ${resp.status}`);
-        json = await resp.json();
+      const resp = await fetch(apiUrl);
+      if (!resp.ok) throw new Error(`API HTTP error! status: ${resp.status}`);
+      json = await resp.json();
     } catch (apiError) {
-        console.warn(`Primary API (${apiUrl}) failed. Attempting fallback...`, apiError);
-        
-        // 2. Attempt Local Fallback Fetch
-        try {
-            const fallbackResp = await fetch(localFallbackUrl);
-            if (!fallbackResp.ok) throw new Error(`Fallback HTTP error! status: ${fallbackResp.status}`);
-            json = await fallbackResp.json();
-        } catch (fallbackError) {
-            console.error('Both API and fallback failed.', fallbackError);
-            track.innerHTML = '<p style="padding:20px; text-align:center; width:100%;">Unable to load offers at this time.</p>';
-            return;
-        }
+      // console.warn(`Primary API (${apiUrl}) failed. Attempting fallback...`, apiError);
+
+      // 2. Attempt Local Fallback Fetch
+      try {
+        const fallbackResp = await fetch(localFallbackUrl);
+        if (!fallbackResp.ok) throw new Error(`Fallback HTTP error! status: ${fallbackResp.status}`);
+        json = await fallbackResp.json();
+      } catch (fallbackError) {
+        // console.error('Both API and fallback failed.', fallbackError);
+        track.innerHTML = '<p style="padding:20px; text-align:center; width:100%;">Unable to load offers at this time.</p>';
+        return;
+      }
     }
 
     let allOffers = [];
 
     // Parse Data (Handle different JSON structures)
     if (Array.isArray(json) && json.length > 0 && json[0].data) {
-        const data = json[0].data;
-        allOffers = [...(data.coupons || []), ...(data.tirePromotions || [])];
+      const { data } = json[0];
+      allOffers = [...(data.coupons || []), ...(data.tirePromotions || [])];
     } else if (json.data) {
-        const data = json.data;
-        allOffers = [...(data.coupons || []), ...(data.tirePromotions || [])];
+      const { data } = json;
+      allOffers = [...(data.coupons || []), ...(data.tirePromotions || [])];
     } else if (Array.isArray(json)) {
-        allOffers = json;
+      allOffers = json;
     }
 
     const renderOffers = (filter) => {
@@ -196,8 +194,8 @@ export default async function decorate(block) {
       const filtered = allOffers.filter((o) => matchCategory(o, filter));
 
       if (filtered.length === 0) {
-          track.innerHTML = '<p style="padding:20px; text-align:center; width:100%;">No offers available.</p>';
-          return;
+        track.innerHTML = '<p style="padding:20px; text-align:center; width:100%;">No offers available.</p>';
+        return;
       }
 
       filtered.forEach((offer) => {
@@ -211,11 +209,11 @@ export default async function decorate(block) {
         const details = offer.offerDetails || '';
         const expiry = offer.offerEndDate || '';
         const daysLeft = '22 days left!';
-        
+
         const iconName = getIconName(offer.tags, offer.category);
         const iconSrc = `/icons/${iconName}`;
         const fallbackIcon = '/icons/tire-icon-offers-bsro-global.svg';
-        const expiryIconSrc = `/icons/offer-expire-icon.svg`;
+        const expiryIconSrc = '/icons/offer-expire-icon.svg';
 
         card.innerHTML = `
           <div class="oc-icon-ribbon"></div>
@@ -250,7 +248,7 @@ export default async function decorate(block) {
         track.append(card);
       });
 
-      setTimeout(updateUIState, 50); 
+      setTimeout(updateUIState, 50);
     };
 
     // Init Tabs
@@ -270,12 +268,11 @@ export default async function decorate(block) {
 
     renderOffers('all');
 
-    const scrollVal = 300; 
+    const scrollVal = 300;
     prevBtn.onclick = () => track.scrollBy({ left: -scrollVal, behavior: 'smooth' });
     nextBtn.onclick = () => track.scrollBy({ left: scrollVal, behavior: 'smooth' });
-
   } catch (e) {
-    console.error('Critical error in Offers block:', e);
+    // console.error('Critical error in Offers block:', e);
     track.innerHTML = '<p style="padding:20px; text-align:center;">Unable to load offers.</p>';
   }
 }

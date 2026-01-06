@@ -9,7 +9,7 @@
 }
 
 @font-face {
-  font-family: 'RobotoCondensed';
+  font-family: RobotoCondensed;
   font-style: normal;
   font-weight: 700;
   font-display: swap;
@@ -17,7 +17,7 @@
 }
 
 @font-face {
-  font-family: 'RobotoCondensed';
+  font-family: RobotoCondensed;
   font-style: normal;
   font-weight: 400;
   font-display: swap;
@@ -25,7 +25,7 @@
 }
 
 @font-face {
-  font-family: 'Avenir';
+  font-family: Avenir;
   font-style: normal;
   font-weight: 400;
   font-display: swap;
@@ -33,7 +33,7 @@
 }
 
 @font-face {
-  font-family: 'FoundationSans';
+  font-family: FoundationSans;
   font-style: normal;
   font-weight: 400;
   font-display: swap;
@@ -41,7 +41,7 @@
 }
 
 @font-face {
-  font-family: 'FoundationSans';
+  font-family: FoundationSans;
   font-style: normal;
   font-weight: 700;
   font-display: swap;
@@ -49,7 +49,7 @@
 }
 
 @font-face {
-  font-family: 'Ultramagnetic';
+  font-family: Ultramagnetic;
   font-style: normal;
   font-weight: 400;
   font-display: swap;

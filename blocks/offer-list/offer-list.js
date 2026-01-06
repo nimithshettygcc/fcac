@@ -23,15 +23,15 @@ function createOffer(imageRow, linkRow) {
   });
 
   moveInstrumentation(link, offerLink);
-  
+
   // Clone picture
   const clonedPicture = picture.cloneNode(true);
-  
+
   // LIGHTHOUSE FIX: Ensure img has explicit width/height if missing
   const img = clonedPicture.querySelector('img');
   if (img) {
-      if (!img.getAttribute('width')) img.setAttribute('width', '100%');
-      if (!img.getAttribute('height')) img.setAttribute('height', '100%');
+    if (!img.getAttribute('width')) img.setAttribute('width', '100%');
+    if (!img.getAttribute('height')) img.setAttribute('height', '100%');
   }
 
   offerLink.appendChild(clonedPicture);
@@ -59,20 +59,20 @@ export default function decorate(block) {
     const imageRow = rows[i];
     const linkRow = rows[i + 1];
 
-    if (!imageRow || !linkRow) continue;
+    if (imageRow && linkRow) {
+      const offerContent = createOffer(imageRow, linkRow);
 
-    const offerContent = createOffer(imageRow, linkRow);
-
-    if (offerContent) {
-      if (i === 0) {
-        moveInstrumentation(imageRow, leftSection);
-        leftSection.appendChild(offerContent);
-      } else {
-        const offerItem = document.createElement('div');
-        offerItem.className = 'offer-list-stacked-item';
-        moveInstrumentation(imageRow, offerItem);
-        offerItem.appendChild(offerContent);
-        rightSection.appendChild(offerItem);
+      if (offerContent) {
+        if (i === 0) {
+          moveInstrumentation(imageRow, leftSection);
+          leftSection.appendChild(offerContent);
+        } else {
+          const offerItem = document.createElement('div');
+          offerItem.className = 'offer-list-stacked-item';
+          moveInstrumentation(imageRow, offerItem);
+          offerItem.appendChild(offerContent);
+          rightSection.appendChild(offerItem);
+        }
       }
     }
   }
@@ -80,7 +80,7 @@ export default function decorate(block) {
   innerWrapper.appendChild(leftSection);
   innerWrapper.appendChild(rightSection);
   container.appendChild(innerWrapper);
-  
+
   block.textContent = '';
   block.appendChild(container);
 }

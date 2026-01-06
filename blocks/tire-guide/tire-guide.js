@@ -9,17 +9,17 @@ export default function decorate(block) {
   const tdgLink = rows[2].querySelector('a');
   const tdgCtaText = rows[3].querySelector('p');
   const heroPic = rows[4].querySelector('picture');
-  const storeBarContainer = rows[5]; 
-  
+  const storeBarContainer = rows[5];
+
   const storeLabel = rows[6].querySelector('p');
-  const storeInfo = rows[7]; 
+  const storeInfo = rows[7];
   const storeDetailsLink = rows[8].querySelector('a');
   const storeDetailsText = rows[9].querySelector('p');
   const changeStoreLink = rows[10].querySelector('a');
   const changeStoreText = rows[11].querySelector('p');
   const schedLink = rows[12].querySelector('a');
   const schedText = rows[13].querySelector('p');
-  const hoursSection = rows[14]; 
+  const hoursSection = rows[14];
   const dirLink = rows[15].querySelector('a');
   const dirText = rows[16].querySelector('p');
   const mapPic = rows[17].querySelector('picture');
@@ -36,15 +36,15 @@ export default function decorate(block) {
 
   const copy = document.createElement('div');
   copy.className = 'tg-copy';
-  
+
   const titleEl = document.createElement('h2');
   titleEl.className = 'tg-title';
   titleEl.innerHTML = title ? title.innerHTML : '';
-  
+
   const descEl = document.createElement('p');
   descEl.className = 'tg-desc';
   descEl.innerHTML = desc ? desc.innerHTML : '';
-  
+
   const tdgCta = document.createElement('a');
   tdgCta.className = 'tg-primary-cta';
   if (tdgLink) tdgCta.href = tdgLink.href;
@@ -56,10 +56,10 @@ export default function decorate(block) {
   // --- STORE BAR ---
   const storeWrapper = document.createElement('div');
   storeWrapper.className = 'tg-store-wrapper';
-  
+
   const iconSpan = storeBarContainer.querySelector('.icon');
   const originalLink = storeBarContainer.querySelector('a') || storeBarContainer.querySelector('p');
-  
+
   const storeBarContent = document.createElement('div');
   storeBarContent.className = 'tg-store-bar-content';
 
@@ -70,20 +70,20 @@ export default function decorate(block) {
 
   const storeBarBtn = document.createElement('div');
   storeBarBtn.className = 'tg-store-bar';
-  
+
   const stateInfo = document.createElement('span');
   stateInfo.className = 'tg-bar-state-info';
   stateInfo.innerHTML = originalLink ? originalLink.innerHTML : 'Select Store';
 
   const stateClose = document.createElement('span');
   stateClose.className = 'tg-bar-state-close';
-  stateClose.innerHTML = 'CLOSE'; 
+  stateClose.innerHTML = 'CLOSE';
 
   storeBarBtn.append(stateInfo, stateClose);
 
   const arrowIcon = document.createElement('span');
   arrowIcon.className = 'tg-arrow-icon';
-  arrowIcon.innerHTML = '▲'; 
+  arrowIcon.innerHTML = '▲';
 
   storeBarContent.append(locIconWrapper, storeBarBtn, arrowIcon);
   storeWrapper.append(storeBarContent);
@@ -91,7 +91,7 @@ export default function decorate(block) {
   // --- EXPANDED PANEL ---
   const panel = document.createElement('div');
   panel.className = 'tg-store-panel';
-  panel.setAttribute('aria-hidden', 'true'); 
+  panel.setAttribute('aria-hidden', 'true');
 
   const infoWrapper = document.createElement('div');
   infoWrapper.className = 'tg-store-info';
@@ -101,10 +101,10 @@ export default function decorate(block) {
   colLeft.className = 'tg-col-contact';
 
   if (storeLabel) {
-      const lbl = document.createElement('p');
-      lbl.className = 'tg-store-label';
-      lbl.innerHTML = storeLabel.innerHTML;
-      colLeft.append(lbl);
+    const lbl = document.createElement('p');
+    lbl.className = 'tg-store-label';
+    lbl.innerHTML = storeLabel.innerHTML;
+    colLeft.append(lbl);
   }
 
   // PHONE
@@ -114,37 +114,38 @@ export default function decorate(block) {
   if (phoneSrc) {
     phone.innerHTML = phoneSrc.innerHTML;
   } else if (storeInfo) {
-     const allText = storeInfo.textContent;
-     const phoneMatch = allText.match(/(\d{3}[.-]\d{3}[.-]\d{4})/);
-     if(phoneMatch) phone.textContent = phoneMatch[0];
+    const allText = storeInfo.textContent;
+    const phoneMatch = allText.match(/(\d{3}[.-]\d{3}[.-]\d{4})/);
+    if (phoneMatch) {
+      const [phoneNumber] = phoneMatch;
+      phone.textContent = phoneNumber;
+    }
   }
   colLeft.append(phone);
 
   // ADDRESS
   const addrBlock = document.createElement('div');
   addrBlock.className = 'tg-address-block';
-  
+
   if (storeInfo) {
-      let ps = [...storeInfo.querySelectorAll('p')].filter(p => {
-         return p !== phoneSrc && (!phoneSrc || !p.contains(phoneSrc)); 
-      });
+    const ps = [...storeInfo.querySelectorAll('p')].filter((p) => p !== phoneSrc && (!phoneSrc || !p.contains(phoneSrc)));
 
-      if (ps.length >= 2) {
-          const lastIndex = ps.length - 1;
-          const lastP = ps[lastIndex];
-          const secondLastP = ps[lastIndex - 1];
-          if (lastP.textContent.length < 20) {
-              secondLastP.innerHTML += ` ${lastP.innerHTML}`;
-              ps.pop();
-          }
+    if (ps.length >= 2) {
+      const lastIndex = ps.length - 1;
+      const lastP = ps[lastIndex];
+      const secondLastP = ps[lastIndex - 1];
+      if (lastP.textContent.length < 20) {
+        secondLastP.innerHTML += ` ${lastP.innerHTML}`;
+        ps.pop();
       }
+    }
 
-      ps.forEach(p => {
-          const line = document.createElement('div'); 
-          line.className = 'tg-addr-line';
-          line.textContent = p.textContent; 
-          addrBlock.append(line);
-      });
+    ps.forEach((p) => {
+      const line = document.createElement('div');
+      line.className = 'tg-addr-line';
+      line.textContent = p.textContent;
+      addrBlock.append(line);
+    });
   }
   colLeft.append(addrBlock);
 
@@ -173,72 +174,72 @@ export default function decorate(block) {
 
   const hoursDiv = document.createElement('div');
   hoursDiv.className = 'tg-hours-wrapper';
-  
+
   if (hoursSection) {
-      const hTitle = hoursSection.querySelector('h2, h3, strong');
-      if(hTitle) {
-          const t = document.createElement('h4');
-          t.className = 'tg-hours-title';
-          t.textContent = hTitle.textContent;
-          hoursDiv.append(t);
-      }
+    const hTitle = hoursSection.querySelector('h2, h3, strong');
+    if (hTitle) {
+      const t = document.createElement('h4');
+      t.className = 'tg-hours-title';
+      t.textContent = hTitle.textContent;
+      hoursDiv.append(t);
+    }
 
-      const hTextP = hoursSection.querySelector('p:last-of-type'); 
-      if (hTextP) {
-          const ul = document.createElement('ul');
-          ul.className = 'tg-hours-list';
-          
-          let rawText = hTextP.textContent.trim();
-          
-          // --- PROTECT MON-FRI RANGES ---
-          // Temporarily replace "MON-FRI" with a placeholder "WEEKDAY_RANGE"
-          // so the splitter doesn't see "FRI" and split it.
-          rawText = rawText.replace(/MON-FRI/gi, 'WEEKDAY_RANGE');
+    const hTextP = hoursSection.querySelector('p:last-of-type');
+    if (hTextP) {
+      const ul = document.createElement('ul');
+      ul.className = 'tg-hours-list';
 
-          // Split logic: Look for Day names or Holidays (or our placeholder)
-          const splitRegex = /(WEEKDAY_RANGE|MON|TUE|WED|THU|FRI|SAT|SUN|Christmas)/gi;
-          const preparedText = rawText.replace(splitRegex, '|$1');
-          
-          const splitLines = preparedText.split('|');
+      let rawText = hTextP.textContent.trim();
 
-          splitLines.forEach(line => {
-              // Restore the text: Replace placeholder back to "MON-FRI"
-              let cleanLine = line.replace(/WEEKDAY_RANGE/g, 'MON-FRI').trim();
-              
-              if(cleanLine.length > 2) { 
-                  const li = document.createElement('li');
-                  
-                  // Holiday styling check
-                  if (cleanLine.toLowerCase().includes('christmas') || 
-                      cleanLine.toLowerCase().includes('closed') ||
-                      cleanLine.toLowerCase().includes('holiday')) {
-                      li.className = 'tg-hour-row tg-holiday';
-                  } else {
-                      li.className = 'tg-hour-row';
-                  }
+      // --- PROTECT MON-FRI RANGES ---
+      // Temporarily replace "MON-FRI" with a placeholder "WEEKDAY_RANGE"
+      // so the splitter doesn't see "FRI" and split it.
+      rawText = rawText.replace(/MON-FRI/gi, 'WEEKDAY_RANGE');
 
-                  // Split Day vs Time at first colon
-                  const parts = cleanLine.split(/:(.+)/); 
-                  
-                  if (parts.length > 1) {
-                      const daySpan = document.createElement('span');
-                      daySpan.className = 'tg-day';
-                      daySpan.textContent = parts[0] + ':'; // "MON-FRI:"
+      // Split logic: Look for Day names or Holidays (or our placeholder)
+      const splitRegex = /(WEEKDAY_RANGE|MON|TUE|WED|THU|FRI|SAT|SUN|Christmas)/gi;
+      const preparedText = rawText.replace(splitRegex, '|$1');
 
-                      const timeSpan = document.createElement('span');
-                      timeSpan.className = 'tg-time';
-                      timeSpan.textContent = parts[1].trim(); // "7:00am-7:00pm"
+      const splitLines = preparedText.split('|');
 
-                      li.append(daySpan, timeSpan);
-                  } else {
-                      li.textContent = cleanLine;
-                  }
+      splitLines.forEach((line) => {
+        // Restore the text: Replace placeholder back to "MON-FRI"
+        const cleanLine = line.replace(/WEEKDAY_RANGE/g, 'MON-FRI').trim();
 
-                  ul.append(li);
-              }
-          });
-          hoursDiv.append(ul);
-      }
+        if (cleanLine.length > 2) {
+          const li = document.createElement('li');
+
+          // Holiday styling check
+          if (cleanLine.toLowerCase().includes('christmas')
+                      || cleanLine.toLowerCase().includes('closed')
+                      || cleanLine.toLowerCase().includes('holiday')) {
+            li.className = 'tg-hour-row tg-holiday';
+          } else {
+            li.className = 'tg-hour-row';
+          }
+
+          // Split Day vs Time at first colon
+          const parts = cleanLine.split(/:(.+)/);
+
+          if (parts.length > 1) {
+            const daySpan = document.createElement('span');
+            daySpan.className = 'tg-day';
+            daySpan.textContent = `${parts[0]}:`; // "MON-FRI:"
+
+            const timeSpan = document.createElement('span');
+            timeSpan.className = 'tg-time';
+            timeSpan.textContent = parts[1].trim(); // "7:00am-7:00pm"
+
+            li.append(daySpan, timeSpan);
+          } else {
+            li.textContent = cleanLine;
+          }
+
+          ul.append(li);
+        }
+      });
+      hoursDiv.append(ul);
+    }
   }
   colRight.append(hoursDiv);
 

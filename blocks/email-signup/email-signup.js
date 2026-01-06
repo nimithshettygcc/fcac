@@ -6,7 +6,7 @@ export default function decorate(block) {
 
   // Row 1: Headline Text
   let headlineText = rows[1]?.textContent.trim();
-  
+
   // FIX: Force specific line break between "EXCLUSIVE" and "OFFERS"
   if (headlineText) {
     // Case-insensitive replace to insert the break
@@ -14,10 +14,10 @@ export default function decorate(block) {
   }
 
   const inputPlaceholder = 'Enter Your Email';
-  
+
   // Row 3: Button Text
   const buttonText = rows[3]?.textContent.trim() || "LET'S GO";
-  
+
   // Row 4: Privacy Policy
   const privacyContent = rows[4]?.querySelector('div')?.innerHTML;
 
@@ -44,7 +44,7 @@ export default function decorate(block) {
     const title = document.createElement('h2');
     title.className = 'es-title';
     // Render HTML to allow the <br> tag to work
-    title.innerHTML = headlineText; 
+    title.innerHTML = headlineText;
     contentWrapper.append(title);
   }
 

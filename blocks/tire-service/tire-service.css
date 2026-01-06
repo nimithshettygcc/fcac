@@ -2,17 +2,17 @@
    TIRE SERVICE - VARIABLES
    ============================================ */
    :root {
-    --ts-black: #000000;
-    --ts-dark-grey: #333333;
+    --ts-black: #000;
+    --ts-dark-grey: #333;
     --ts-light-grey: #ebebeb;
     --ts-red: #d81e05;
     --ts-red-hover: #b41904;
-    --ts-font-title: 'Ultramagnetic', Arial, sans-serif;
-    --ts-font-body: 'Avenir', Arial, sans-serif;
+    --ts-font-title: 'Ultramagnetic', arial, sans-serif;
+    --ts-font-body: 'Avenir', arial, sans-serif;
   }
   
   .tire-service-container {
-    padding: 10px 20px 40px 20px;
+    padding: 10px 20px 40px;
     background-color: #fff;
     box-sizing: border-box;
   }
@@ -95,9 +95,9 @@
     display: flex;
     flex-direction: column;
     background-color: #ebebeb;
-    border: 1px solid #cccccc;
+    border: 1px solid #ccc;
     text-align: left;
-    color: #333333;
+    color: #333;
     box-sizing: border-box;
   }
   
@@ -136,7 +136,7 @@
     font-size: 16px;
     font-weight: 400;
     line-height: 22.8571px;
-    color: rgb(51, 51, 51);
+    color: rgb(51 51 51);
     text-align: center;
     margin: 16px 0;
     padding: 0 10px;
@@ -150,7 +150,7 @@
     font-size: 18px;
     font-weight: 400;
     line-height: 25.7143px;
-    color: #000000 !important; 
+    color: #000 !important; 
     text-decoration: none;
     text-transform: capitalize;
     cursor: pointer;
@@ -209,7 +209,7 @@
     line-height: 28.16px;
     margin: 0; 
     text-transform: uppercase;
-    color: #ffffff;
+    color: #fff;
     text-align: left;
     overflow-wrap: break-word;
   }
@@ -226,7 +226,7 @@
     font-weight: 400;
     line-height: 20px;
     margin: 14px 0;
-    color: #ffffff;
+    color: #fff;
     text-align: left;
     width: 242px;
     max-width: none;
@@ -241,7 +241,7 @@
     box-sizing: border-box;
     display: inline-block;
     background-color: var(--ts-red);
-    color: #ffffff !important; 
+    color: #fff !important; 
     border: 2px solid var(--ts-red);
     font-family: var(--ts-font-title);
     font-size: 19px;
@@ -280,6 +280,7 @@
   }
   
 /* CARD 1: Tire Advisor */
+
 /* CARD 1: Tire Advisor */
 .feature-0 .ts-feature-image { 
   width: 100%;
@@ -291,12 +292,12 @@
 
 .feature-0 .ts-bg-img img {
   object-position: center right;
-  -webkit-mask-image: none; 
   mask-image: none;
   opacity: 1; 
 }
   
   /* CARD 2: Financing */
+
   /* CARD 2: Financing */
 .feature-1 .ts-feature-image { width: 100%; }
 
@@ -318,41 +319,63 @@
     
     /* UPDATED: Matches provided style */
     transform: rotate(-2deg);
-    
     display: block;
-    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.4));
+    filter: drop-shadow(0 10px 15px rgb(0 0 0 / 40%));
   }
   
   /* ============================================
       RESPONSIVE
      ============================================ */
-  @media (max-width: 1024px) {
+  @media (width <= 1024px) {
     .ts-service-grid { flex-wrap: wrap; }
     .ts-card { flex: 0 0 48%; }
     
     .ts-feature-grid { flex-direction: column; }
     .ts-feature-card { min-height: auto; }
     
-    .ts-feature-text { width: 100%; padding: 40px 30px; }
+    .ts-feature-text {
+      width: 100%;
+      padding: 40px 30px;
+    }
+
     .feature-0 .ts-feature-text h3, 
     .feature-1 .ts-feature-text h3 { max-width: 100%; }
     .ts-feature-text p { max-width: 100%; }
     
-    .feature-0 .ts-feature-image { width: 100%; position: relative; height: 250px; }
+    .feature-0 .ts-feature-image {
+      width: 100%;
+      position: relative;
+      height: 250px;
+    }
+
     .feature-0 .ts-bg-img img { 
-        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 80%);
         mask-image: linear-gradient(to bottom, transparent 0%, black 80%);
     }
     
     /* On smaller screens, bring it back in or adjust as needed */
-    .ts-overlay-img { bottom: 0px; right: 0px; width: 40%; }
+    .ts-overlay-img {
+      bottom: 0;
+      right: 0;
+      width: 40%;
+    }
   }
   
-  @media (max-width: 767px) {
-    .ts-card { flex: 0 0 100%; margin-bottom: 20px; }
-    .ts-nav { flex-direction: column; gap: 5px; }
+  @media (width <= 767px) {
+    .ts-card {
+      flex: 0 0 100%;
+      margin-bottom: 20px;
+    }
+
+    .ts-nav {
+      flex-direction: column;
+      gap: 5px;
+    }
     .ts-sep { display: none; }
     
     /* Further adjustment for mobile */
-    .ts-overlay-img { bottom: -20px; right: -10px; width: 50%; }
+    .ts-overlay-img {
+      bottom: -20px;
+      right: -10px;
+      width: 50%;
+    }
   }

@@ -92,11 +92,11 @@
   /* Computed Styles */
   align-items: flex-end;
   box-sizing: border-box;
-  font-family: 'Avenir', Arial, sans-serif;
+  font-family: Avenir, Arial, sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
-  color: rgb(51, 51, 51);
+  color: rgb(51 51 51);
   text-align: left;
   -webkit-font-smoothing: antialiased;
 }
@@ -104,16 +104,11 @@
 /* LIGHTHOUSE FIX: 
    Use 'cover' to maintain aspect ratio. 
    'fill' distorts the image and triggers the aspect ratio penalty.
+   Note: Styles for .offer-list-stacked-item img are defined above at line 67.
 */
-.offer-list-stacked-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; 
-  display: block;
-}
 
 /* --- Responsive (Mobile) --- */
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .offer-list-inner {
     flex-direction: column;
     gap: 16px;

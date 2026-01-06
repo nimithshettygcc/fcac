@@ -4,8 +4,8 @@
    :root {
     --art-red: #d81e05;
     --art-red-hover: #b41904;
-    --art-font-title: 'Ultramagnetic', Arial, sans-serif;
-    --art-font-body: 'Avenir', Arial, sans-serif;
+    --art-font-title: 'Ultramagnetic', arial, sans-serif;
+    --art-font-body: 'Avenir', arial, sans-serif;
   }
   
   /* 1. OUTER BLOCK */
@@ -14,8 +14,8 @@
     width: 100%;
     box-sizing: border-box;
     background-color: #fff;
-    padding-top: 0px; 
-    padding-bottom: 0px;
+    padding-top: 0; 
+    padding-bottom: 0;
   }
   
   /* 2. INNER WRAPPER */
@@ -26,13 +26,12 @@
     max-width: 1264.67px;
     margin: 0 auto;
     font-family: var(--art-font-body);
-    color: rgb(51, 51, 51);
+    color: rgb(51 51 51);
     box-sizing: border-box;
-    padding-top: 0px;
+    padding-top: 0;
     
     /* UPDATED: Reduced padding bottom */
     padding-bottom: 45px; 
-    
     min-height: auto; 
   }
   
@@ -43,19 +42,19 @@
     box-sizing: border-box;
     width: 100%;
     max-width: 1141px;
-    margin: 0 auto 25px auto; 
-    border-top: 4px solid rgb(216, 30, 5);
+    margin: 0 auto 25px; 
+    border-top: 4px solid rgb(216 30 5);
     padding-top: 7px;
     display: block;
   }
   
   .articles-title {
-    font-family: 'AvenirHeavy', 'Avenir', Arial, sans-serif;
+    font-family: AvenirHeavy, Avenir, Arial, sans-serif;
     font-weight: 900; 
     font-size: 20px;
     line-height: 22px;
     letter-spacing: 2px;
-    color: rgb(0, 0, 0);
+    color: rgb(0 0 0);
     text-transform: uppercase;
     text-align: left;
     margin: 0;
@@ -79,7 +78,6 @@
     width: 367px;
     flex: 0 0 367px;
     height: 440px; /* Fixed height for hover box */
-    
     display: flex;
     flex-direction: column;
     text-decoration: none !important;
@@ -91,9 +89,26 @@
     transition: box-shadow 0.3s ease-in-out;
   }
   
+  .article-heading {
+    display: block;
+    box-sizing: border-box;
+    font-family: AvenirHeavy, Avenir, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 28px;
+    color: rgb(0 0 0);
+    text-transform: capitalize;
+    text-align: left;
+    max-width: 342px; 
+    height: 84px; 
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+  }
+
   /* Darker grey outline on hover */
   .article-card:hover {
-     box-shadow: 0 0 0 2px #999999; 
+     box-shadow: 0 0 0 2px #999; 
   }
   
   .article-card:hover .article-heading {
@@ -124,32 +139,15 @@
   .article-category {
     display: block;
     box-sizing: border-box;
-    font-family: 'Avenir', Arial, sans-serif; 
+    font-family: Avenir, Arial, sans-serif; 
     font-size: 11px;
     font-weight: 700;
     line-height: 15.7143px;
     letter-spacing: 1px;
-    color: rgb(224, 0, 0);
+    color: rgb(224 0 0);
     text-transform: uppercase;
     text-align: left;
     margin: 0;
-  }
-  
-  .article-heading {
-    display: block;
-    box-sizing: border-box;
-    font-family: 'AvenirHeavy', 'Avenir', Arial, sans-serif;
-    font-weight: 700;
-    font-size: 22px;
-    line-height: 28px;
-    color: rgb(0, 0, 0);
-    text-transform: capitalize;
-    text-align: left;
-    max-width: 342px; 
-    height: 84px; 
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
   }
   
   /* Specific fix for the 3rd card */
@@ -172,10 +170,10 @@
   .articles-view-more-btn {
     display: inline-block;
     box-sizing: border-box;
-    background-color: rgb(216, 30, 5);
-    border: 2px solid rgb(216, 30, 5);
-    color: rgb(255, 255, 255) !important; 
-    font-family: 'Ultramagnetic', Arial, sans-serif;
+    background-color: rgb(216 30 5);
+    border: 2px solid rgb(216 30 5);
+    color: rgb(255 255 255) !important; 
+    font-family: Ultramagnetic, Arial, sans-serif;
     font-size: 19px;
     font-weight: 400; 
     line-height: 20.9px;
@@ -197,27 +195,32 @@
   /* =========================================
       RESPONSIVE
      ========================================= */
-  @media (max-width: 900px) {
+  @media (width <= 900px) {
     .articles-grid {
       flex-direction: column;
       gap: 40px;
     }
+
     .article-card {
         width: 100%;
         height: auto; 
         flex: 1;
     }
+
     .article-image {
       height: auto;
       aspect-ratio: 16/9;
     }
+
     .article-heading {
       height: auto;
       max-width: 100%;
     }
+
     .article-card:nth-child(3) .article-heading {
       max-width: 100%; 
     }
+
     .articles-header {
       max-width: 100%;
       padding-left: 20px;
