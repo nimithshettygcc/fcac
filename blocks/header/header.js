@@ -281,6 +281,14 @@ export default async function decorate(block) {
       const link = firstLink ? firstLink.href : '#';
       const pic = section.querySelector('picture');
       if (pic) {
+        // --- ADDED LCP OPTIMIZATION ---
+        const img = pic.querySelector('img');
+        if (img) {
+          img.setAttribute('loading', 'eager');
+          img.setAttribute('fetchpriority', 'high');
+        }
+        // ------------------------------
+        
         const a = document.createElement('a');
         a.href = link;
         a.append(pic);

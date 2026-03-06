@@ -28,8 +28,8 @@ export default function decorate(block) {
   };
 
   // Extract banner content
-  const heading = getFirstText(rows[0]) || 'Cyber Monday Sale';
-  const subheading = getFirstText(rows[1]) || 'Tire & Service Offers';
+  const heading = getFirstText(rows[0]) || ''; // Removed the hardcoded default
+  const subheading = getFirstText(rows[1]) || '';
   const description = getFirstText(rows[2]) || '';
   const ctaLink = getFirstLink(rows[3]) || '#';
   const ctaText = getFirstText(rows[4]) || 'GET DETAILS';
@@ -602,7 +602,10 @@ export default function decorate(block) {
   const copyOverlay = document.createElement('div');
   copyOverlay.className = 'hero-copy-overlay';
   const mainHeading = document.createElement('h1');
-  mainHeading.textContent = `${heading} `;
+  
+  // FIX: Conditionally render heading and space only if one was authored
+  mainHeading.textContent = heading ? `${heading} ` : '';
+  
   const subheadSpan = document.createElement('span');
   subheadSpan.className = 'subhead';
   subheadSpan.textContent = subheading;
