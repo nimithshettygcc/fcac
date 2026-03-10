@@ -4,7 +4,7 @@ export default async function decorate(block) {
   const titleText = rows[0]?.textContent.trim();
 
   // --- UPDATED API URL HERE ---
-  const apiUrl = 'https://fcacs.free.beeceptor.com';
+  const apiUrl = 'https://674422deb4e2e04abea0f2ee.mockapi.io/api/v1/offers';
 
   // Path to local fallback file (Ensure this file exists in your project)
   const localFallbackUrl = '/blocks/offers-coupons/offers-fallback.json';
