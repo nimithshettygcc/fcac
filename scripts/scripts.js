@@ -92,7 +92,7 @@ export function decorateMain(main) {
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
-  
+
   // --- LCP OPTIMIZATION ---
   // Kick off header loading immediately so the browser discovers the banner image faster
   loadHeader(doc.querySelector('header'));

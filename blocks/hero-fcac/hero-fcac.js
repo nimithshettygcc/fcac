@@ -602,10 +602,10 @@ export default function decorate(block) {
   const copyOverlay = document.createElement('div');
   copyOverlay.className = 'hero-copy-overlay';
   const mainHeading = document.createElement('h1');
-  
+
   // FIX: Conditionally render heading and space only if one was authored
   mainHeading.textContent = heading ? `${heading} ` : '';
-  
+
   const subheadSpan = document.createElement('span');
   subheadSpan.className = 'subhead';
   subheadSpan.textContent = subheading;

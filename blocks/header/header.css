@@ -1044,7 +1044,7 @@ header nav {
    MEGA MENU TOGGLE (Surgical Fix)
    ========================================= */
 
-@media (min-width: 900px) {
+@media (width >= 900px) {
   /* 1. Only target the secondary bar when a MEGA-MENU item (.nav-drop) is hovered. 
         This keeps the strip visible for Coupons, Find a Store, and Contact Us. */
   .nav-primary:has(.nav-sections li.nav-drop:hover) + .nav-secondary,
@@ -1065,6 +1065,7 @@ header nav {
     z-index: 1000 !important;
   }
 }
+
 /* =========================================
    7. MOBILE ADJUSTMENTS
    ========================================= */

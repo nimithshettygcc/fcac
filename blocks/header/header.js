@@ -288,7 +288,7 @@ export default async function decorate(block) {
           img.setAttribute('fetchpriority', 'high');
         }
         // ------------------------------
-        
+
         const a = document.createElement('a');
         a.href = link;
         a.append(pic);
