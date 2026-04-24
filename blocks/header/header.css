@@ -18,6 +18,11 @@ header .nav-wrapper {
   font-family: var(--nav-font);
 }
 
+/* Wheelworks: scale the entire header to 110% so it matches production at 100% zoom */
+.brand-wheelworks .nav-wrapper {
+  zoom: 1.1;
+}
+
 header nav {
   width: 100%;
   margin: 0 auto;
@@ -42,9 +47,17 @@ header nav {
 .nav-flyer img {
   width: 100%;
   height: auto;
-  max-height: 62px;
-  object-fit: contain;
+  max-height: 71px;
   display: block;
+}
+
+/* Wheelworks: lock the image to the exact strip height so it never distorts */
+.brand-wheelworks .nav-flyer img {
+  height: 71px;
+  max-height: 71px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
 }
 
 /* =========================================
@@ -85,6 +98,87 @@ header nav {
   height: auto;
   max-height: 35px;
   display: block;
+}
+
+/* --- WHEELWORKS LOGO (taller, square-ish 129x63) --- */
+.nav-brand-wheelworks a {
+  width: auto;
+  max-width: 170px;
+}
+
+.nav-brand-wheelworks img {
+  width: 129px;
+  height: 63px;
+  max-height: 63px;
+  vertical-align: middle;
+}
+
+/* =========================================
+   WHEELWORKS BRAND THEME
+   Red primary bar, white menu text, no Blog/Sign In
+   ========================================= */
+
+/* Override brand colour token for all Wheelworks elements */
+.brand-wheelworks {
+  --nav-red: rgb(175, 39, 47);
+  --nav-font: Avenir, Arial, sans-serif;
+}
+
+/* Red primary bar */
+.brand-wheelworks .nav-primary {
+  background-color: var(--nav-red);
+  border-bottom: none;
+}
+
+/* Primary bar sits at 82px on Wheelworks, with a tighter left padding */
+.brand-wheelworks .nav-primary-content {
+  height: 82px;
+  padding-left: 40px;
+}
+
+/* White menu text */
+.brand-wheelworks .nav-sections > ul > li > a,
+.brand-wheelworks .nav-sections > ul > li > .nav-item-label {
+  color: #fff;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+/* Menu hover — stay white, add subtle underline instead of turning red */
+.brand-wheelworks .nav-sections > ul > li:hover > a,
+.brand-wheelworks .nav-sections > ul > li:hover > .nav-item-label {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Dropdown chevron — white instead of red */
+.brand-wheelworks .nav-sections .nav-drop > a::after {
+  border-right-color: #fff;
+  border-bottom-color: #fff;
+}
+
+/* Hide Blog / Sign In utilities on Wheelworks */
+.brand-wheelworks .nav-tools {
+  display: none;
+}
+
+/* White hamburger for mobile on red bar */
+.brand-wheelworks .nav-hamburger-icon,
+.brand-wheelworks .nav-hamburger-icon::before,
+.brand-wheelworks .nav-hamburger-icon::after {
+  background: #fff;
+}
+
+/* Promo banner — image stays at its natural (max-1264px) centered width,
+   background fills the rest of the viewport with dark grey so the banner
+   appears to span edge-to-edge */
+.brand-wheelworks .nav-flyer {
+  background-color: rgb(65, 64, 66);
+  height: 71px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* --- HAMBURGER (Mobile) --- */
@@ -139,11 +233,16 @@ header nav {
 
 .nav-sections > ul > li {
   position: static !important;
-  height: 82px;
+  height: 72px;
   display: flex;
   align-items: center;
   cursor: pointer;
   margin: 0;
+}
+
+/* Wheelworks: match li height to the 82px primary bar */
+.brand-wheelworks .nav-sections > ul > li {
+  height: 82px;
 }
 
 /* Link Styling */

@@ -102,8 +102,33 @@ function getMappedTitle(rawText) {
 }
 
 export default async function decorate(block) {
+  // Resolve which nav fragment to load. Priority:
+  //   1. Explicit `nav` metadata on the page (e.g. <meta name="nav" content="/nav-wheelworks">)
+  //   2. `keywords` metadata used as a brand key (e.g. keywords=wheelworks -> /nav-wheelworks)
+  //   3. URL prefix (e.g. /wheelworks/* -> /nav-wheelworks)
+  //   4. Default /nav fragment
   const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
+  const keywordsMeta = (getMetadata('keywords') || '').trim().toLowerCase();
+  const firstPathSegment = window.location.pathname.split('/').filter(Boolean)[0] || '';
+
+  let navPath = '/nav';
+  let brandKey = '';
+  if (navMeta) {
+    navPath = new URL(navMeta, window.location).pathname;
+    const m = navPath.match(/\/nav-([a-z0-9]+)/i);
+    if (m) [, brandKey] = m;
+  } else if (keywordsMeta) {
+    // take the first keyword if it's a comma/space-separated list
+    [brandKey] = keywordsMeta.split(/[,\s]+/);
+    if (brandKey) navPath = `/nav-${brandKey}`;
+  } else if (firstPathSegment && firstPathSegment !== 'nav') {
+    brandKey = firstPathSegment;
+    navPath = `/nav-${firstPathSegment}`;
+  }
+
+  // Tag the block with the brand so CSS can theme the whole header per brand
+  if (brandKey) block.classList.add(`brand-${brandKey.toLowerCase()}`);
+
   const fragment = await loadFragment(navPath);
 
   block.textContent = '';
@@ -149,7 +174,8 @@ export default async function decorate(block) {
     const textLower = rawText.toLowerCase();
     const firstLink = section.querySelector('a');
     const headings = section.querySelectorAll('h2, h3');
-    const logoIcon = section.querySelector('.icon-fcac-logo-icon-global-web-bsro');
+    // Detect any authored logo icon (e.g. icon-fcac-logo-icon-global-web-bsro, icon-wheelworks-logo)
+    const logoIcon = section.querySelector('span.icon[class*="-logo"]');
 
     // 1. SECONDARY BAR CHECK
     if (section.querySelector('.icon-schedule-appointment-icon-global-web-bsro')) {
@@ -304,16 +330,54 @@ export default async function decorate(block) {
     // 4. BRAND LOGO Check
     if (logoIcon || (firstLink && firstLink.href.includes('firestonecompleteautocare.com') && rawText.length < 5)) {
       if (brandWrapper.children.length > 0) return;
+
+      // Identify which brand based on the authored icon class
+      // Examples: icon-wheelworks-logo  ->  wheelworks
+      //           icon-fcac-logo-icon-global-web-bsro -> fcac
+      let brandKey = 'fcac';
+      if (logoIcon) {
+        const cls = [...logoIcon.classList].find((c) => c.startsWith('icon-') && c.includes('-logo'));
+        if (cls) {
+          // strip leading "icon-" then take the first hyphen segment as the brand key
+          [brandKey] = cls.replace(/^icon-/, '').split('-');
+        }
+      }
+
+      // Per-brand defaults (home url, alt text, label, fallback icon path)
+      const brandDefaults = {
+        wheelworks: {
+          home: '/wheelworks',
+          alt: 'Wheel Works',
+          label: 'Wheel Works Home',
+          iconSrc: '/icons/wheelworks-logo.svg',
+        },
+        fcac: {
+          home: 'https://www.firestonecompleteautocare.com/',
+          alt: 'Firestone Complete Auto Care',
+          label: 'Firestone Complete Auto Care Home',
+          iconSrc: '/icons/fcac-logo-icon-global-web-bsro.svg',
+        },
+      };
+      const brand = brandDefaults[brandKey] || brandDefaults.fcac;
+
       const logoLink = document.createElement('a');
-      logoLink.href = 'https://www.firestonecompleteautocare.com/';
+      // Prefer the link the author put around the logo, fall back to brand default
+      logoLink.href = firstLink ? firstLink.href : brand.home;
 
       /* ACCESSIBILITY FIX: Ensure Logo has label */
-      logoLink.setAttribute('aria-label', 'Firestone Complete Auto Care Home');
+      logoLink.setAttribute('aria-label', brand.label);
 
       const img = document.createElement('img');
-      img.src = '/icons/fcac-logo-icon-global-web-bsro.svg';
-      img.alt = 'Firestone Complete Auto Care';
-      img.width = 170; img.height = 30;
+      // Prefer the actual authored icon image; fall back to a sensible default per brand
+      const authoredImg = logoIcon ? logoIcon.querySelector('img') : null;
+      img.src = authoredImg && authoredImg.src ? authoredImg.src : brand.iconSrc;
+      img.alt = brand.alt;
+      img.width = 170;
+      img.height = 30;
+
+      // Tag the brand so CSS can style per-brand if needed
+      brandWrapper.classList.add(`nav-brand-${brandKey}`);
+
       logoLink.append(img);
       brandWrapper.append(logoLink);
       return;
