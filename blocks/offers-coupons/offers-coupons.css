@@ -2,14 +2,14 @@
    VARIABLES & GLOBAL
    ========================================= */
    :root {
-    --oc-red: #d81e05;
-    --oc-red-hover: #b81a05;
+    --oc-red: #af272f;
+    --oc-red-hover: #8f1f26;
     --oc-black: #000;
     --oc-grey: #333;
     --oc-light-grey: #f5f5f5;
     --oc-font-title: 'Ultramagnetic', arial, sans-serif;
     --oc-font-body: 'Avenir', arial, sans-serif;
-    --brand-color-red: #d81e05;
+    --brand-color-red: #af272f;
     --white: #fff;
     --black: #000;
     --dark-gray: #333;
@@ -51,12 +51,10 @@
   .oc-navbar {
     background-color: var(--oc-red);
     height: 60px;
-    width: 100vw;
+    width: 112%;
     position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    left: 0;
+    margin-left: -3em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -143,7 +141,8 @@
     margin: 40px auto;
     margin-bottom: 0 !important;
     padding: 0 20px;
-    padding-bottom: 0; 
+    padding-bottom: 0;
+    overflow: visible;
   }
   
   .oc-track {
@@ -204,11 +203,11 @@
   .oc-arrow:hover { background: #ccc; }
   
   .oc-prev {
-    left: calc(50% - 50vw + 10px); 
+    left: -50px;
   }
-  
+
   .oc-next {
-    right: calc(50% - 50vw + 10px);
+    right: -50px;
   }
   
   .oc-arrow.disabled {
@@ -315,7 +314,7 @@
   /* Price/Discount */
   .oc-discount-copy {
     font-family: Ultramagnetic, Arial, sans-serif !important;
-    color: rgb(216 30 5) !important;
+    color: rgb(175 39 47) !important;
     font-size: 30px !important;
     font-weight: 400 !important;
     line-height: 33px !important;
@@ -577,30 +576,31 @@
     box-sizing: border-box !important;
     display: inline-block !important;
     width: auto !important;
-    height: 40.8958px !important;
+    height: 54.8984px !important;
     font-family: Ultramagnetic, Arial, sans-serif !important;
     font-size: 19px !important;
     font-weight: 400 !important;
     line-height: 20.9px !important;
     text-align: center !important;
     text-transform: uppercase !important;
-    color: rgb(255 255 255) !important;
+    color: rgb(255, 255, 255) !important;
     text-decoration: none !important;
-    background-color: rgb(216 30 5) !important;
-    border: 2px solid rgb(216 30 5) !important;
+    background-color: rgb(175, 39, 47) !important;
+    border: 2px solid rgb(216, 30, 5) !important;
     border-radius: 4px !important;
-    padding: 8px 11px !important;
+    padding: 15px 25px !important;
     margin: 0 !important;
+    margin-bottom: 60px !important;
     position: relative !important;
     cursor: pointer !important;
     -webkit-font-smoothing: antialiased !important;
-    -webkit-tap-highlight-color: rgb(0 0 0 / 0%) !important;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
     transition: background-color 0.3s ease-in-out, border 0.3s ease-in-out !important;
   }
   
   .oc-btn-see-all:hover {
-    background-color: var(--oc-red-hover);
-    border-color: var(--oc-red-hover);
+    background-color: #8f1f26 !important;
+    border-color: #8f1f26 !important;
     color: #fff !important;
     text-decoration: none !important;
   }

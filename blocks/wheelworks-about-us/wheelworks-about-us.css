@@ -1,0 +1,320 @@
+/* =========================================
+   VARIABLES
+   ========================================= */
+:root {
+  --ww-red: #d81e05;
+  --ww-red-dark: #b41904;
+  --ww-grey-bg: #fff;
+  --ww-text-dark: rgb(51 51 51);
+  --ww-text-grey: rgb(74 74 74);
+  --ww-text-light: rgb(102 102 102);
+  --ww-font-title: 'Ultramagnetic', arial, sans-serif;
+  --ww-font-body: 'Avenir', arial, sans-serif;
+}
+
+/* 1. OUTER CONTAINER */
+.wheelworks-about-us-container {
+  width: 100%;
+  background-color: var(--ww-grey-bg);
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* 2. INNER CONTAINER */
+.ww-container {
+  width: 100%;
+  max-width: 1142px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--ww-font-body);
+  color: var(--ww-text-grey);
+  padding: 50px 20px;
+  box-sizing: border-box;
+}
+
+/* =========================================
+   TOP SECTION (white area: header + 2 features)
+   ========================================= */
+.ww-top {
+  width: 100%;
+  background: linear-gradient(to bottom, #f4f4f4 0%, #fff 100%);
+  padding: 60px 40px 40px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.ww-top-title {
+  box-sizing: border-box;
+  display: block;
+  font-family: var(--ww-font-title);
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 42px;
+  color: var(--ww-text-grey);
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0 0 50px;
+  width: 100%;
+}
+
+/* =========================================
+   FEATURES GRID (2-up)
+   ========================================= */
+.ww-features {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  width: 100%;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+}
+
+.ww-feature-card {
+  flex: 0 1 420px;
+  max-width: 480px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ww-icon-circle {
+  width: 65px;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.ww-icon-circle svg {
+  width: 64px;
+  height: 64px;
+  display: block;
+}
+
+.ww-icon-circle svg path,
+.ww-icon-circle svg polygon,
+.ww-icon-circle svg circle {
+  fill: var(--ww-red);
+}
+
+.ww-icon-circle img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  filter: invert(19%) sepia(96%) saturate(6084%) hue-rotate(356deg) brightness(96%) contrast(116%);
+}
+
+.ww-feature-eyebrow {
+  font-family: var(--ww-font-title);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ww-red);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 12px;
+}
+
+.ww-feature-text {
+  font-family: var(--ww-font-body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22.4px;
+  color: var(--ww-text-grey);
+  text-align: center;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.ww-feature-text p {
+  margin: 0 0 8px;
+}
+
+.ww-feature-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* =========================================
+   DISCLAIMER (text field outside white card)
+   ========================================= */
+.ww-disclaimer {
+  width: 100%;
+  max-width: 1000px;
+  text-align: center;
+  font-family: var(--ww-font-body);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--ww-text-grey);
+  padding: 30px 20px 40px;
+  box-sizing: border-box;
+}
+
+.ww-disclaimer p {
+  margin: 0 0 14px;
+}
+
+.ww-disclaimer p:last-child {
+  margin-bottom: 0;
+}
+
+/* =========================================
+   RED REASONS BOX
+   ========================================= */
+.ww-reasons-box {
+  width: 100%;
+  background-color: var(--ww-red);
+  background-image: linear-gradient(135deg, #d81e05 0%, #b41904 100%);
+  color: #fff;
+  padding: 50px 40px 60px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.ww-reasons-title {
+  box-sizing: border-box;
+  display: block;
+  font-family: var(--ww-font-title);
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #fff;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0 0 40px;
+  width: 100%;
+}
+
+.ww-reasons-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.ww-reason {
+  text-align: center;
+}
+
+.ww-reason-eyebrow {
+  font-family: var(--ww-font-title);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 8px;
+}
+
+.ww-reason-text {
+  font-family: var(--ww-font-body);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+  color: #fff;
+  text-align: center;
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.ww-reason-text p {
+  margin: 0;
+}
+
+/* =========================================
+   BUTTON
+   ========================================= */
+.ww-button-wrapper {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.ww-button,
+a.ww-button {
+  display: inline-block;
+  background-color: rgb(102 102 102);
+  color: #fff !important;
+  font-family: var(--ww-font-title);
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 14px 32px;
+  text-decoration: none;
+  border: 2px solid #fff;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.ww-button:hover,
+a.ww-button:hover {
+  background-color: #fff;
+  color: var(--ww-red) !important;
+  text-decoration: none;
+}
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+@media (width <= 900px) {
+  .ww-features {
+    gap: 50px;
+  }
+}
+
+@media (width <= 768px) {
+  .ww-container {
+    padding: 30px 15px;
+  }
+
+  .ww-top {
+    padding: 40px 20px 30px;
+  }
+
+  .ww-top-title {
+    font-size: 24px;
+    line-height: 30px;
+    margin-bottom: 30px;
+  }
+
+  .ww-features {
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .ww-feature-card {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .ww-disclaimer {
+    padding: 20px 15px 30px;
+    font-size: 11px;
+  }
+
+  .ww-reasons-box {
+    padding: 40px 20px 50px;
+  }
+
+  .ww-reasons-title {
+    font-size: 24px;
+  }
+
+  .ww-reason-eyebrow {
+    font-size: 16px;
+  }
+
+  .ww-reason-text {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}

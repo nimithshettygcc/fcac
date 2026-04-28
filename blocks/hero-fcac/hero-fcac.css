@@ -5,12 +5,12 @@
 /* Hero Container */
 .hero-fcac-section {
   position: relative;
-  width: 100vw;
-  margin-left: calc(-50vw + 50%); /* Force full viewport width */
+  width: 112%;
+  margin-left: -3em;
   height: 557px;
   overflow: hidden;
-  margin-top: 110px; /* Spacing to clear header */
-  z-index: 0; 
+  margin-top: 140px; /* Spacing to clear header */
+  z-index: 0;
 
   /* FIX: Remove bottom whitespace */
   margin-bottom: 0 !important;
@@ -40,12 +40,16 @@
 
 /* --- WIDGET ALIGNMENT LOGIC --- */
 
-/* Wrapper to establish the 1264px grid context */
+/* Wrapper to establish the 1264px grid context.
+   position: absolute + left: 3em cancels out the section's margin-left: -3em
+   so the widget and text stay pinned to their original position regardless
+   of how wide the section (background) grows. */
 .hero-content-container {
-  position: relative;
+  position: absolute;
+  left: 3em;
+  top: 0;
   width: 100%;
   max-width: 1264px;
-  margin: 0 auto;
   height: 100%;
   z-index: 10;
   pointer-events: none;
@@ -57,7 +61,7 @@
   top: 17.5px;
 
   /* Fixed left align relative to the center grid */
-  left: calc(50% - 572px);
+  left: calc(50% - 592px);
   width: 375px;
   height: 522px;
   background-color: #fff;
@@ -72,7 +76,7 @@
   position: absolute;
   top: 62%;
   transform: translateY(-50%);
-  left: calc(50% - 165px);
+  left: calc(50% - 185px);
   right: auto;
   max-width: 650px;
   color: #fff;

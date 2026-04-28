@@ -24,6 +24,7 @@
       "tire-service",
       "articles",
       "about-us",
+      "wheelworks-about-us",
       "email-signup"
     ]
   },
@@ -71,6 +72,12 @@
     "id": "about-us",
     "components": [
       "about-us-item"
+    ]
+  },
+  {
+    "id": "wheelworks-about-us",
+    "components": [
+      "wheelworks-about-us-reason"
     ]
   },
   {
