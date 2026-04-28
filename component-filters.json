@@ -75,12 +75,6 @@
     ]
   },
   {
-    "id": "wheelworks-about-us",
-    "components": [
-      "wheelworks-about-us-reason"
-    ]
-  },
-  {
     "id": "tire-service",
     "components": [
       "tire-service-card",

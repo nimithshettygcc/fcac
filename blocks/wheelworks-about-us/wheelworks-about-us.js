@@ -1,52 +1,62 @@
 export default function decorate(block) {
-  // 1. Extract Elements
+  // 1. Extract Elements (one row per field; image+alt collapse to one row)
   const rows = [...block.children];
 
-  // Top header: "PRICED RIGHT, FIXED RIGHT AND WARRANTEED"
+  // row 0: header
   const topHeader = rows[0]?.textContent.trim();
 
-  // Section 1: icon, eyebrow, text
-  const section1Row = rows[1];
-  const section1Cols = section1Row ? [...section1Row.children] : [];
-  const section1Icon = section1Cols[0]?.querySelector('picture, img, svg');
-  const section1Eyebrow = section1Cols[1]?.textContent.trim();
-  const section1Text = section1Cols[2]?.querySelector('div')?.innerHTML
-    || section1Cols[2]?.innerHTML || '';
+  // row 1: section1Icon (+alt)
+  const section1Icon = rows[1]?.querySelector('picture, img, svg');
+  // row 2: section1Eyebrow
+  const section1Eyebrow = rows[2]?.textContent.trim();
+  // row 3: section1Text
+  const section1Text = rows[3]?.querySelector('div')?.innerHTML
+    || rows[3]?.innerHTML || '';
 
-  // Section 2: icon, eyebrow, text
-  const section2Row = rows[2];
-  const section2Cols = section2Row ? [...section2Row.children] : [];
-  const section2Icon = section2Cols[0]?.querySelector('picture, img, svg');
-  const section2Eyebrow = section2Cols[1]?.textContent.trim();
-  const section2Text = section2Cols[2]?.querySelector('div')?.innerHTML
-    || section2Cols[2]?.innerHTML || '';
+  // row 4: section2Icon (+alt)
+  const section2Icon = rows[4]?.querySelector('picture, img, svg');
+  // row 5: section2Eyebrow
+  const section2Eyebrow = rows[5]?.textContent.trim();
+  // row 6: section2Text
+  const section2Text = rows[6]?.querySelector('div')?.innerHTML
+    || rows[6]?.innerHTML || '';
 
-  // Disclaimer text field (outside white card, above red box)
-  const disclaimerContainer = rows[3]?.querySelector('div');
-  const disclaimerHtml = disclaimerContainer ? disclaimerContainer.innerHTML : '';
+  // row 7: disclaimer
+  const disclaimerHtml = rows[7]?.querySelector('div')?.innerHTML
+    || rows[7]?.innerHTML || '';
 
-  // Bottom header: "WHY WHEEL WORKS? HERE ARE THREE REASONS."
-  const bottomHeader = rows[4]?.textContent.trim();
+  // row 8: reasonsHeader
+  const bottomHeader = rows[8]?.textContent.trim();
 
-  // Button (link, text)
-  const buttonRow = rows[5];
-  const buttonCols = buttonRow ? [...buttonRow.children] : [];
-  const buttonLink = buttonCols[0]?.querySelector('a')?.href;
-  const buttonText = buttonCols[1]?.textContent.trim();
+  // rows 9-14: reason1Header, reason1Text, reason2Header, reason2Text, reason3Header, reason3Text
+  const reasons = [
+    {
+      eyebrow: rows[9]?.textContent.trim(),
+      text: rows[10]?.querySelector('div')?.innerHTML || rows[10]?.innerHTML || '',
+    },
+    {
+      eyebrow: rows[11]?.textContent.trim(),
+      text: rows[12]?.querySelector('div')?.innerHTML || rows[12]?.innerHTML || '',
+    },
+    {
+      eyebrow: rows[13]?.textContent.trim(),
+      text: rows[14]?.querySelector('div')?.innerHTML || rows[14]?.innerHTML || '',
+    },
+  ];
 
-  // Reason items (multifield) - all remaining rows
-  const reasonRows = rows.slice(6);
+  // row 15: buttonLink (aem-content)
+  const buttonLink = rows[15]?.querySelector('a')?.href;
+  // row 16: buttonText
+  const buttonText = rows[16]?.textContent.trim();
 
-  // Default icons (used as fallback when no icon image is supplied)
+  // Default icons (fallback)
   const defaultIcons = [
-    // Tire price-tag icon
     `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="64px" height="64px" viewBox="0 0 64 64" class="ww-icon-double-difference">
        <path d="M31.9,57.5C18,57.5,6.7,46.2,6.7,32.3C6.7,18.4,18,7.1,31.9,7.1s25.2,11.3,25.2,25.2C57.1,46.2,45.8,57.5,31.9,57.5z M31.9,9C19,9,8.6,19.5,8.6,32.3c0,12.8,10.4,23.3,23.3,23.3s23.3-10.4,23.3-23.3C55.2,19.5,44.7,9,31.9,9z"/>
        <path d="M27,18c-5.5,0-10,4.5-10,10s4.5,10,10,10s10-4.5,10-10S32.5,18,27,18z M27,34c-3.3,0-6-2.7-6-6s2.7-6,6-6s6,2.7,6,6 S30.3,34,27,34z"/>
        <circle cx="27" cy="28" r="2"/>
        <path d="M44.5,30.5l-9-9c-0.4-0.4-0.9-0.6-1.4-0.6h-1.6c1.6,1.5,2.7,3.4,3.3,5.6h-0.4l8.3,8.3l-7.5,7.5l-8.3-8.3v0.7 c0,0.5,0.2,1,0.6,1.4l9,9c0.8,0.8,2,0.8,2.8,0l4.2-4.2C45.3,40,45.3,38.7,44.5,38l-1-1l1.5-1.5C46,34.7,45.7,32.6,44.5,30.5z"/>
     </svg>`,
-    // Wrench/screwdriver crossed icon
     `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="64px" height="64px" viewBox="0 0 64 64" class="ww-icon-fixed-right-promise">
        <path d="M31.9,57.5C18,57.5,6.7,46.2,6.7,32.3C6.7,18.4,18,7.1,31.9,7.1s25.2,11.3,25.2,25.2C57.1,46.2,45.8,57.5,31.9,57.5z M31.9,9C19,9,8.6,19.5,8.6,32.3c0,12.8,10.4,23.3,23.3,23.3s23.3-10.4,23.3-23.3C55.2,19.5,44.7,9,31.9,9z"/>
        <path d="M39.1,24.2c0.3-0.3,0.7-0.9,0.9-1.3l0.4-0.9c0.2-0.4,0.6-0.9,1-1.2l3.5-2.4l1.7,1.6l-2.5,3.6c-0.3,0.4-0.8,0.8-1.2,1 L42.2,25c-0.4,0.2-1,0.6-1.3,0.9L32.8,34L31,32.3L39.1,24.2z"/>
@@ -71,7 +81,6 @@ export default function decorate(block) {
     topSection.append(h2);
   }
 
-  // 2 feature sections grid
   const featuresGrid = document.createElement('div');
   featuresGrid.className = 'ww-features';
 
@@ -115,7 +124,7 @@ export default function decorate(block) {
   topSection.append(featuresGrid);
   container.append(topSection);
 
-  // Disclaimer text outside the white card (above red box)
+  // Disclaimer text outside the white card
   if (disclaimerHtml && disclaimerHtml.trim()) {
     const disclaimer = document.createElement('div');
     disclaimer.className = 'ww-disclaimer';
@@ -134,37 +143,30 @@ export default function decorate(block) {
     bottomBox.append(h2);
   }
 
-  // Reasons multifield
   const reasonsList = document.createElement('div');
   reasonsList.className = 'ww-reasons-list';
 
-  reasonRows.forEach((row) => {
-    if (!row) return;
-    const cols = [...row.children];
-    const eyebrow = cols[0]?.textContent.trim();
-    const textHtml = cols[1]?.querySelector('div')?.innerHTML
-      || cols[1]?.innerHTML || '';
+  reasons.forEach((reason) => {
+    if (!reason.eyebrow && !reason.text) return;
 
-    if (!eyebrow && !textHtml) return;
+    const reasonEl = document.createElement('div');
+    reasonEl.className = 'ww-reason';
 
-    const reason = document.createElement('div');
-    reason.className = 'ww-reason';
-
-    if (eyebrow) {
+    if (reason.eyebrow) {
       const eyebrowEl = document.createElement('div');
       eyebrowEl.className = 'ww-reason-eyebrow';
-      eyebrowEl.textContent = eyebrow;
-      reason.append(eyebrowEl);
+      eyebrowEl.textContent = reason.eyebrow;
+      reasonEl.append(eyebrowEl);
     }
 
-    if (textHtml) {
+    if (reason.text) {
       const textEl = document.createElement('div');
       textEl.className = 'ww-reason-text';
-      textEl.innerHTML = textHtml;
-      reason.append(textEl);
+      textEl.innerHTML = reason.text;
+      reasonEl.append(textEl);
     }
 
-    reasonsList.append(reason);
+    reasonsList.append(reasonEl);
   });
 
   bottomBox.append(reasonsList);

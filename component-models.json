@@ -1415,6 +1415,48 @@
         "value": ""
       },
       {
+        "component": "text",
+        "valueType": "string",
+        "name": "reason1Header",
+        "label": "Reason 1 - Header",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "reason1Text",
+        "value": "",
+        "label": "Reason 1 - Text",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "reason2Header",
+        "label": "Reason 2 - Header",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "reason2Text",
+        "value": "",
+        "label": "Reason 2 - Text",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "reason3Header",
+        "label": "Reason 3 - Header",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "reason3Text",
+        "value": "",
+        "label": "Reason 3 - Text",
+        "valueType": "string"
+      },
+      {
         "component": "aem-content",
         "name": "buttonLink",
         "label": "Button Link"
@@ -1425,25 +1467,6 @@
         "name": "buttonText",
         "label": "Button Text",
         "value": ""
-      }
-    ]
-  },
-  {
-    "id": "wheelworks-about-us-reason",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "eyebrow",
-        "label": "Eyebrow",
-        "value": ""
-      },
-      {
-        "component": "richtext",
-        "name": "text",
-        "value": "",
-        "label": "Text",
-        "valueType": "string"
       }
     ]
   },
