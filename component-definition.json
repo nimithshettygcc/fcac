@@ -400,7 +400,15 @@
                   "name": "wheelworks-about-us",
                   "model": "wheelworks-about-us",
                   "filter": "wheelworks-about-us",
-                  "container": true
+                  "container": true,
+                  "header": "Priced Right, Fixed Right and Warranteed",
+                  "section1Eyebrow": "Double the Difference",
+                  "section1Text": "<p>We will match any current, locally advertised price on tires.</p>",
+                  "section2Eyebrow": "Fixed Right Promise",
+                  "section2Text": "<p>We promise that the services we perform will be fixed right the first time.</p>",
+                  "disclaimer": "<p>*This guarantee extends to the Customer.</p>",
+                  "reasonsHeader": "Why Wheel Works? Here are three reasons.",
+                  "buttonText": "Get more reasons why"
                 }
               }
             }
@@ -415,7 +423,9 @@
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
                   "name": "wheelworks-about-us-reason",
-                  "model": "wheelworks-about-us-reason"
+                  "model": "wheelworks-about-us-reason",
+                  "eyebrow": "Reason #1",
+                  "text": "<p>We stand behind our service and products.</p>"
                 }
               }
             }
