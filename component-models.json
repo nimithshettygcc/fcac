@@ -1335,6 +1335,119 @@
     ]
   },
   {
+    "id": "wheelworks-about-us",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "header",
+        "label": "Header",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "section1Icon",
+        "label": "Section 1 - Icon",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "section1IconAlt",
+        "label": "Section 1 - Icon Alt Text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "section1Eyebrow",
+        "label": "Section 1 - Eyebrow",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "section1Text",
+        "value": "",
+        "label": "Section 1 - Text",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "section2Icon",
+        "label": "Section 2 - Icon",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "section2IconAlt",
+        "label": "Section 2 - Icon Alt Text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "section2Eyebrow",
+        "label": "Section 2 - Eyebrow",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "section2Text",
+        "value": "",
+        "label": "Section 2 - Text",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "disclaimer",
+        "value": "",
+        "label": "Disclaimer Text",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "reasonsHeader",
+        "label": "Reasons Header",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "name": "buttonLink",
+        "label": "Button Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "buttonText",
+        "label": "Button Text",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "wheelworks-about-us-reason",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "eyebrow",
+        "label": "Eyebrow",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "email-signup",
     "fields": [
       {
