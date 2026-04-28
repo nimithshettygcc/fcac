@@ -399,7 +399,8 @@
                 "template": {
                   "name": "wheelworks-about-us",
                   "model": "wheelworks-about-us",
-                  "filter": "wheelworks-about-us"
+                  "filter": "wheelworks-about-us",
+                  "container": true
                 }
               }
             }
