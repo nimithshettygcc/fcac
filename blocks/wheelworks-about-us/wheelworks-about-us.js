@@ -124,13 +124,15 @@ export default function decorate(block) {
   topSection.append(featuresGrid);
   container.append(topSection);
 
-  // Disclaimer text outside the white card
-  if (disclaimerHtml && disclaimerHtml.trim()) {
-    const disclaimer = document.createElement('div');
-    disclaimer.className = 'ww-disclaimer';
-    disclaimer.innerHTML = disclaimerHtml;
-    container.append(disclaimer);
-  }
+  // Disclaimer text outside the constrained container
+  const disclaimer = disclaimerHtml && disclaimerHtml.trim()
+    ? (() => {
+      const d = document.createElement('div');
+      d.className = 'ww-disclaimer';
+      d.innerHTML = disclaimerHtml;
+      return d;
+    })()
+    : null;
 
   // Bottom: red box with header + reasons + button
   const bottomBox = document.createElement('div');
@@ -183,6 +185,7 @@ export default function decorate(block) {
     bottomBox.append(btnWrapper);
   }
 
+  if (disclaimer) container.append(disclaimer);
   container.append(bottomBox);
   block.append(container);
 }

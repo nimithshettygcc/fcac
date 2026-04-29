@@ -39,7 +39,7 @@
    TOP SECTION (white area: header + 2 features)
    ========================================= */
 .ww-top {
-  width: 120%;
+  width: 130%;
   background: linear-gradient(to bottom, #f4f4f4 0%, #fff 100%);
   padding: 60px 40px 40px;
   box-sizing: border-box;
@@ -66,15 +66,19 @@
 .ww-features {
   display: flex;
   justify-content: center;
-  gap: 80px;
+  gap: 90px;
   width: 100%;
-  box-sizing: border-box;
+  box-sizing: content-box;
   flex-wrap: wrap;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  list-style: none outside none;
+  text-align: left;
 }
 
 .ww-feature-card {
-  flex: 0 1 420px;
-  max-width: 480px;
+  flex: 1 1 500px;
+  max-width: 600px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -87,7 +91,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 18px;
+  margin-bottom: 0;
 }
 
 .ww-icon-circle svg {
@@ -103,32 +107,36 @@
 }
 
 .ww-icon-circle img {
-  width: 64px;
-  height: 64px;
+  display: inline;
+  width: 65px;
+  height: 60px;
+  max-width: 100%;
   object-fit: contain;
   mix-blend-mode: multiply;
+  margin-bottom: 15px;
+  vertical-align: middle;
+  overflow: clip;
 }
 
 .ww-feature-eyebrow {
   font-family: var(--ww-font-title);
   font-size: 18px;
-  font-weight: 700;
-  line-height: 1.2;
-  color: var(--ww-red);
+  font-weight: 400;
+  line-height: 18px;
+  color: rgb(191, 48, 26);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin: 0 0 12px;
+  text-align: center;
+  margin: 0 0 4.5px;
 }
 
 .ww-feature-text {
-  font-family: var(--ww-font-body);
+  font-family: HelveticaNeue-Roman, Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
-  line-height: 22.4px;
-  color: var(--ww-text-grey);
+  line-height: 19.2px;
+  color: var(--ww-text-dark);
   text-align: center;
-  max-width: 440px;
-  margin: 0 auto;
+  margin: 8px 0;
 }
 
 .ww-feature-text p {
@@ -143,15 +151,16 @@
    DISCLAIMER (text field outside white card)
    ========================================= */
 .ww-disclaimer {
-  width: 100%;
-  max-width: 1000px;
+  align-self: stretch;
+  width: 130%;
+  margin-left: -15%;
   text-align: center;
-  font-family: var(--ww-font-body);
+  font-family: HelveticaNeue-Roman, Arial, sans-serif;
   font-size: 12px;
   font-weight: 400;
-  line-height: 18px;
-  color: var(--ww-text-grey);
-  padding: 30px 20px 40px;
+  line-height: 20px;
+  color: var(--ww-text-dark);
+  padding: 30px 0 40px;
   box-sizing: border-box;
 }
 
@@ -167,10 +176,16 @@
    RED REASONS BOX
    ========================================= */
 .ww-reasons-box {
-  width: 120%;
+  width: 130%;
   background-color: var(--ww-red);
   background-image: linear-gradient(135deg, #d81e05 0%, #b41904 100%);
-  color: #fff;
+  color: rgb(51, 51, 51);
+  font-family: HelveticaNeue-Roman, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  border-bottom: 10px solid rgb(175, 39, 47);
+  position: relative;
   padding: 50px 40px 60px;
   box-sizing: border-box;
   text-align: center;
@@ -179,21 +194,22 @@
 .ww-reasons-title {
   box-sizing: border-box;
   display: block;
-  font-family: var(--ww-font-title);
-  font-size: 32px;
+  font-family: Ultramagnetic, Arial, sans-serif;
+  font-size: 48px;
   font-weight: 400;
-  line-height: 1.2;
-  color: #fff;
+  line-height: 52.8px;
+  letter-spacing: -1px;
+  color: rgb(255, 255, 255);
   text-transform: uppercase;
   text-align: center;
-  margin: 0 0 40px;
+  margin: 0 0 30px;
   width: 100%;
 }
 
 .ww-reasons-list {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 0;
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
@@ -204,25 +220,27 @@
 }
 
 .ww-reason-eyebrow {
-  font-family: var(--ww-font-title);
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.2;
-  color: #fff;
+  font-family: Ultramagnetic, Arial, sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 28.6px;
+  color: rgb(255, 255, 255);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin: 0 0 8px;
+  text-align: center;
+  margin: 10px 0 6.5px;
+  box-sizing: border-box;
 }
 
 .ww-reason-text {
-  font-family: var(--ww-font-body);
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 22px;
-  color: #fff;
+  font-family: Ultramagnetic, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 21.6px;
+  color: rgb(255, 255, 255);
   text-align: center;
-  max-width: 880px;
-  margin: 0 auto;
+  width: 111%;
+  margin: 0 0 10px -4%;
+  box-sizing: border-box;
 }
 
 .ww-reason-text p {
@@ -298,7 +316,7 @@ a.ww-button:hover {
 
   .ww-disclaimer {
     padding: 20px 15px 30px;
-    font-size: 11px;
+    font-size: 13px;
   }
 
   .ww-reasons-box {
