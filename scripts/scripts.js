@@ -11,6 +11,11 @@ import {
   loadSections,
   loadCSS,
 } from './aem.js';
+import {
+  getStoredStoreNumber,
+  fetchStoreByNumber,
+  fetchCartStatus,
+} from './api.js';
 
 /**
  * Moves all the attributes from a given elmenet to another given element.
@@ -119,6 +124,23 @@ async function loadEager(doc) {
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
  */
+async function initStoreContext() {
+  const storeNumber = getStoredStoreNumber();
+  if (!storeNumber) return;
+
+  try {
+    const [store, cart] = await Promise.all([
+      fetchStoreByNumber(storeNumber),
+      fetchCartStatus(),
+    ]);
+    window.bsro = { store, cart };
+    document.dispatchEvent(new CustomEvent('bsro:ready', { detail: { store, cart } }));
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.warn('BSRO API init failed', err);
+  }
+}
+
 async function loadLazy(doc) {
   const main = doc.querySelector('main');
   await loadSections(main);
@@ -132,6 +154,7 @@ async function loadLazy(doc) {
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
+  initStoreContext();
 }
 
 /**

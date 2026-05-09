@@ -120,8 +120,8 @@ header nav {
 
 /* Override brand colour token for all Wheelworks elements */
 .brand-wheelworks {
-  --nav-red: rgb(175, 39, 47);
-  --nav-font: Avenir, Arial, sans-serif;
+  --nav-red: rgb(175 39 47);
+  --nav-font: avenir, arial, sans-serif;
 }
 
 /* Red primary bar */
@@ -174,7 +174,7 @@ header nav {
    background fills the rest of the viewport with dark grey so the banner
    appears to span edge-to-edge */
 .brand-wheelworks .nav-flyer {
-  background-color: rgb(65, 64, 66);
+  background-color: rgb(65 64 66);
   height: 71px;
   display: flex;
   align-items: center;

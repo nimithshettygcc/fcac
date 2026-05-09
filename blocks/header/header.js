@@ -174,7 +174,7 @@ export default async function decorate(block) {
     const textLower = rawText.toLowerCase();
     const firstLink = section.querySelector('a');
     const headings = section.querySelectorAll('h2, h3');
-    // Detect any authored logo icon (e.g. icon-fcac-logo-icon-global-web-bsro, icon-wheelworks-logo)
+    // Detect any authored logo icon (e.g. icon-wheelworks-logo, icon-fcac-logo)
     const logoIcon = section.querySelector('span.icon[class*="-logo"]');
 
     // 1. SECONDARY BAR CHECK
@@ -334,12 +334,12 @@ export default async function decorate(block) {
       // Identify which brand based on the authored icon class
       // Examples: icon-wheelworks-logo  ->  wheelworks
       //           icon-fcac-logo-icon-global-web-bsro -> fcac
-      let brandKey = 'fcac';
+      let logoBrand = 'fcac';
       if (logoIcon) {
         const cls = [...logoIcon.classList].find((c) => c.startsWith('icon-') && c.includes('-logo'));
         if (cls) {
           // strip leading "icon-" then take the first hyphen segment as the brand key
-          [brandKey] = cls.replace(/^icon-/, '').split('-');
+          [logoBrand] = cls.replace(/^icon-/, '').split('-');
         }
       }
 
@@ -358,7 +358,7 @@ export default async function decorate(block) {
           iconSrc: '/icons/fcac-logo-icon-global-web-bsro.svg',
         },
       };
-      const brand = brandDefaults[brandKey] || brandDefaults.fcac;
+      const brand = brandDefaults[logoBrand] || brandDefaults.fcac;
 
       const logoLink = document.createElement('a');
       // Prefer the link the author put around the logo, fall back to brand default
