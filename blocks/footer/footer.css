@@ -197,7 +197,7 @@ footer {
   min-width: 26px !important;
   flex-shrink: 0 !important;
   height: 26px !important;
-  border-radius: 0 !important; 
+  border-radius: 0 !important;
   background-color: #e31e24 !important;
   color: #fff !important;
   border: none !important;
@@ -427,7 +427,7 @@ footer {
 }
 
 .footer-nav li {
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
 
 /* Remaining Text (Links) */
@@ -473,7 +473,7 @@ footer {
   z-index: 10 !important;
 }
 
-.footer-nav-logo img, 
+.footer-nav-logo img,
 .footer-nav-logo svg {
   width: 49px !important;
   height: 52px !important;
@@ -483,6 +483,7 @@ footer {
   display: block !important;
   object-fit: fill !important;
 }
+
 
 /* =========================================
    FOOTER BOTTOM SECTION
@@ -593,7 +594,7 @@ footer {
     grid-template-columns: 1fr !important;
     padding: 20px !important;
   }
-  
+
   /* Reset left margins for mobile */
   .footer-top .footer-column:nth-child(1),
   .footer-top .footer-column:nth-child(2),
@@ -601,7 +602,7 @@ footer {
   .footer-top .footer-column:nth-child(4) {
     margin-left: 0 !important;
   }
-  
+
   .footer-nav {
     grid-template-columns: 1fr;
     padding: 20px;
@@ -615,4 +616,103 @@ footer {
   .footer-bottom { padding: 30px 20px; }
   .footer-bottom ul { flex-direction: column; }
 
+}
+
+/* =========================================
+   WHEELWORKS FOOTER OVERRIDES
+   ========================================= */
+
+/* Background color for entire footer */
+footer:has(.brand-wheelworks),
+.brand-wheelworks,
+.brand-wheelworks .footer-content {
+  background: rgb(86, 86, 86) !important;
+}
+
+/* Constrain content to inner container */
+.brand-wheelworks .footer-content {
+  max-width: 1460px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* White text throughout */
+.brand-wheelworks .footer-top .footer-column > p,
+.brand-wheelworks .footer-top .footer-column p {
+  color: #fff !important;
+}
+
+.brand-wheelworks .footer-top a,
+.brand-wheelworks .footer-top .footer-column a {
+  color: #fff !important;
+  text-decoration-color: #fff !important;
+}
+
+.brand-wheelworks .footer-top .footer-column:not(.footer-column-credit, .footer-column-app, .footer-column-social) > p:first-child {
+  color: #fff !important;
+}
+
+.brand-wheelworks .footer-column-credit > p:first-child,
+.brand-wheelworks .footer-column-app > p:first-child,
+.brand-wheelworks .footer-column-social > p:first-child {
+  color: #fff !important;
+}
+
+.brand-wheelworks .footer-column-credit .footer-text-right a,
+.brand-wheelworks .footer-column-app-content .footer-text-right a,
+.brand-wheelworks .footer-column-app-content .footer-text-right p {
+  color: #fff !important;
+  text-decoration-color: #fff !important;
+}
+
+/* Nav section white text */
+.brand-wheelworks .footer-nav h2 {
+  color: #fff !important;
+}
+
+.brand-wheelworks .footer-nav h3 {
+  color: #fff !important;
+}
+
+.brand-wheelworks .footer-nav a {
+  color: #fff !important;
+  text-decoration-color: #fff !important;
+}
+
+/* Bottom section white text */
+.brand-wheelworks .footer-bottom a {
+  color: #fff !important;
+  text-decoration-color: #fff !important;
+}
+
+.brand-wheelworks .footer-copyright {
+  color: #fff !important;
+}
+
+/* Divider lines in white */
+.brand-wheelworks .footer-top::after,
+.brand-wheelworks .footer-bottom::before {
+  background-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Social icons white */
+.brand-wheelworks .social-icon-item .icon img {
+  filter: brightness(0) invert(1) !important;
+}
+
+/* Coupon submit button */
+.brand-wheelworks .email-submit-btn {
+  background-color: rgb(51, 51, 51) !important;
+}
+
+/* Wheelworks footer logo */
+.brand-wheelworks .footer-nav-logo {
+  width: 149px !important;
+  height: 72.7656px !important;
+  bottom: 7px !important;
+}
+
+.brand-wheelworks .footer-nav-logo img {
+  width: 149px !important;
+  height: 72.7656px !important;
 }

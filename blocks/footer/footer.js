@@ -2,9 +2,33 @@ import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 export default async function decorate(block) {
-  // Load footer fragment
+  // Resolve which footer fragment to load. Priority:
+  //   1. Explicit `footer` metadata on the page (e.g. <meta name="footer" content="/footer-wheelworks">)
+  //   2. `keywords` metadata used as a brand key (e.g. keywords=wheelworks -> /footer-wheelworks)
+  //   3. URL prefix (e.g. /wheelworks/* -> /footer-wheelworks)
+  //   4. Default /footer fragment
   const footerMeta = getMetadata('footer');
-  const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
+  const keywordsMeta = (getMetadata('keywords') || '').trim().toLowerCase();
+  const firstPathSegment = window.location.pathname.split('/').filter(Boolean)[0] || '';
+
+  let footerPath = '/footer';
+  let brandKey = '';
+  if (footerMeta) {
+    footerPath = new URL(footerMeta, window.location).pathname;
+    const m = footerPath.match(/\/footer-([a-z0-9]+)/i);
+    if (m) [, brandKey] = m;
+  } else if (keywordsMeta) {
+    // take the first keyword if it's a comma/space-separated list
+    [brandKey] = keywordsMeta.split(/[,\s]+/);
+    if (brandKey) footerPath = `/footer-${brandKey}`;
+  } else if (firstPathSegment && firstPathSegment !== 'footer') {
+    brandKey = firstPathSegment;
+    footerPath = `/footer-${firstPathSegment}`;
+  }
+
+  // Tag the block with the brand so CSS can theme the whole footer per brand
+  if (brandKey) block.classList.add(`brand-${brandKey.toLowerCase()}`);
+
   const fragment = await loadFragment(footerPath);
 
   // Put fragment content into block temporarily
@@ -37,6 +61,17 @@ export default async function decorate(block) {
 
   // Variable to store copyright text from DOM
   let copyrightText = '© 2025 Firestone Complete Auto Care. All Rights Reserved.';
+
+  // For branded footers, capture the authored logo picture before the loop processes sections
+  let authoredLogoPicture = null;
+  if (brandKey && brandKey !== 'fcac') {
+    sectionContainers.forEach((container) => {
+      const contentWrapper = container.querySelector('.default-content-wrapper');
+      if (!contentWrapper) return;
+      const pic = contentWrapper.querySelector('picture img[alt="wheelworks-logo"]');
+      if (pic) authoredLogoPicture = pic.closest('picture').cloneNode(true);
+    });
+  }
 
   // Process each section
   sectionContainers.forEach((container, index) => {
@@ -85,9 +120,11 @@ export default async function decorate(block) {
       const picture = contentWrapper.querySelector('picture');
       const allLinks = contentWrapper.querySelectorAll('a');
 
-      // Create heading FIRST (outside of horizontal layout)
+      // Create heading FIRST - read first plain <p> (no links/pictures) from authored content
       const heading = document.createElement('p');
-      heading.textContent = 'FIRESTONE CREDIT CARD';
+      const allParas = contentWrapper.querySelectorAll('p');
+      const authoredHeading = [...allParas].find((p) => !p.querySelector('a') && !p.querySelector('picture') && p.textContent.trim());
+      heading.textContent = authoredHeading ? authoredHeading.textContent.trim() : 'FIRESTONE CREDIT CARD';
       column.appendChild(heading);
 
       // Create wrapper for horizontal content (image + links)
@@ -125,9 +162,10 @@ export default async function decorate(block) {
       const picture = contentWrapper.querySelector('picture');
       const allParagraphs = contentWrapper.querySelectorAll('p');
 
-      // Create heading FIRST (outside of horizontal layout)
+      // Create heading FIRST - read first plain <p> (no links/pictures) from authored content
       const heading = document.createElement('p');
-      heading.textContent = 'MY FIRESTONE APP';
+      const authoredHeading = [...allParagraphs].find((p) => !p.querySelector('a') && !p.querySelector('picture') && p.textContent.trim());
+      heading.textContent = authoredHeading ? authoredHeading.textContent.trim() : 'MY FIRESTONE APP';
       column.appendChild(heading);
 
       // Create wrapper for horizontal content (image + text)
@@ -233,21 +271,30 @@ export default async function decorate(block) {
     }
   });
 
-  // Add Firestone logo to footer-nav (bottom right) - Clickable
-  const logoLink = document.createElement('a');
-  logoLink.href = 'https://www.firestonecompleteautocare.com/';
-  logoLink.className = 'footer-nav-logo';
-  logoLink.setAttribute('aria-label', 'Visit Firestone Complete Auto Care');
-  logoLink.setAttribute('target', '_blank');
-  logoLink.setAttribute('rel', 'noopener noreferrer');
+  // Add logo to footer-nav (bottom right)
+  // For branded pages (e.g. wheelworks), use the authored picture from the fragment
+  // For FCAC, use the hardcoded Firestone logo
+  if (authoredLogoPicture) {
+    const logoWrapper = document.createElement('div');
+    logoWrapper.className = 'footer-nav-logo';
+    logoWrapper.appendChild(authoredLogoPicture);
+    footerNav.appendChild(logoWrapper);
+  } else {
+    const logoLink = document.createElement('a');
+    logoLink.href = 'https://www.firestonecompleteautocare.com/';
+    logoLink.className = 'footer-nav-logo';
+    logoLink.setAttribute('aria-label', 'Visit Firestone Complete Auto Care');
+    logoLink.setAttribute('target', '_blank');
+    logoLink.setAttribute('rel', 'noopener noreferrer');
 
-  const logoImg = document.createElement('img');
-  logoImg.src = '/media_1a35b41be6f4d749dc2fc70e26fe1abb0bede6a22.svg?width=2000&format=webply&optimize=medium';
-  logoImg.alt = 'Firestone Logo';
-  logoImg.loading = 'lazy';
+    const logoImg = document.createElement('img');
+    logoImg.src = '/media_1a35b41be6f4d749dc2fc70e26fe1abb0bede6a22.svg?width=2000&format=webply&optimize=medium';
+    logoImg.alt = 'Firestone Logo';
+    logoImg.loading = 'lazy';
 
-  logoLink.appendChild(logoImg);
-  footerNav.appendChild(logoLink);
+    logoLink.appendChild(logoImg);
+    footerNav.appendChild(logoLink);
+  }
 
   // Clear and rebuild
   block.innerHTML = '';
